@@ -5,14 +5,18 @@ Cellular senescence is a major driver of aging and age-related diseases. Quantif
 [This repository](https://github.com/gerencserlab/FAST/) contains components of the complete FAST workflow for Image Analyst MKII and R.   
 
 ## List of pipelines
-* [BLAH](blah.md)
+* [Create BLANK reference image for multiwell plate using median](FAST_-_Create_BLANK_reference_image_for_multiwell_plate_using_median.md)
+* [Create background reference image(s) for multiwell plate using median of wells](FAST_-_Create_reference_image_for_multiwell_plate_using_median.md)
+* [FAST Analysis Pipeline - Basic](FAST_Analysis_Pipeline_-_basic.md)
+* [FAST Analysis Pipeline - Cellpose Segmentation](FAST_Analysis_Pipeline_-_Cellpose.md)
+* [Install FAST.R Shiny App](Install_FAST.R.md)
+* [FAST Analysis Pipeline - Basic - Modified for Live plus Fixed Merging](Pipelines used in the FAST paper/Fluorescence_and_absorbance_histometry_using_nuclear_marker_(1-4_labels)_live_plus_fixed.md)
+* [Run FAST.R Shiny App](Run_FAST.R.md)
 
-## List of R scripts
-* [BLAH](blah.R)
 
 ## Installation
 1. Download and install [Image Analyst MKII for Windows](https://www.imageanalyst.net/downloads/?item=recent/imageanalystMKII64.msi).
-2. Download and install [Rtools 4.3](https://cran.r-project.org/bin/windows/Rtools/rtools43/rtools.html). Note that no R-Studio is required for this implementation and all interaction with R is menu-based.
+2. Download and install [R for Windows](https://cran.r-project.org/bin/windows/base/). Note that no R-Studio is required for this implementation and all interaction with R is menu-based from Image Analyst MKII.
 3. Clone this git in Image Analyst MKII by Edit/Download and Manage Pipelines from GitHub. 
 4. Press the "< > Code" button [above in this page](https://github.com/gerencserlab/FAST/) and copy the URL of this git.
 5. Paste the URL in the URL field in the Connect to Git window in Image Analyst MKII.
@@ -22,3 +26,6 @@ Cellular senescence is a major driver of aging and age-related diseases. Quantif
 9. Follow the protocol on protocols.io for the analysis.
 
 [Gerencser Lab on Github](https://github.com/gerencserlab)
+
+
+
