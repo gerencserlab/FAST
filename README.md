@@ -22,7 +22,7 @@ Cellular senescence is a major driver of aging and age-related diseases. Quantif
 5. Paste the URL in the URL field in the Connect to Git window in Image Analyst MKII.
 6. Press Download.
 7. The pipelines deposited here will appear in the middle section of the Pipelines main menu.
-8. In Image Analyst MKII main menu select Pipelines/FAST/Install to install R dependencies 
+8. In Image Analyst MKII main menu select Pipelines/FAST/"Install FAST.R Shiny App" to install app and its R dependencies 
 9. Follow the protocol on protocols.io for the analysis.
 
 [Gerencser Lab on Github](https://github.com/gerencserlab)
