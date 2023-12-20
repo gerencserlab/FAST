@@ -18,15 +18,18 @@ Cellular senescence is a major driver of aging and age-related diseases. Quantif
 
 ## Installation
 1. Download and install [Image Analyst MKII for Windows](https://www.imageanalyst.net/downloads/?item=recent/imageanalystMKII64.msi).
-2. Download and install [R for Windows](https://cran.r-project.org/bin/windows/base/). Note that no R-Studio is required for this implementation and all interaction with R is menu-based from Image Analyst MKII.
-3. Clone this git in Image Analyst MKII by Edit/Download and Manage Pipelines from GitHub. 
-4. Press the "< > Code" button [above in this page](https://github.com/gerencserlab/FAST/) and copy the URL of this git.
-5. Paste the URL in the URL field in the Connect to Git window in Image Analyst MKII.
-6. Press Download.
-7. The pipelines deposited here will appear in the middle section of the Pipelines main menu.
-8. In Image Analyst MKII main menu select Pipelines/FAST/"Install FAST.R Shiny App" to install app and its R dependencies 
-9. Follow the protocol on protocols.io for the analysis.
-Note: For standalone installation of FAST.R using R-Studio go to the [FAST.R Repository](https://github.com/f-neri/FAST.R).
+2. You will also need Microsoft Excel to perform the analysis.
+3. Download and install [R for Windows](https://cran.r-project.org/bin/windows/base/). Note that no R-Studio is required for this implementation and all interaction with R is menu-based from Image Analyst MKII.
+4. Clone this git in Image Analyst MKII by Edit/Download and Manage Pipelines from GitHub. 
+5. Press the "< > Code" button [above in this page](https://github.com/gerencserlab/FAST/) and copy the URL of this git.
+6. Paste the URL in the URL field in the Connect to Git window in Image Analyst MKII.
+7. Press Download.
+8. The pipelines deposited here will appear in the middle section of the Pipelines main menu.
+9. In Image Analyst MKII main menu select Pipelines/FAST/"Install FAST.R Shiny App" to install app and its R dependencies. 
+10. Follow the protocol on protocols.io for the analysis.
+
+## Standalone app installation
+For standalone installation for data analysis only by FAST.R using R-Studio go to the [FAST.R Repository](https://f-neri.github.io/FAST.R/).
 
 [Gerencser Lab on Github](https://github.com/gerencserlab)
 
