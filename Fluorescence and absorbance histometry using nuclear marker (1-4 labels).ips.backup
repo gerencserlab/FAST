@@ -1,0 +1,3366 @@
+<IAPipeline Description="Image Analyst MKII XML 1.0" Version="1195">
+  <Pipeline Version="1195">
+    <Functions>
+      <fInput Caption="Input image" ID="0" PID="0" Description="Input image">
+        <Caption>Input image</Caption>
+        <Position Top="92" Left="378" Height="25" Width="74"/>
+        <Parameters>
+          <image ID="0" Type="Text" Value="[Actual window]"/>
+        </Parameters>
+        <Inputs Types="" IDs=""/>
+        <Outputs Types="C" IDs="1"/>
+      </fInput>
+      <fGetLinked Caption="Get Linked Channel : nuclei" ID="1" PID="17" Description="Get Linked Channel">
+        <Caption>Get Linked Channel : nuclei</Caption>
+        <Position Top="129" Left="342" Height="25" Width="156"/>
+        <Parameters>
+          <channel ID="0" Type="Integer" Value="1" SValue=""/>
+        </Parameters>
+        <Inputs Types="P" IDs="0"/>
+        <Outputs Types="P" IDs="33"/>
+      </fGetLinked>
+      <fSetScaling Caption="Set scaling/LUT" ID="2" PID="3" Description="Set scaling/LUT">
+        <Caption>Set scaling/LUT</Caption>
+        <Position Top="863" Left="338" Height="25" Width="95"/>
+        <Parameters>
+          <lut ID="0" Type="Text" Value="Blue"/>
+          <type ID="1" Type="Text" Value="Percentile by frame"/>
+          <pmin ID="2" Type="Real" Value="1" SValue=""/>
+          <pmax ID="3" Type="Real" Value="99.8" SValue=""/>
+          <fmin ID="4" Type="Real" Value="0" SValue=""/>
+          <fmax ID="5" Type="Real" Value="1" SValue=""/>
+          <gamma ID="6" Type="Real" Value="1" SValue=""/>
+          <color ID="7" Type="Text" Value=""/>
+        </Parameters>
+        <Inputs Types="P" IDs="51"/>
+        <Outputs Types="P" IDs="55"/>
+      </fSetScaling>
+      <fCopy Caption="Copy" ID="3" PID="4" Description="Copy">
+        <Caption>Copy</Caption>
+        <Position Top="857" Left="259" Height="25" Width="42"/>
+        <Parameters>
+          <linked ID="0" Type="Bool" Value="Yes"/>
+        </Parameters>
+        <Inputs Types="P" IDs="4"/>
+        <Outputs Types="P" IDs="64"/>
+      </fCopy>
+      <fWienerFilterSmooth Caption="Wiener Filter Smooth" ID="4" PID="84" Description="Wiener Filter Smooth">
+        <Caption>Wiener Filter Smooth</Caption>
+        <Position Top="986" Left="406" Height="25" Width="122"/>
+        <Parameters>
+          <width ID="0" Type="Integer" Value="3" SValue=""/>
+          <noise ID="1" Type="Real" Value="0.01" SValue=""/>
+        </Parameters>
+        <Inputs Types="P" IDs="55"/>
+        <Outputs Types="PC" IDs="16;3"/>
+      </fWienerFilterSmooth>
+      <fRename Caption="Rename Image" ID="5" PID="18" Description="Rename Image">
+        <Caption>Rename Image</Caption>
+        <Position Top="965" Left="214" Height="25" Width="92"/>
+        <Parameters>
+          <channel ID="0" Type="Integer" Value="101" SValue=""/>
+          <name ID="1" Type="Text" Value="seeds"/>
+        </Parameters>
+        <Inputs Types="P" IDs="63"/>
+        <Outputs Types="P" IDs="6"/>
+      </fRename>
+      <fDetectNucleiConvolution Caption="Detect Nuclei Convolution" ID="6" PID="102" Description="Detect Nuclei Convolution">
+        <Caption>Detect Nuclei Convolution</Caption>
+        <Position Top="996" Left="196" Height="25" Width="146"/>
+        <Parameters>
+          <way ID="0" Type="Text" Value="Bright inside"/>
+          <id ID="1" Type="Integer" Value="30" SValue="=param=30"/>
+          <od ID="2" Type="Integer" Value="32" SValue="=param+2=32"/>
+        </Parameters>
+        <Inputs Types="P" IDs="5"/>
+        <Outputs Types="P" IDs="56"/>
+      </fDetectNucleiConvolution>
+      <fSetScaling Caption="Set scaling/LUT" ID="7" PID="3" Description="Set scaling/LUT">
+        <Caption>Set scaling/LUT</Caption>
+        <Position Top="1080" Left="329" Height="25" Width="95"/>
+        <Parameters>
+          <lut ID="0" Type="Text" Value="Grayscale"/>
+          <type ID="1" Type="Text" Value="Percentile by frame"/>
+          <pmin ID="2" Type="Real" Value="0" SValue=""/>
+          <pmax ID="3" Type="Real" Value="100" SValue=""/>
+          <fmin ID="4" Type="Real" Value="0" SValue=""/>
+          <fmax ID="5" Type="Real" Value="0" SValue=""/>
+          <gamma ID="6" Type="Real" Value="1.7" SValue=""/>
+          <color ID="7" Type="Text" Value=""/>
+        </Parameters>
+        <Inputs Types="P" IDs="56"/>
+        <Outputs Types="P" IDs="58"/>
+      </fSetScaling>
+      <fWriteBack Caption="Write back scaled values" ID="8" PID="46" Description="Write back scaled values">
+        <Caption>Write back scaled values</Caption>
+        <Position Top="1170" Left="185" Height="25" Width="142"/>
+        <Parameters>
+          <range ID="0" Type="Real" Value="100" SValue=""/>
+          <clip ID="1" Type="Bool" Value="Yes"/>
+        </Parameters>
+        <Inputs Types="P" IDs="58"/>
+        <Outputs Types="P" IDs="18"/>
+      </fWriteBack>
+      <fAdvSegment Caption="Advanced Segmentation" ID="9" PID="78" Description="Watershed Segmentation">
+        <Caption>Advanced Segmentation</Caption>
+        <Position Top="1288" Left="170" Height="25" Width="139"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Pixel value"/>
+          <way ID="1" Type="Text" Value="Above"/>
+          <value ID="2" Type="Real" Value="2" SValue=""/>
+          <proctype ID="3" Type="Text" Value="Bound locally"/>
+          <value2 ID="4" Type="Real" Value="50" SValue=""/>
+          <method ID="5" Type="Text" Value="Mark Seed"/>
+          <connectivity ID="6" Type="Text" Value="Inf (3x3 rectangular)"/>
+          <separate ID="7" Type="Bool" Value="Yes"/>
+          <weld ID="8" Type="Bool" Value="No"/>
+          <evaluate ID="9" Type="Bool" Value="Yes"/>
+          <textoutput ID="10" Type="Bool" Value="No"/>
+          <keeporigmask ID="11" Type="Bool" Value="No"/>
+          <noedges ID="12" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="18"/>
+        <Outputs Types="PC" IDs="10;19"/>
+      </fAdvSegment>
+      <fMorphological Caption="Morphological operator" ID="10" PID="13" Description="Morphological operator">
+        <Caption>Morphological operator</Caption>
+        <Position Top="1332" Left="170" Height="25" Width="133"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Dilate"/>
+          <size ID="1" Type="Integer" Value="15" SValue="=param/2=15"/>
+          <shape ID="2" Type="Text" Value="Disc"/>
+        </Parameters>
+        <Inputs Types="P" IDs="9"/>
+        <Outputs Types="P" IDs="14"/>
+      </fMorphological>
+      <fSetSegmentationClassifiers Caption="Set Segmentation Classifiers" ID="11" PID="48" Description="Set Segmentation Classifiers">
+        <Caption>Set Segmentation Classifiers</Caption>
+        <Position Top="1147" Left="550" Height="25" Width="161"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Min"/>
+          <volume ID="1" Type="Integer" Value="0" SValue=""/>
+          <surface ID="2" Type="Integer" Value="0" SValue=""/>
+          <maxarea ID="3" Type="Integer" Value="0" SValue=""/>
+          <maxperimeter ID="4" Type="Integer" Value="0" SValue=""/>
+          <maxdiameter ID="5" Type="Real" Value="0" SValue=""/>
+          <shapefactor ID="6" Type="Real" Value="0.1" SValue=""/>
+          <sphericalshapefactor ID="7" Type="Real" Value="0" SValue=""/>
+          <totalfileamentlength ID="8" Type="Integer" Value="0" SValue=""/>
+          <totalbranchpoints ID="9" Type="Integer" Value="0" SValue=""/>
+          <fiberlength ID="10" Type="Real" Value="0" SValue=""/>
+          <fiberbreadth ID="11" Type="Real" Value="0" SValue=""/>
+          <nearestneighbor ID="12" Type="Real" Value="0" SValue=""/>
+          <numberofneighbors ID="13" Type="Integer" Value="0" SValue=""/>
+          <distancetoedge ID="14" Type="Real" Value="0" SValue=""/>
+        </Parameters>
+        <Inputs Types="P" IDs="15"/>
+        <Outputs Types="P" IDs="12"/>
+      </fSetSegmentationClassifiers>
+      <fSetSegmentationClassifiers Caption="Set Segmentation Classifiers" ID="12" PID="48" Description="Set Segmentation Classifiers">
+        <Caption>Set Segmentation Classifiers</Caption>
+        <Position Top="1205" Left="556" Height="25" Width="161"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Max"/>
+          <volume ID="1" Type="Integer" Value="10000" SValue=""/>
+          <surface ID="2" Type="Integer" Value="0" SValue=""/>
+          <maxarea ID="3" Type="Integer" Value="0" SValue=""/>
+          <maxperimeter ID="4" Type="Integer" Value="0" SValue=""/>
+          <maxdiameter ID="5" Type="Real" Value="0" SValue=""/>
+          <shapefactor ID="6" Type="Real" Value="0" SValue=""/>
+          <sphericalshapefactor ID="7" Type="Real" Value="0" SValue=""/>
+          <totalfileamentlength ID="8" Type="Integer" Value="0" SValue=""/>
+          <totalbranchpoints ID="9" Type="Integer" Value="0" SValue=""/>
+          <fiberlength ID="10" Type="Real" Value="0" SValue=""/>
+          <fiberbreadth ID="11" Type="Real" Value="0" SValue=""/>
+          <nearestneighbor ID="12" Type="Real" Value="0" SValue=""/>
+          <numberofneighbors ID="13" Type="Integer" Value="0" SValue=""/>
+          <distancetoedge ID="14" Type="Real" Value="0" SValue=""/>
+        </Parameters>
+        <Inputs Types="P" IDs="11"/>
+        <Outputs Types="P" IDs="13"/>
+      </fSetSegmentationClassifiers>
+      <fSetSegmentationIntensityClassifiers Caption="Set Segmentation Intensity Classifiers" ID="13" PID="100" Description="Set Segmentation Intensity Classifiers">
+        <Caption>Set Segmentation Intensity Classifiers</Caption>
+        <Position Top="1278" Left="405" Height="25" Width="206"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Min"/>
+          <mean ID="1" Type="Real" Value="15" SValue=""/>
+          <sum ID="2" Type="Real" Value="0" SValue=""/>
+          <sphmean ID="3" Type="Real" Value="0" SValue=""/>
+          <variance ID="4" Type="Real" Value="0" SValue=""/>
+          <varianceOverMean ID="5" Type="Real" Value="0" SValue=""/>
+          <SDOverMean ID="6" Type="Real" Value="0" SValue=""/>
+        </Parameters>
+        <Inputs Types="PP" IDs="12;19"/>
+        <Outputs Types="P" IDs="14"/>
+      </fSetSegmentationIntensityClassifiers>
+      <fAdvSegmentSepSeed Caption="Advanced Segmentation Sep.Seed" ID="14" PID="99" Description="Secondary Watershed Segmentation">
+        <Caption>Advanced Segmentation Sep.Seed</Caption>
+        <Position Top="1334" Left="610" Height="25" Width="192"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Max of marks"/>
+          <way ID="1" Type="Text" Value="Above"/>
+          <value ID="2" Type="Real" Value="0" SValue=""/>
+          <proctype ID="3" Type="Text" Value="Bound locally"/>
+          <value2 ID="4" Type="Real" Value="50" SValue=""/>
+          <method ID="5" Type="Text" Value="Watershed(distance)"/>
+          <connectivity ID="6" Type="Text" Value="Inf (3x3 rectangular)"/>
+          <separate ID="7" Type="Bool" Value="Yes"/>
+          <weld ID="8" Type="Bool" Value="Yes"/>
+          <evaluate ID="9" Type="Bool" Value="Yes"/>
+          <textoutput ID="10" Type="Bool" Value="No"/>
+          <keeporigmask ID="11" Type="Bool" Value="No"/>
+          <noedges ID="12" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="PP" IDs="13;10"/>
+        <Outputs Types="PC" IDs="139;188"/>
+      </fAdvSegmentSepSeed>
+      <fCopy Caption="Copy" ID="15" PID="4" Description="Copy">
+        <Caption>Copy</Caption>
+        <Position Top="1119" Left="610" Height="25" Width="42"/>
+        <Parameters>
+          <linked ID="0" Type="Bool" Value="Yes"/>
+        </Parameters>
+        <Inputs Types="P" IDs="16"/>
+        <Outputs Types="P" IDs="11"/>
+      </fCopy>
+      <fWriteBack Caption="Write back scaled values" ID="16" PID="46" Description="Write back scaled values">
+        <Caption>Write back scaled values</Caption>
+        <Position Top="1010" Left="397" Height="25" Width="142"/>
+        <Parameters>
+          <range ID="0" Type="Real" Value="100" SValue=""/>
+          <clip ID="1" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="4"/>
+        <Outputs Types="CP" IDs="15;17"/>
+      </fWriteBack>
+      <fRename Caption="Rename Image" ID="17" PID="18" Description="Rename Image">
+        <Caption>Rename Image</Caption>
+        <Position Top="1120" Left="397" Height="25" Width="92"/>
+        <Parameters>
+          <channel ID="0" Type="Integer" Value="102" SValue=""/>
+          <name ID="1" Type="Text" Value="intensity classifier"/>
+        </Parameters>
+        <Inputs Types="P" IDs="16"/>
+        <Outputs Types="P" IDs="18"/>
+      </fRename>
+      <fSetSegmentationIntensityClassifiers Caption="Set Segmentation Intensity Classifiers" ID="18" PID="100" Description="Set Segmentation Intensity Classifiers">
+        <Caption>Set Segmentation Intensity Classifiers</Caption>
+        <Position Top="1210" Left="252" Height="25" Width="206"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Min"/>
+          <mean ID="1" Type="Real" Value="15" SValue=""/>
+          <sum ID="2" Type="Real" Value="0" SValue=""/>
+          <sphmean ID="3" Type="Real" Value="0" SValue=""/>
+          <variance ID="4" Type="Real" Value="0" SValue=""/>
+          <varianceOverMean ID="5" Type="Real" Value="0" SValue=""/>
+          <SDOverMean ID="6" Type="Real" Value="0" SValue=""/>
+        </Parameters>
+        <Inputs Types="PP" IDs="8;17"/>
+        <Outputs Types="P" IDs="9"/>
+      </fSetSegmentationIntensityClassifiers>
+      <fGetLinked Caption="Get Linked Channel" ID="19" PID="17" Description="Get Linked Channel">
+        <Caption>Get Linked Channel</Caption>
+        <Position Top="1243" Left="388" Height="25" Width="117"/>
+        <Parameters>
+          <channel ID="0" Type="Integer" Value="102" SValue=""/>
+        </Parameters>
+        <Inputs Types="P" IDs="9"/>
+        <Outputs Types="P" IDs="13"/>
+      </fGetLinked>
+      <fPlotSegmentMorphology Caption="Plot Morphological Parameters" ID="20" PID="73" Description="Plot Morphological Parameters">
+        <Caption>Plot Morphological Parameters</Caption>
+        <Position Top="1373" Left="1125" Height="25" Width="170"/>
+        <Parameters>
+          <morphology ID="0" Type="Text" Value="area"/>
+          <dfperf ID="1" Type="Bool" Value="No"/>
+          <resample ID="2" Type="Bool" Value="No"/>
+          <type ID="3" Type="Text" Value="Each"/>
+          <allMean ID="4" Type="Bool" Value="No"/>
+          <allMedian ID="5" Type="Bool" Value="No"/>
+          <advnorm ID="6" Type="Text" Value="None"/>
+          <histogram ID="7" Type="Text" Value="None"/>
+          <savename ID="8" Type="Text" Value=""/>
+          <save ID="9" Type="Bool" Value="No"/>
+          <saveconfirm ID="10" Type="Bool" Value="No"/>
+          <ranges ID="11" Type="Text" Value=""/>
+          <rates ID="12" Type="Bool" Value="No"/>
+          <ratesnorm ID="13" Type="Bool" Value="No"/>
+          <yonly ID="14" Type="Bool" Value="Yes"/>
+          <mdoutput ID="15" Type="Bool" Value="No"/>
+          <channelrange ID="16" Type="Text" Value="0-4"/>
+          <plateoutput ID="17" Type="Bool" Value="No"/>
+          <stagetocolumn ID="18" Type="Bool" Value="No"/>
+          <singlechannel ID="19" Type="Bool" Value="No"/>
+          <forcenewrow ID="20" Type="Bool" Value="No"/>
+          <histogrambins ID="21" Type="Integer" Value="20" SValue=""/>
+          <histogramrange ID="22" Type="Text" Value="All"/>
+          <constrainActiveROI ID="23" Type="Bool" Value="Yes"/>
+        </Parameters>
+        <Inputs Types="P" IDs="139"/>
+        <Outputs Types="" IDs=""/>
+      </fPlotSegmentMorphology>
+      <fMorphological Caption="Morphological operator" ID="21" PID="13" Description="Morphological operator">
+        <Caption>Morphological operator</Caption>
+        <Position Top="414" Left="71" Height="25" Width="133"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Erode"/>
+          <size ID="1" Type="Integer" Value="25" SValue=""/>
+          <shape ID="2" Type="Text" Value="Disc"/>
+        </Parameters>
+        <Inputs Types="P" IDs="193"/>
+        <Outputs Types="P" IDs="50"/>
+      </fMorphological>
+      <fMaskImage Caption="Mask Image" ID="22" PID="88" Description="Mask Image">
+        <Caption>Mask Image</Caption>
+        <Position Top="477" Left="230" Height="25" Width="76"/>
+        <Parameters/>
+        <Inputs Types="PP" IDs="34;28"/>
+        <Outputs Types="P" IDs="35"/>
+      </fMaskImage>
+      <fCopy Caption="Copy" ID="23" PID="4" Description="Copy">
+        <Caption>Copy</Caption>
+        <Position Top="177" Left="125" Height="25" Width="42"/>
+        <Parameters>
+          <linked ID="0" Type="Bool" Value="Yes"/>
+        </Parameters>
+        <Inputs Types="P" IDs="34"/>
+        <Outputs Types="PC" IDs="24;190"/>
+      </fCopy>
+      <fWienerFilterSmooth Caption="Wiener Filter Smooth" ID="24" PID="84" Description="Wiener Filter Smooth">
+        <Caption>Wiener Filter Smooth</Caption>
+        <Position Top="202" Left="85" Height="25" Width="122"/>
+        <Parameters>
+          <width ID="0" Type="Integer" Value="3" SValue=""/>
+          <noise ID="1" Type="Real" Value="0.01" SValue=""/>
+        </Parameters>
+        <Inputs Types="P" IDs="23"/>
+        <Outputs Types="P" IDs="31"/>
+      </fWienerFilterSmooth>
+      <fSetSegmentationClassifiers Caption="Set Segmentation Classifiers" ID="25" PID="48" Description="Set Segmentation Classifiers">
+        <Caption>Set Segmentation Classifiers</Caption>
+        <Position Top="276" Left="66" Height="25" Width="161"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Max"/>
+          <volume ID="1" Type="Integer" Value="0" SValue=""/>
+          <surface ID="2" Type="Integer" Value="0" SValue=""/>
+          <maxarea ID="3" Type="Integer" Value="0" SValue=""/>
+          <maxperimeter ID="4" Type="Integer" Value="0" SValue=""/>
+          <maxdiameter ID="5" Type="Real" Value="0" SValue=""/>
+          <shapefactor ID="6" Type="Real" Value="0" SValue=""/>
+          <sphericalshapefactor ID="7" Type="Real" Value="0" SValue=""/>
+          <totalfileamentlength ID="8" Type="Integer" Value="0" SValue=""/>
+          <totalbranchpoints ID="9" Type="Integer" Value="0" SValue=""/>
+          <fiberlength ID="10" Type="Real" Value="0" SValue=""/>
+          <fiberbreadth ID="11" Type="Real" Value="0" SValue=""/>
+          <nearestneighbor ID="12" Type="Real" Value="0" SValue=""/>
+          <numberofneighbors ID="13" Type="Integer" Value="0" SValue=""/>
+          <distancetoedge ID="14" Type="Real" Value="0" SValue=""/>
+        </Parameters>
+        <Inputs Types="P" IDs="32"/>
+        <Outputs Types="P" IDs="27"/>
+      </fSetSegmentationClassifiers>
+      <fSimpleSegmentation Caption="Simple Segmentation" ID="26" PID="34" Description="Simple Segmentation">
+        <Caption>Simple Segmentation</Caption>
+        <Position Top="326" Left="85" Height="25" Width="122"/>
+        <Parameters>
+          <na1 ID="0" Type="Bool" Value="No"/>
+          <na2 ID="1" Type="Real" Value="0.75" SValue=""/>
+          <na3 ID="2" Type="Integer" Value="1" SValue=""/>
+          <noedges ID="3" Type="Bool" Value="No"/>
+          <textoutput ID="4" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="27"/>
+        <Outputs Types="P" IDs="30"/>
+      </fSimpleSegmentation>
+      <fSetSegmentationClassifiers Caption="Set Segmentation Classifiers" ID="27" PID="48" Description="Set Segmentation Classifiers">
+        <Caption>Set Segmentation Classifiers</Caption>
+        <Position Top="301" Left="66" Height="25" Width="161"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Min"/>
+          <volume ID="1" Type="Integer" Value="0" SValue=""/>
+          <surface ID="2" Type="Integer" Value="0" SValue=""/>
+          <maxarea ID="3" Type="Integer" Value="0" SValue=""/>
+          <maxperimeter ID="4" Type="Integer" Value="0" SValue=""/>
+          <maxdiameter ID="5" Type="Real" Value="300" SValue=""/>
+          <shapefactor ID="6" Type="Real" Value="0" SValue=""/>
+          <sphericalshapefactor ID="7" Type="Real" Value="0" SValue=""/>
+          <totalfileamentlength ID="8" Type="Integer" Value="0" SValue=""/>
+          <totalbranchpoints ID="9" Type="Integer" Value="0" SValue=""/>
+          <fiberlength ID="10" Type="Real" Value="0" SValue=""/>
+          <fiberbreadth ID="11" Type="Real" Value="0" SValue=""/>
+          <nearestneighbor ID="12" Type="Real" Value="0" SValue=""/>
+          <numberofneighbors ID="13" Type="Integer" Value="0" SValue=""/>
+          <distancetoedge ID="14" Type="Real" Value="0" SValue=""/>
+        </Parameters>
+        <Inputs Types="P" IDs="25"/>
+        <Outputs Types="P" IDs="26"/>
+      </fSetSegmentationClassifiers>
+      <fRename Caption="Rename Image" ID="28" PID="18" Description="Rename Image">
+        <Caption>Rename Image</Caption>
+        <Position Top="518" Left="100" Height="25" Width="92"/>
+        <Parameters>
+          <channel ID="0" Type="Integer" Value="3" SValue=""/>
+          <name ID="1" Type="Text" Value="Valid area"/>
+        </Parameters>
+        <Inputs Types="P" IDs="29"/>
+        <Outputs Types="CC" IDs="22;47"/>
+      </fRename>
+      <fCreateROI Caption="Create ROI" ID="29" PID="95" Description="Create ROI">
+        <Caption>Create ROI</Caption>
+        <Position Top="494" Left="110" Height="25" Width="73"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Box"/>
+          <unit ID="1" Type="Text" Value="pixels"/>
+          <left ID="2" Type="Real" Value="0" SValue=""/>
+          <top ID="3" Type="Real" Value="0" SValue=""/>
+          <width ID="4" Type="Real" Value="2560" SValue="=imagesizex=2,560"/>
+          <height ID="5" Type="Real" Value="2560" SValue="=imagesizey=2,560"/>
+        </Parameters>
+        <Inputs Types="P" IDs="49"/>
+        <Outputs Types="P" IDs="28"/>
+      </fCreateROI>
+      <fThreshold Caption="Threshold" ID="30" PID="14" Description="Threshold">
+        <Caption>Threshold</Caption>
+        <Position Top="350" Left="112" Height="25" Width="67"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Pixel value"/>
+          <way ID="1" Type="Text" Value="Below"/>
+          <value ID="2" Type="Real" Value="0.5" SValue=""/>
+          <value2 ID="3" Type="Real" Value="0" SValue=""/>
+          <proctype ID="4" Type="Text" Value="None"/>
+          <keeporigmask ID="5" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="26"/>
+        <Outputs Types="P" IDs="193"/>
+      </fThreshold>
+      <fBgSub Caption="Subtract Background" ID="31" PID="21" Description="Subtract Background">
+        <Caption>Subtract Background</Caption>
+        <Position Top="226" Left="85" Height="25" Width="122"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Percentile by frames"/>
+          <value ID="1" Type="Real" Value="5" SValue=""/>
+          <bgimagefilename ID="2" Type="Text" Value=""/>
+          <bgstage ID="3" Type="Integer" Value="1" SValue=""/>
+          <bgframe ID="4" Type="Integer" Value="1" SValue=""/>
+          <avgbgframes ID="5" Type="Bool" Value="No"/>
+          <shimagefilename ID="6" Type="Text" Value=""/>
+          <shstage ID="7" Type="Integer" Value="1" SValue=""/>
+          <shframe ID="8" Type="Integer" Value="1" SValue=""/>
+          <avgshframes ID="9" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="24"/>
+        <Outputs Types="P" IDs="32"/>
+      </fBgSub>
+      <fThreshold Caption="Threshold" ID="32" PID="14" Description="Threshold">
+        <Caption>Threshold</Caption>
+        <Position Top="251" Left="112" Height="25" Width="67"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Otsu by frames"/>
+          <way ID="1" Type="Text" Value="Above"/>
+          <value ID="2" Type="Real" Value="75" SValue="=1.5-param/100=0.75"/>
+          <value2 ID="3" Type="Real" Value="0" SValue=""/>
+          <proctype ID="4" Type="Text" Value="None"/>
+          <keeporigmask ID="5" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="31"/>
+        <Outputs Types="P" IDs="25"/>
+      </fThreshold>
+      <fIfBool Caption="If" ID="33" PID="142" Description="If">
+        <Caption>If</Caption>
+        <Position Top="159" Left="408" Height="25" Width="22"/>
+        <Parameters>
+          <condition ID="0" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="1"/>
+        <Outputs Types="PP" IDs="34;35"/>
+      </fIfBool>
+      <fWait Caption="Nothing" ID="34" PID="106" Description="Wait for all inputs">
+        <Caption>Nothing</Caption>
+        <Position Top="180" Left="241" Height="25" Width="54"/>
+        <Parameters/>
+        <Inputs Types="P" IDs="33"/>
+        <Outputs Types="CP" IDs="23;22"/>
+      </fWait>
+      <fEndIf Caption="EndIf" ID="35" PID="143" Description="EndIf">
+        <Caption>EndIf</Caption>
+        <Position Top="344" Left="457" Height="25" Width="42"/>
+        <Parameters>
+          <inputs ID="0" Type="Integer" Value="1" SValue=""/>
+        </Parameters>
+        <Inputs Types="PP" IDs="33;22"/>
+        <Outputs Types="CC" IDs="180;210"/>
+      </fEndIf>
+      <f2DDFTBPTiled Caption="2D DFT Butterworth BP filter tiled" ID="36" PID="103" Description="2D DFT Butterworth BP filter tiled">
+        <Caption>2D DFT Butterworth BP filter tiled</Caption>
+        <Position Top="662" Left="385" Height="25" Width="183"/>
+        <Parameters>
+          <tilesx ID="0" Type="Integer" Value="5" SValue=""/>
+          <tilesy ID="1" Type="Integer" Value="5" SValue=""/>
+          <cuton ID="2" Type="Real" Value="9.6016" SValue="=0.5*sqrt(imagesizex*imagesizey)/param=9.6016"/>
+          <ordon ID="3" Type="Real" Value="1.3" SValue=""/>
+          <cutoff ID="4" Type="Real" Value="1000" SValue=""/>
+          <ordff ID="5" Type="Real" Value="100" SValue=""/>
+          <units ID="6" Type="Text" Value="pixels"/>
+          <normalization ID="7" Type="Text" Value="Corrected Integral"/>
+          <edges ID="8" Type="Bool" Value="Yes"/>
+          <enlarge ID="9" Type="Bool" Value="No"/>
+          <enlargeto ID="10" Type="Integer" Value="9" SValue=""/>
+          <phase ID="11" Type="Bool" Value="No"/>
+          <absolute ID="12" Type="Bool" Value="No"/>
+          <protect ID="13" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="45"/>
+        <Outputs Types="P" IDs="37"/>
+      </f2DDFTBPTiled>
+      <fThreshold Caption="Threshold" ID="37" PID="14" Description="Threshold">
+        <Caption>Threshold</Caption>
+        <Position Top="706" Left="444" Height="25" Width="67"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Pixel value"/>
+          <way ID="1" Type="Text" Value="Bottom"/>
+          <value ID="2" Type="Real" Value="0" SValue=""/>
+          <value2 ID="3" Type="Real" Value="0" SValue=""/>
+          <proctype ID="4" Type="Text" Value="None"/>
+          <keeporigmask ID="5" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="36"/>
+        <Outputs Types="P" IDs="42"/>
+      </fThreshold>
+      <fCopy Caption="Copy" ID="38" PID="4" Description="Copy">
+        <Caption>Copy</Caption>
+        <Position Top="630" Left="268" Height="25" Width="42"/>
+        <Parameters>
+          <linked ID="0" Type="Bool" Value="Yes"/>
+        </Parameters>
+        <Inputs Types="P" IDs="43"/>
+        <Outputs Types="P" IDs="39"/>
+      </fCopy>
+      <f2DMedian Caption="2D Median filter" ID="39" PID="1" Description="2D Median filter">
+        <Caption>2D Median filter</Caption>
+        <Position Top="658" Left="240" Height="25" Width="95"/>
+        <Parameters>
+          <width ID="0" Type="Integer" Value="49" SValue=""/>
+        </Parameters>
+        <Inputs Types="P" IDs="38"/>
+        <Outputs Types="CP" IDs="40;41"/>
+      </f2DMedian>
+      <fImageAritmeticsIP Caption="Image Aritmetics In Place" ID="40" PID="61" Description="Image Arithmetic In Place">
+        <Caption>Image Aritmetics In Place</Caption>
+        <Position Top="746" Left="304" Height="25" Width="142"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="-"/>
+          <framerange ID="1" Type="Text" Value="All"/>
+        </Parameters>
+        <Inputs Types="PP" IDs="43;39"/>
+        <Outputs Types="P" IDs="42"/>
+      </fImageAritmeticsIP>
+      <fClose Caption="Close" ID="41" PID="22" Description="Close">
+        <Caption>Close</Caption>
+        <Position Top="685" Left="266" Height="25" Width="45"/>
+        <Parameters>
+          <target ID="0" Type="Text" Value="Image"/>
+        </Parameters>
+        <Inputs Types="P" IDs="39"/>
+        <Outputs Types="" IDs=""/>
+      </fClose>
+      <fEndIf Caption="EndIf" ID="42" PID="143" Description="EndIf">
+        <Caption>EndIf</Caption>
+        <Position Top="738" Left="526" Height="25" Width="42"/>
+        <Parameters>
+          <inputs ID="0" Type="Integer" Value="1" SValue=""/>
+        </Parameters>
+        <Inputs Types="PPPP" IDs="37;40;44;163"/>
+        <Outputs Types="P" IDs="46"/>
+      </fEndIf>
+      <fWait Caption="Wait for all inputs" ID="43" PID="106" Description="Wait for all inputs">
+        <Caption>Wait for all inputs</Caption>
+        <Position Top="590" Left="297" Height="25" Width="103"/>
+        <Parameters/>
+        <Inputs Types="P" IDs="44"/>
+        <Outputs Types="CP" IDs="38;40"/>
+      </fWait>
+      <fSelect Caption="Select" ID="44" PID="145" Description="Select">
+        <Caption>Select</Caption>
+        <Position Top="552" Left="458" Height="25" Width="47"/>
+        <Parameters>
+          <selectorvalues ID="0" Type="Text" Value="Percentile;Rolling ball;Spatial filtering;None"/>
+          <selector ID="1" Type="Text" Value="Spatial filtering"/>
+          <operation ID="2" Type="Text" Value="Execute selected output"/>
+        </Parameters>
+        <Inputs Types="P" IDs="208"/>
+        <Outputs Types="PPPP" IDs="163;43;45;42"/>
+      </fSelect>
+      <fInpaintMask Caption="Inpaint Mask" ID="45" PID="94" Description="Inpaint Mask">
+        <Caption>Inpaint Mask</Caption>
+        <Position Top="615" Left="428" Height="25" Width="79"/>
+        <Parameters>
+          <radius ID="0" Type="Real" Value="5" SValue=""/>
+          <method ID="1" Type="Text" Value="Telea"/>
+        </Parameters>
+        <Inputs Types="P" IDs="44"/>
+        <Outputs Types="P" IDs="36"/>
+      </fInpaintMask>
+      <fIfBool Caption="If" ID="46" PID="142" Description="If">
+        <Caption>If</Caption>
+        <Position Top="775" Left="436" Height="25" Width="22"/>
+        <Parameters>
+          <condition ID="0" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="42"/>
+        <Outputs Types="PP" IDs="47;48"/>
+      </fIfBool>
+      <fImageAritmeticsIP Caption="Image Arithmetic In Place" ID="47" PID="61" Description="Image Arithmetic In Place">
+        <Caption>Image Arithmetic In Place</Caption>
+        <Position Top="804" Left="224" Height="25" Width="142"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="MASK"/>
+          <framerange ID="1" Type="Text" Value="All"/>
+        </Parameters>
+        <Inputs Types="PP" IDs="46;28"/>
+        <Outputs Types="P" IDs="48"/>
+      </fImageAritmeticsIP>
+      <fEndIf Caption="EndIf" ID="48" PID="143" Description="EndIf">
+        <Caption>EndIf</Caption>
+        <Position Top="821" Left="476" Height="25" Width="42"/>
+        <Parameters>
+          <inputs ID="0" Type="Integer" Value="1" SValue=""/>
+        </Parameters>
+        <Inputs Types="PP" IDs="46;47"/>
+        <Outputs Types="P" IDs="51"/>
+      </fEndIf>
+      <fCropInPlace Caption="Crop in place" ID="49" PID="159" Description="Crop in place">
+        <Caption>Crop in place</Caption>
+        <Position Top="469" Left="104" Height="25" Width="83"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="All Segments"/>
+          <width ID="1" Type="Integer" Value="3" SValue=""/>
+        </Parameters>
+        <Inputs Types="P" IDs="50"/>
+        <Outputs Types="P" IDs="29"/>
+      </fCropInPlace>
+      <fSimpleSegmentation Caption="Simple Segmentation" ID="50" PID="34" Description="Simple Segmentation">
+        <Caption>Simple Segmentation</Caption>
+        <Position Top="444" Left="85" Height="25" Width="122"/>
+        <Parameters>
+          <na1 ID="0" Type="Bool" Value="No"/>
+          <na2 ID="1" Type="Real" Value="0.75" SValue=""/>
+          <na3 ID="2" Type="Integer" Value="1" SValue=""/>
+          <noedges ID="3" Type="Bool" Value="No"/>
+          <textoutput ID="4" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="21"/>
+        <Outputs Types="P" IDs="49"/>
+      </fSimpleSegmentation>
+      <fSelect Caption="Select" ID="51" PID="145" Description="Select">
+        <Caption>Select</Caption>
+        <Position Top="859" Left="466" Height="25" Width="47"/>
+        <Parameters>
+          <selectorvalues ID="0" Type="Text" Value="Self-referenced;Make reference image;Use reference image"/>
+          <selector ID="1" Type="Text" Value="Self-referenced"/>
+          <operation ID="2" Type="Text" Value="Execute selected output"/>
+        </Parameters>
+        <Inputs Types="P" IDs="48"/>
+        <Outputs Types="PPP" IDs="2;53;52"/>
+      </fSelect>
+      <fSetScaling Caption="Set scaling/LUT" ID="52" PID="3" Description="Set scaling/LUT">
+        <Caption>Set scaling/LUT</Caption>
+        <Position Top="903" Left="453" Height="25" Width="95"/>
+        <Parameters>
+          <lut ID="0" Type="Text" Value="Blue"/>
+          <type ID="1" Type="Text" Value="Percentile by reference"/>
+          <pmin ID="2" Type="Real" Value="1" SValue=""/>
+          <pmax ID="3" Type="Real" Value="99.8" SValue=""/>
+          <fmin ID="4" Type="Real" Value="0" SValue=""/>
+          <fmax ID="5" Type="Real" Value="1" SValue=""/>
+          <gamma ID="6" Type="Real" Value="1" SValue=""/>
+          <color ID="7" Type="Text" Value=""/>
+        </Parameters>
+        <Inputs Types="P" IDs="51"/>
+        <Outputs Types="P" IDs="55"/>
+      </fSetScaling>
+      <fWait Caption="Branch" ID="53" PID="106" Description="Wait for all inputs">
+        <Caption>Branch</Caption>
+        <Position Top="897" Left="609" Height="25" Width="52"/>
+        <Parameters/>
+        <Inputs Types="P" IDs="51"/>
+        <Outputs Types="PC" IDs="59;54"/>
+      </fWait>
+      <fCopy Caption="Copy" ID="54" PID="4" Description="Copy">
+        <Caption>Copy</Caption>
+        <Position Top="950" Left="649" Height="25" Width="42"/>
+        <Parameters>
+          <linked ID="0" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="53"/>
+        <Outputs Types="P" IDs="182"/>
+      </fCopy>
+      <fEndIf Caption="EndIf" ID="55" PID="143" Description="EndIf">
+        <Caption>EndIf</Caption>
+        <Position Top="961" Left="446" Height="25" Width="42"/>
+        <Parameters>
+          <inputs ID="0" Type="Integer" Value="1" SValue=""/>
+        </Parameters>
+        <Inputs Types="PPP" IDs="2;52;59"/>
+        <Outputs Types="P" IDs="4"/>
+      </fEndIf>
+      <fSelect Caption="Select" ID="56" PID="145" Description="Select">
+        <Caption>Select</Caption>
+        <Position Top="1030" Left="224" Height="25" Width="47"/>
+        <Parameters>
+          <selectorvalues ID="0" Type="Text" Value="Self-referenced;Make reference image;Use reference image"/>
+          <selector ID="1" Type="Text" Value="Self-referenced"/>
+          <operation ID="2" Type="Text" Value="Execute selected output"/>
+        </Parameters>
+        <Inputs Types="P" IDs="6"/>
+        <Outputs Types="PPP" IDs="7;61;60"/>
+      </fSelect>
+      <fCopy Caption="Copy" ID="57" PID="4" Description="Copy">
+        <Caption>Copy</Caption>
+        <Position Top="1126" Left="70" Height="25" Width="42"/>
+        <Parameters>
+          <linked ID="0" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="61"/>
+        <Outputs Types="P" IDs="187"/>
+      </fCopy>
+      <fEndIf Caption="EndIf" ID="58" PID="143" Description="EndIf">
+        <Caption>EndIf</Caption>
+        <Position Top="1137" Left="229" Height="25" Width="42"/>
+        <Parameters>
+          <inputs ID="0" Type="Integer" Value="1" SValue=""/>
+        </Parameters>
+        <Inputs Types="PPP" IDs="61;60;7"/>
+        <Outputs Types="P" IDs="8"/>
+      </fEndIf>
+      <fSetScaling Caption="Set scaling/LUT" ID="59" PID="3" Description="Set scaling/LUT">
+        <Caption>Set scaling/LUT</Caption>
+        <Position Top="935" Left="524" Height="25" Width="95"/>
+        <Parameters>
+          <lut ID="0" Type="Text" Value="Blue"/>
+          <type ID="1" Type="Text" Value="Percentile by frame"/>
+          <pmin ID="2" Type="Real" Value="1" SValue=""/>
+          <pmax ID="3" Type="Real" Value="99.8" SValue=""/>
+          <fmin ID="4" Type="Real" Value="0" SValue=""/>
+          <fmax ID="5" Type="Real" Value="1" SValue=""/>
+          <gamma ID="6" Type="Real" Value="1" SValue=""/>
+          <color ID="7" Type="Text" Value=""/>
+        </Parameters>
+        <Inputs Types="P" IDs="53"/>
+        <Outputs Types="P" IDs="55"/>
+      </fSetScaling>
+      <fSetScaling Caption="Set scaling/LUT" ID="60" PID="3" Description="Set scaling/LUT">
+        <Caption>Set scaling/LUT</Caption>
+        <Position Top="1077" Left="201" Height="25" Width="95"/>
+        <Parameters>
+          <lut ID="0" Type="Text" Value="Grayscale"/>
+          <type ID="1" Type="Text" Value="Percentile by reference"/>
+          <pmin ID="2" Type="Real" Value="0" SValue=""/>
+          <pmax ID="3" Type="Real" Value="100" SValue=""/>
+          <fmin ID="4" Type="Real" Value="0" SValue=""/>
+          <fmax ID="5" Type="Real" Value="0" SValue=""/>
+          <gamma ID="6" Type="Real" Value="1.7" SValue=""/>
+          <color ID="7" Type="Text" Value=""/>
+        </Parameters>
+        <Inputs Types="P" IDs="56"/>
+        <Outputs Types="P" IDs="58"/>
+      </fSetScaling>
+      <fSetScaling Caption="Set scaling/LUT" ID="61" PID="3" Description="Set scaling/LUT">
+        <Caption>Set scaling/LUT</Caption>
+        <Position Top="1076" Left="76" Height="25" Width="95"/>
+        <Parameters>
+          <lut ID="0" Type="Text" Value="Grayscale"/>
+          <type ID="1" Type="Text" Value="Percentile by frame"/>
+          <pmin ID="2" Type="Real" Value="0" SValue=""/>
+          <pmax ID="3" Type="Real" Value="100" SValue=""/>
+          <fmin ID="4" Type="Real" Value="0" SValue=""/>
+          <fmax ID="5" Type="Real" Value="0" SValue=""/>
+          <gamma ID="6" Type="Real" Value="1.7" SValue=""/>
+          <color ID="7" Type="Text" Value=""/>
+        </Parameters>
+        <Inputs Types="P" IDs="56"/>
+        <Outputs Types="CP" IDs="57;58"/>
+      </fSetScaling>
+      <fSetScaling Caption="Set scaling/color" ID="62" PID="3" Description="Set scaling/LUT">
+        <Caption>Set scaling/color</Caption>
+        <Position Top="915" Left="54" Height="25" Width="99"/>
+        <Parameters>
+          <lut ID="0" Type="Text" Value="Grayscale"/>
+          <type ID="1" Type="Text" Value="Percentile by frame"/>
+          <pmin ID="2" Type="Real" Value="10" SValue=""/>
+          <pmax ID="3" Type="Real" Value="99.9" SValue=""/>
+          <fmin ID="4" Type="Real" Value="0" SValue=""/>
+          <fmax ID="5" Type="Real" Value="0" SValue=""/>
+          <gamma ID="6" Type="Real" Value="1.6" SValue=""/>
+          <color ID="7" Type="Text" Value=""/>
+        </Parameters>
+        <Inputs Types="P" IDs="66"/>
+        <Outputs Types="P" IDs="67"/>
+      </fSetScaling>
+      <fWriteBack Caption="Write back scaled values" ID="63" PID="46" Description="Write back scaled values">
+        <Caption>Write back scaled values</Caption>
+        <Position Top="940" Left="160" Height="25" Width="142"/>
+        <Parameters>
+          <range ID="0" Type="Real" Value="100" SValue=""/>
+          <clip ID="1" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="67"/>
+        <Outputs Types="P" IDs="5"/>
+      </fWriteBack>
+      <fSelect Caption="Select" ID="64" PID="145" Description="Select">
+        <Caption>Select</Caption>
+        <Position Top="860" Left="133" Height="25" Width="47"/>
+        <Parameters>
+          <selectorvalues ID="0" Type="Text" Value="Self-referenced;Make reference image;Use reference image"/>
+          <selector ID="1" Type="Text" Value="Self-referenced"/>
+          <operation ID="2" Type="Text" Value="Execute selected output"/>
+        </Parameters>
+        <Inputs Types="P" IDs="3"/>
+        <Outputs Types="PPP" IDs="66;66;65"/>
+      </fSelect>
+      <fSetScaling Caption="Set scaling/color" ID="65" PID="3" Description="Set scaling/LUT">
+        <Caption>Set scaling/color</Caption>
+        <Position Top="890" Left="181" Height="25" Width="99"/>
+        <Parameters>
+          <lut ID="0" Type="Text" Value="Grayscale"/>
+          <type ID="1" Type="Text" Value="Percentile by reference"/>
+          <pmin ID="2" Type="Real" Value="10" SValue=""/>
+          <pmax ID="3" Type="Real" Value="99.9" SValue=""/>
+          <fmin ID="4" Type="Real" Value="0" SValue=""/>
+          <fmax ID="5" Type="Real" Value="0" SValue=""/>
+          <gamma ID="6" Type="Real" Value="1.6" SValue=""/>
+          <color ID="7" Type="Text" Value=""/>
+        </Parameters>
+        <Inputs Types="P" IDs="64"/>
+        <Outputs Types="P" IDs="67"/>
+      </fSetScaling>
+      <fEndIf Caption="EndIf" ID="66" PID="143" Description="EndIf">
+        <Caption>EndIf</Caption>
+        <Position Top="890" Left="84" Height="25" Width="42"/>
+        <Parameters>
+          <inputs ID="0" Type="Integer" Value="1" SValue=""/>
+        </Parameters>
+        <Inputs Types="PP" IDs="64;64"/>
+        <Outputs Types="P" IDs="62"/>
+      </fEndIf>
+      <fEndIf Caption="EndIf" ID="67" PID="143" Description="EndIf">
+        <Caption>EndIf</Caption>
+        <Position Top="915" Left="210" Height="25" Width="42"/>
+        <Parameters>
+          <inputs ID="0" Type="Integer" Value="1" SValue=""/>
+        </Parameters>
+        <Inputs Types="PP" IDs="62;65"/>
+        <Outputs Types="P" IDs="63"/>
+      </fEndIf>
+      <f2DDFTBPTiled Caption="2D DFT Butterworth BP filter tiled" ID="68" PID="103" Description="2D DFT Butterworth BP filter tiled">
+        <Caption>2D DFT Butterworth BP filter tiled</Caption>
+        <Position Top="554" Left="1475" Height="25" Width="183"/>
+        <Parameters>
+          <tilesx ID="0" Type="Integer" Value="5" SValue=""/>
+          <tilesy ID="1" Type="Integer" Value="5" SValue=""/>
+          <cuton ID="2" Type="Real" Value="9.6016" SValue="=0.5*sqrt(imagesizex*imagesizey)/param=9.6016"/>
+          <ordon ID="3" Type="Real" Value="1.3" SValue=""/>
+          <cutoff ID="4" Type="Real" Value="1000" SValue=""/>
+          <ordff ID="5" Type="Real" Value="100" SValue=""/>
+          <units ID="6" Type="Text" Value="pixels"/>
+          <normalization ID="7" Type="Text" Value="Corrected Integral"/>
+          <edges ID="8" Type="Bool" Value="Yes"/>
+          <enlarge ID="9" Type="Bool" Value="No"/>
+          <enlargeto ID="10" Type="Integer" Value="9" SValue=""/>
+          <phase ID="11" Type="Bool" Value="No"/>
+          <absolute ID="12" Type="Bool" Value="No"/>
+          <protect ID="13" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="77"/>
+        <Outputs Types="P" IDs="69"/>
+      </f2DDFTBPTiled>
+      <fThreshold Caption="Threshold" ID="69" PID="14" Description="Threshold">
+        <Caption>Threshold</Caption>
+        <Position Top="599" Left="1535" Height="25" Width="67"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Pixel value"/>
+          <way ID="1" Type="Text" Value="Bottom"/>
+          <value ID="2" Type="Real" Value="0" SValue=""/>
+          <value2 ID="3" Type="Real" Value="0" SValue=""/>
+          <proctype ID="4" Type="Text" Value="None"/>
+          <keeporigmask ID="5" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="68"/>
+        <Outputs Types="P" IDs="74"/>
+      </fThreshold>
+      <fCopy Caption="Copy" ID="70" PID="4" Description="Copy">
+        <Caption>Copy</Caption>
+        <Position Top="519" Left="1339" Height="25" Width="42"/>
+        <Parameters>
+          <linked ID="0" Type="Bool" Value="Yes"/>
+        </Parameters>
+        <Inputs Types="P" IDs="75"/>
+        <Outputs Types="P" IDs="71"/>
+      </fCopy>
+      <f2DMedian Caption="2D Median filter" ID="71" PID="1" Description="2D Median filter">
+        <Caption>2D Median filter</Caption>
+        <Position Top="547" Left="1311" Height="25" Width="95"/>
+        <Parameters>
+          <width ID="0" Type="Integer" Value="49" SValue=""/>
+        </Parameters>
+        <Inputs Types="P" IDs="70"/>
+        <Outputs Types="CP" IDs="72;73"/>
+      </f2DMedian>
+      <fImageAritmeticsIP Caption="Image Aritmetics In Place" ID="72" PID="61" Description="Image Arithmetic In Place">
+        <Caption>Image Aritmetics In Place</Caption>
+        <Position Top="635" Left="1375" Height="25" Width="142"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="-"/>
+          <framerange ID="1" Type="Text" Value="All"/>
+        </Parameters>
+        <Inputs Types="PP" IDs="75;71"/>
+        <Outputs Types="P" IDs="74"/>
+      </fImageAritmeticsIP>
+      <fClose Caption="Close" ID="73" PID="22" Description="Close">
+        <Caption>Close</Caption>
+        <Position Top="575" Left="1337" Height="25" Width="45"/>
+        <Parameters>
+          <target ID="0" Type="Text" Value="Image"/>
+        </Parameters>
+        <Inputs Types="P" IDs="71"/>
+        <Outputs Types="" IDs=""/>
+      </fClose>
+      <fEndIf Caption="EndIf" ID="74" PID="143" Description="EndIf">
+        <Caption>EndIf</Caption>
+        <Position Top="657" Left="1661" Height="25" Width="42"/>
+        <Parameters>
+          <inputs ID="0" Type="Integer" Value="1" SValue=""/>
+        </Parameters>
+        <Inputs Types="PPPP" IDs="69;72;76;164"/>
+        <Outputs Types="P" IDs="231"/>
+      </fEndIf>
+      <fWait Caption="Wait for all inputs" ID="75" PID="106" Description="Wait for all inputs">
+        <Caption>Wait for all inputs</Caption>
+        <Position Top="479" Left="1367" Height="25" Width="103"/>
+        <Parameters/>
+        <Inputs Types="P" IDs="76"/>
+        <Outputs Types="CP" IDs="70;72"/>
+      </fWait>
+      <fSelect Caption="Select" ID="76" PID="145" Description="Select">
+        <Caption>Select</Caption>
+        <Position Top="411" Left="1502" Height="25" Width="47"/>
+        <Parameters>
+          <selectorvalues ID="0" Type="Text" Value="Percentile;Rolling ball;Spatial filtering;None"/>
+          <selector ID="1" Type="Text" Value="Spatial filtering"/>
+          <operation ID="2" Type="Text" Value="Execute selected output"/>
+        </Parameters>
+        <Inputs Types="P" IDs="176"/>
+        <Outputs Types="PPPP" IDs="164;75;77;74"/>
+      </fSelect>
+      <fInpaintMask Caption="Inpaint Mask" ID="77" PID="94" Description="Inpaint Mask">
+        <Caption>Inpaint Mask</Caption>
+        <Position Top="507" Left="1519" Height="25" Width="79"/>
+        <Parameters>
+          <radius ID="0" Type="Real" Value="5" SValue=""/>
+          <method ID="1" Type="Text" Value="Telea"/>
+        </Parameters>
+        <Inputs Types="P" IDs="76"/>
+        <Outputs Types="P" IDs="68"/>
+      </fInpaintMask>
+      <f2DDFTBPTiled Caption="2D DFT Butterworth BP filter tiled" ID="78" PID="103" Description="2D DFT Butterworth BP filter tiled">
+        <Caption>2D DFT Butterworth BP filter tiled</Caption>
+        <Position Top="554" Left="1879" Height="25" Width="183"/>
+        <Parameters>
+          <tilesx ID="0" Type="Integer" Value="5" SValue=""/>
+          <tilesy ID="1" Type="Integer" Value="5" SValue=""/>
+          <cuton ID="2" Type="Real" Value="9.6016" SValue="=0.5*sqrt(imagesizex*imagesizey)/param=9.6016"/>
+          <ordon ID="3" Type="Real" Value="1.3" SValue=""/>
+          <cutoff ID="4" Type="Real" Value="1000" SValue=""/>
+          <ordff ID="5" Type="Real" Value="100" SValue=""/>
+          <units ID="6" Type="Text" Value="pixels"/>
+          <normalization ID="7" Type="Text" Value="Corrected Integral"/>
+          <edges ID="8" Type="Bool" Value="Yes"/>
+          <enlarge ID="9" Type="Bool" Value="No"/>
+          <enlargeto ID="10" Type="Integer" Value="9" SValue=""/>
+          <phase ID="11" Type="Bool" Value="No"/>
+          <absolute ID="12" Type="Bool" Value="No"/>
+          <protect ID="13" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="87"/>
+        <Outputs Types="P" IDs="79"/>
+      </f2DDFTBPTiled>
+      <fThreshold Caption="Threshold" ID="79" PID="14" Description="Threshold">
+        <Caption>Threshold</Caption>
+        <Position Top="598" Left="1937" Height="25" Width="67"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Pixel value"/>
+          <way ID="1" Type="Text" Value="Bottom"/>
+          <value ID="2" Type="Real" Value="0" SValue=""/>
+          <value2 ID="3" Type="Real" Value="0" SValue=""/>
+          <proctype ID="4" Type="Text" Value="None"/>
+          <keeporigmask ID="5" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="78"/>
+        <Outputs Types="P" IDs="84"/>
+      </fThreshold>
+      <fCopy Caption="Copy" ID="80" PID="4" Description="Copy">
+        <Caption>Copy</Caption>
+        <Position Top="522" Left="1763" Height="25" Width="42"/>
+        <Parameters>
+          <linked ID="0" Type="Bool" Value="Yes"/>
+        </Parameters>
+        <Inputs Types="P" IDs="85"/>
+        <Outputs Types="P" IDs="81"/>
+      </fCopy>
+      <f2DMedian Caption="2D Median filter" ID="81" PID="1" Description="2D Median filter">
+        <Caption>2D Median filter</Caption>
+        <Position Top="550" Left="1735" Height="25" Width="95"/>
+        <Parameters>
+          <width ID="0" Type="Integer" Value="49" SValue=""/>
+        </Parameters>
+        <Inputs Types="P" IDs="80"/>
+        <Outputs Types="CP" IDs="82;83"/>
+      </f2DMedian>
+      <fImageAritmeticsIP Caption="Image Aritmetics In Place" ID="82" PID="61" Description="Image Arithmetic In Place">
+        <Caption>Image Aritmetics In Place</Caption>
+        <Position Top="638" Left="1797" Height="25" Width="142"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="-"/>
+          <framerange ID="1" Type="Text" Value="All"/>
+        </Parameters>
+        <Inputs Types="PP" IDs="85;81"/>
+        <Outputs Types="P" IDs="84"/>
+      </fImageAritmeticsIP>
+      <fClose Caption="Close" ID="83" PID="22" Description="Close">
+        <Caption>Close</Caption>
+        <Position Top="577" Left="1759" Height="25" Width="45"/>
+        <Parameters>
+          <target ID="0" Type="Text" Value="Image"/>
+        </Parameters>
+        <Inputs Types="P" IDs="81"/>
+        <Outputs Types="" IDs=""/>
+      </fClose>
+      <fEndIf Caption="EndIf" ID="84" PID="143" Description="EndIf">
+        <Caption>EndIf</Caption>
+        <Position Top="662" Left="2055" Height="25" Width="42"/>
+        <Parameters>
+          <inputs ID="0" Type="Integer" Value="1" SValue=""/>
+        </Parameters>
+        <Inputs Types="PPPP" IDs="79;82;86;165"/>
+        <Outputs Types="P" IDs="233"/>
+      </fEndIf>
+      <fWait Caption="Wait for all inputs" ID="85" PID="106" Description="Wait for all inputs">
+        <Caption>Wait for all inputs</Caption>
+        <Position Top="482" Left="1791" Height="25" Width="103"/>
+        <Parameters/>
+        <Inputs Types="P" IDs="86"/>
+        <Outputs Types="CP" IDs="80;82"/>
+      </fWait>
+      <fSelect Caption="Select" ID="86" PID="145" Description="Select">
+        <Caption>Select</Caption>
+        <Position Top="413" Left="1898" Height="25" Width="47"/>
+        <Parameters>
+          <selectorvalues ID="0" Type="Text" Value="Percentile;Rolling ball;Spatial filtering;None"/>
+          <selector ID="1" Type="Text" Value="Spatial filtering"/>
+          <operation ID="2" Type="Text" Value="Execute selected output"/>
+        </Parameters>
+        <Inputs Types="P" IDs="177"/>
+        <Outputs Types="PPPP" IDs="165;85;87;84"/>
+      </fSelect>
+      <fInpaintMask Caption="Inpaint Mask" ID="87" PID="94" Description="Inpaint Mask">
+        <Caption>Inpaint Mask</Caption>
+        <Position Top="507" Left="1921" Height="25" Width="79"/>
+        <Parameters>
+          <radius ID="0" Type="Real" Value="5" SValue=""/>
+          <method ID="1" Type="Text" Value="Telea"/>
+        </Parameters>
+        <Inputs Types="P" IDs="86"/>
+        <Outputs Types="P" IDs="78"/>
+      </fInpaintMask>
+      <fGetLinked Caption="Get Linked Channel : label1" ID="88" PID="17" Description="Get Linked Channel">
+        <Caption>Get Linked Channel : label1</Caption>
+        <Position Top="34" Left="1362" Height="25" Width="157"/>
+        <Parameters>
+          <channel ID="0" Type="Integer" Value="1" SValue=""/>
+        </Parameters>
+        <Inputs Types="P" IDs="101"/>
+        <Outputs Types="C" IDs="136"/>
+      </fGetLinked>
+      <fGetLinked Caption="Get Linked Channel : label2" ID="89" PID="17" Description="Get Linked Channel">
+        <Caption>Get Linked Channel : label2</Caption>
+        <Position Top="46" Left="1804" Height="25" Width="157"/>
+        <Parameters>
+          <channel ID="0" Type="Integer" Value="2" SValue=""/>
+        </Parameters>
+        <Inputs Types="P" IDs="101"/>
+        <Outputs Types="C" IDs="137"/>
+      </fGetLinked>
+      <fPlotSegmentIntensities Caption="Plot Segment Intensities" ID="90" PID="69" Description="Plot Segment Intensities">
+        <Caption>Plot Segment Intensities</Caption>
+        <Position Top="1301" Left="1511" Height="25" Width="137"/>
+        <Parameters>
+          <dfperf ID="0" Type="Bool" Value="No"/>
+          <resample ID="1" Type="Bool" Value="No"/>
+          <type ID="2" Type="Text" Value="Sum"/>
+          <allMean ID="3" Type="Bool" Value="No"/>
+          <allMedian ID="4" Type="Bool" Value="No"/>
+          <advnorm ID="5" Type="Text" Value="None"/>
+          <histogram ID="6" Type="Text" Value="None"/>
+          <savename ID="7" Type="Text" Value=""/>
+          <save ID="8" Type="Bool" Value="No"/>
+          <saveconfirm ID="9" Type="Bool" Value="No"/>
+          <ranges ID="10" Type="Text" Value=""/>
+          <rates ID="11" Type="Bool" Value="No"/>
+          <ratesnorm ID="12" Type="Bool" Value="No"/>
+          <yonly ID="13" Type="Bool" Value="Yes"/>
+          <mdoutput ID="14" Type="Bool" Value="No"/>
+          <channelrange ID="15" Type="Text" Value="0-4"/>
+          <plateoutput ID="16" Type="Bool" Value="No"/>
+          <stagetocolumn ID="17" Type="Bool" Value="No"/>
+          <singlechannel ID="18" Type="Bool" Value="No"/>
+          <forcenewrow ID="19" Type="Bool" Value="No"/>
+          <histogrambins ID="20" Type="Integer" Value="20" SValue=""/>
+          <histogramrange ID="21" Type="Text" Value="All"/>
+          <continuous ID="22" Type="Bool" Value="No"/>
+          <constrainActiveROI ID="23" Type="Bool" Value="Yes"/>
+        </Parameters>
+        <Inputs Types="PP" IDs="97;232"/>
+        <Outputs Types="" IDs=""/>
+      </fPlotSegmentIntensities>
+      <fReEvSegment Caption="Reevaluate Segments" ID="91" PID="101" Description="Reevaluate Segments">
+        <Caption>Reevaluate Segments</Caption>
+        <Position Top="1234" Left="1491" Height="25" Width="127"/>
+        <Parameters>
+          <reapply ID="0" Type="Bool" Value="Yes"/>
+          <textoutput ID="1" Type="Bool" Value="No"/>
+          <weld ID="2" Type="Bool" Value="No"/>
+          <noedges ID="3" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="100"/>
+        <Outputs Types="P" IDs="97"/>
+      </fReEvSegment>
+      <fCopy Caption="Copy" ID="92" PID="4" Description="Copy">
+        <Caption>Copy</Caption>
+        <Position Top="990" Left="1448" Height="25" Width="42"/>
+        <Parameters>
+          <linked ID="0" Type="Bool" Value="Yes"/>
+        </Parameters>
+        <Inputs Types="P" IDs="99"/>
+        <Outputs Types="P" IDs="94"/>
+      </fCopy>
+      <fMorphological Caption="Morphological operator" ID="93" PID="13" Description="Morphological operator">
+        <Caption>Morphological operator</Caption>
+        <Position Top="1026" Left="1474" Height="25" Width="133"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Dilate"/>
+          <size ID="1" Type="Integer" Value="15" SValue="=param*2+1=31"/>
+          <shape ID="2" Type="Text" Value="Disc"/>
+        </Parameters>
+        <Inputs Types="P" IDs="99"/>
+        <Outputs Types="P" IDs="95"/>
+      </fMorphological>
+      <fThreshold Caption="Threshold" ID="94" PID="14" Description="Threshold">
+        <Caption>Threshold</Caption>
+        <Position Top="1060" Left="1436" Height="25" Width="67"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Pixel value"/>
+          <way ID="1" Type="Text" Value="Below"/>
+          <value ID="2" Type="Real" Value="0.5" SValue=""/>
+          <value2 ID="3" Type="Real" Value="0" SValue=""/>
+          <proctype ID="4" Type="Text" Value="None"/>
+          <keeporigmask ID="5" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="92"/>
+        <Outputs Types="CP" IDs="95;96"/>
+      </fThreshold>
+      <fImageAritmeticsIP Caption="Image Aritmetics In Place" ID="95" PID="61" Description="Image Arithmetic In Place">
+        <Caption>Image Aritmetics In Place</Caption>
+        <Position Top="1152" Left="1444" Height="25" Width="142"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="*"/>
+          <framerange ID="1" Type="Text" Value="All"/>
+        </Parameters>
+        <Inputs Types="PP" IDs="93;94"/>
+        <Outputs Types="P" IDs="100"/>
+      </fImageAritmeticsIP>
+      <fClose Caption="Close" ID="96" PID="22" Description="Close">
+        <Caption>Close</Caption>
+        <Position Top="1114" Left="1431" Height="25" Width="45"/>
+        <Parameters>
+          <target ID="0" Type="Text" Value="Image"/>
+        </Parameters>
+        <Inputs Types="P" IDs="94"/>
+        <Outputs Types="" IDs=""/>
+      </fClose>
+      <fEndIf Caption="EndIf - seg" ID="97" PID="143" Description="EndIf">
+        <Caption>EndIf - seg</Caption>
+        <Position Top="1270" Left="1632" Height="25" Width="70"/>
+        <Parameters>
+          <inputs ID="0" Type="Integer" Value="1" SValue=""/>
+        </Parameters>
+        <Inputs Types="PP" IDs="98;91"/>
+        <Outputs Types="C" IDs="90"/>
+      </fEndIf>
+      <fSelect Caption="Select" ID="98" PID="145" Description="Select">
+        <Caption>Select</Caption>
+        <Position Top="924" Left="1688" Height="25" Width="47"/>
+        <Parameters>
+          <selectorvalues ID="0" Type="Text" Value="Nucleus;Perinuclear ring"/>
+          <selector ID="1" Type="Text" Value="Nucleus"/>
+          <operation ID="2" Type="Text" Value="Execute selected output"/>
+        </Parameters>
+        <Inputs Types="P" IDs="102"/>
+        <Outputs Types="PC" IDs="97;99"/>
+      </fSelect>
+      <fCopy Caption="Copy" ID="99" PID="4" Description="Copy">
+        <Caption>Copy</Caption>
+        <Position Top="940" Left="1472" Height="25" Width="42"/>
+        <Parameters>
+          <linked ID="0" Type="Bool" Value="Yes"/>
+        </Parameters>
+        <Inputs Types="P" IDs="98"/>
+        <Outputs Types="CP" IDs="92;93"/>
+      </fCopy>
+      <fRename Caption="Rename Image" ID="100" PID="18" Description="Rename Image">
+        <Caption>Rename Image</Caption>
+        <Position Top="1194" Left="1484" Height="25" Width="92"/>
+        <Parameters>
+          <channel ID="0" Type="Integer" Value="-1" SValue=""/>
+          <name ID="1" Type="Text" Value="Perinuclear ring for label #1"/>
+        </Parameters>
+        <Inputs Types="P" IDs="95"/>
+        <Outputs Types="P" IDs="91"/>
+      </fRename>
+      <fSelectByNumber Caption="Select by Number" ID="101" PID="147" Description="Select by Number">
+        <Caption>Select by Number</Caption>
+        <Position Top="0" Left="836" Height="25" Width="105"/>
+        <Parameters>
+          <selector ID="0" Type="Integer" Value="3" SValue=""/>
+          <operation ID="1" Type="Text" Value="Execute all outputs up to the selected"/>
+        </Parameters>
+        <Inputs Types="P" IDs="180"/>
+        <Outputs Types="CCCC" IDs="88;89;135;161"/>
+      </fSelectByNumber>
+      <fSelectByNumber Caption="Select by Number" ID="102" PID="147" Description="Select by Number">
+        <Caption>Select by Number</Caption>
+        <Position Top="842" Left="1166" Height="25" Width="105"/>
+        <Parameters>
+          <selector ID="0" Type="Integer" Value="3" SValue=""/>
+          <operation ID="1" Type="Text" Value="Execute all outputs up to the selected"/>
+        </Parameters>
+        <Inputs Types="P" IDs="139"/>
+        <Outputs Types="PPPP" IDs="98;111;122;148"/>
+      </fSelectByNumber>
+      <fPlotSegmentIntensities Caption="Plot Segment Intensities" ID="103" PID="69" Description="Plot Segment Intensities">
+        <Caption>Plot Segment Intensities</Caption>
+        <Position Top="1299" Left="2001" Height="25" Width="137"/>
+        <Parameters>
+          <dfperf ID="0" Type="Bool" Value="No"/>
+          <resample ID="1" Type="Bool" Value="No"/>
+          <type ID="2" Type="Text" Value="Sum"/>
+          <allMean ID="3" Type="Bool" Value="No"/>
+          <allMedian ID="4" Type="Bool" Value="No"/>
+          <advnorm ID="5" Type="Text" Value="None"/>
+          <histogram ID="6" Type="Text" Value="None"/>
+          <savename ID="7" Type="Text" Value=""/>
+          <save ID="8" Type="Bool" Value="No"/>
+          <saveconfirm ID="9" Type="Bool" Value="No"/>
+          <ranges ID="10" Type="Text" Value=""/>
+          <rates ID="11" Type="Bool" Value="No"/>
+          <ratesnorm ID="12" Type="Bool" Value="No"/>
+          <yonly ID="13" Type="Bool" Value="Yes"/>
+          <mdoutput ID="14" Type="Bool" Value="No"/>
+          <channelrange ID="15" Type="Text" Value="0-4"/>
+          <plateoutput ID="16" Type="Bool" Value="No"/>
+          <stagetocolumn ID="17" Type="Bool" Value="No"/>
+          <singlechannel ID="18" Type="Bool" Value="No"/>
+          <forcenewrow ID="19" Type="Bool" Value="No"/>
+          <histogrambins ID="20" Type="Integer" Value="20" SValue=""/>
+          <histogramrange ID="21" Type="Text" Value="All"/>
+          <continuous ID="22" Type="Bool" Value="No"/>
+          <constrainActiveROI ID="23" Type="Bool" Value="Yes"/>
+        </Parameters>
+        <Inputs Types="PP" IDs="110;234"/>
+        <Outputs Types="" IDs=""/>
+      </fPlotSegmentIntensities>
+      <fReEvSegment Caption="Reevaluate Segments" ID="104" PID="101" Description="Reevaluate Segments">
+        <Caption>Reevaluate Segments</Caption>
+        <Position Top="1220" Left="1852" Height="25" Width="127"/>
+        <Parameters>
+          <reapply ID="0" Type="Bool" Value="Yes"/>
+          <textoutput ID="1" Type="Bool" Value="No"/>
+          <weld ID="2" Type="Bool" Value="No"/>
+          <noedges ID="3" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="113"/>
+        <Outputs Types="P" IDs="110"/>
+      </fReEvSegment>
+      <fCopy Caption="Copy" ID="105" PID="4" Description="Copy">
+        <Caption>Copy</Caption>
+        <Position Top="984" Left="1800" Height="25" Width="42"/>
+        <Parameters>
+          <linked ID="0" Type="Bool" Value="Yes"/>
+        </Parameters>
+        <Inputs Types="P" IDs="112"/>
+        <Outputs Types="P" IDs="107"/>
+      </fCopy>
+      <fMorphological Caption="Morphological operator" ID="106" PID="13" Description="Morphological operator">
+        <Caption>Morphological operator</Caption>
+        <Position Top="1022" Left="1826" Height="25" Width="133"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Dilate"/>
+          <size ID="1" Type="Integer" Value="31" SValue="=param*2+1=31"/>
+          <shape ID="2" Type="Text" Value="Disc"/>
+        </Parameters>
+        <Inputs Types="P" IDs="112"/>
+        <Outputs Types="P" IDs="108"/>
+      </fMorphological>
+      <fThreshold Caption="Threshold" ID="107" PID="14" Description="Threshold">
+        <Caption>Threshold</Caption>
+        <Position Top="1054" Left="1788" Height="25" Width="67"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Pixel value"/>
+          <way ID="1" Type="Text" Value="Below"/>
+          <value ID="2" Type="Real" Value="0.5" SValue=""/>
+          <value2 ID="3" Type="Real" Value="0" SValue=""/>
+          <proctype ID="4" Type="Text" Value="None"/>
+          <keeporigmask ID="5" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="105"/>
+        <Outputs Types="CP" IDs="108;109"/>
+      </fThreshold>
+      <fImageAritmeticsIP Caption="Image Aritmetics In Place" ID="108" PID="61" Description="Image Arithmetic In Place">
+        <Caption>Image Aritmetics In Place</Caption>
+        <Position Top="1146" Left="1796" Height="25" Width="142"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="*"/>
+          <framerange ID="1" Type="Text" Value="All"/>
+        </Parameters>
+        <Inputs Types="PP" IDs="106;107"/>
+        <Outputs Types="P" IDs="113"/>
+      </fImageAritmeticsIP>
+      <fClose Caption="Close" ID="109" PID="22" Description="Close">
+        <Caption>Close</Caption>
+        <Position Top="1108" Left="1783" Height="25" Width="45"/>
+        <Parameters>
+          <target ID="0" Type="Text" Value="Image"/>
+        </Parameters>
+        <Inputs Types="P" IDs="107"/>
+        <Outputs Types="" IDs=""/>
+      </fClose>
+      <fEndIf Caption="EndIf - seg" ID="110" PID="143" Description="EndIf">
+        <Caption>EndIf - seg</Caption>
+        <Position Top="1262" Left="1975" Height="25" Width="70"/>
+        <Parameters>
+          <inputs ID="0" Type="Integer" Value="1" SValue=""/>
+        </Parameters>
+        <Inputs Types="PP" IDs="111;104"/>
+        <Outputs Types="C" IDs="103"/>
+      </fEndIf>
+      <fSelect Caption="Select" ID="111" PID="145" Description="Select">
+        <Caption>Select</Caption>
+        <Position Top="900" Left="1970" Height="25" Width="47"/>
+        <Parameters>
+          <selectorvalues ID="0" Type="Text" Value="Nucleus;Perinuclear ring"/>
+          <selector ID="1" Type="Text" Value="Perinuclear ring"/>
+          <operation ID="2" Type="Text" Value="Execute selected output"/>
+        </Parameters>
+        <Inputs Types="P" IDs="102"/>
+        <Outputs Types="PC" IDs="110;112"/>
+      </fSelect>
+      <fCopy Caption="Copy" ID="112" PID="4" Description="Copy">
+        <Caption>Copy</Caption>
+        <Position Top="934" Left="1824" Height="25" Width="42"/>
+        <Parameters>
+          <linked ID="0" Type="Bool" Value="Yes"/>
+        </Parameters>
+        <Inputs Types="P" IDs="111"/>
+        <Outputs Types="CP" IDs="105;106"/>
+      </fCopy>
+      <fRename Caption="Rename Image" ID="113" PID="18" Description="Rename Image">
+        <Caption>Rename Image</Caption>
+        <Position Top="1188" Left="1836" Height="25" Width="92"/>
+        <Parameters>
+          <channel ID="0" Type="Integer" Value="-1" SValue=""/>
+          <name ID="1" Type="Text" Value="Perinuclear ring for label #2"/>
+        </Parameters>
+        <Inputs Types="P" IDs="108"/>
+        <Outputs Types="P" IDs="104"/>
+      </fRename>
+      <fPlotSegmentIntensities Caption="Plot Segment Intensities" ID="114" PID="69" Description="Plot Segment Intensities">
+        <Caption>Plot Segment Intensities</Caption>
+        <Position Top="1279" Left="2433" Height="25" Width="137"/>
+        <Parameters>
+          <dfperf ID="0" Type="Bool" Value="No"/>
+          <resample ID="1" Type="Bool" Value="No"/>
+          <type ID="2" Type="Text" Value="Sum"/>
+          <allMean ID="3" Type="Bool" Value="No"/>
+          <allMedian ID="4" Type="Bool" Value="No"/>
+          <advnorm ID="5" Type="Text" Value="None"/>
+          <histogram ID="6" Type="Text" Value="None"/>
+          <savename ID="7" Type="Text" Value=""/>
+          <save ID="8" Type="Bool" Value="No"/>
+          <saveconfirm ID="9" Type="Bool" Value="No"/>
+          <ranges ID="10" Type="Text" Value=""/>
+          <rates ID="11" Type="Bool" Value="No"/>
+          <ratesnorm ID="12" Type="Bool" Value="No"/>
+          <yonly ID="13" Type="Bool" Value="Yes"/>
+          <mdoutput ID="14" Type="Bool" Value="No"/>
+          <channelrange ID="15" Type="Text" Value="0-4"/>
+          <plateoutput ID="16" Type="Bool" Value="No"/>
+          <stagetocolumn ID="17" Type="Bool" Value="No"/>
+          <singlechannel ID="18" Type="Bool" Value="No"/>
+          <forcenewrow ID="19" Type="Bool" Value="No"/>
+          <histogrambins ID="20" Type="Integer" Value="20" SValue=""/>
+          <histogramrange ID="21" Type="Text" Value="All"/>
+          <continuous ID="22" Type="Bool" Value="No"/>
+          <constrainActiveROI ID="23" Type="Bool" Value="Yes"/>
+        </Parameters>
+        <Inputs Types="PP" IDs="121;236"/>
+        <Outputs Types="" IDs=""/>
+      </fPlotSegmentIntensities>
+      <fReEvSegment Caption="Reevaluate Segments" ID="115" PID="101" Description="Reevaluate Segments">
+        <Caption>Reevaluate Segments</Caption>
+        <Position Top="1218" Left="2210" Height="25" Width="127"/>
+        <Parameters>
+          <reapply ID="0" Type="Bool" Value="Yes"/>
+          <textoutput ID="1" Type="Bool" Value="No"/>
+          <weld ID="2" Type="Bool" Value="No"/>
+          <noedges ID="3" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="124"/>
+        <Outputs Types="P" IDs="121"/>
+      </fReEvSegment>
+      <fCopy Caption="Copy" ID="116" PID="4" Description="Copy">
+        <Caption>Copy</Caption>
+        <Position Top="982" Left="2168" Height="25" Width="42"/>
+        <Parameters>
+          <linked ID="0" Type="Bool" Value="Yes"/>
+        </Parameters>
+        <Inputs Types="P" IDs="123"/>
+        <Outputs Types="P" IDs="118"/>
+      </fCopy>
+      <fMorphological Caption="Morphological operator" ID="117" PID="13" Description="Morphological operator">
+        <Caption>Morphological operator</Caption>
+        <Position Top="1020" Left="2195" Height="25" Width="133"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Dilate"/>
+          <size ID="1" Type="Integer" Value="31" SValue="=param*2+1=31"/>
+          <shape ID="2" Type="Text" Value="Disc"/>
+        </Parameters>
+        <Inputs Types="P" IDs="123"/>
+        <Outputs Types="P" IDs="119"/>
+      </fMorphological>
+      <fThreshold Caption="Threshold" ID="118" PID="14" Description="Threshold">
+        <Caption>Threshold</Caption>
+        <Position Top="1054" Left="2156" Height="25" Width="67"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Pixel value"/>
+          <way ID="1" Type="Text" Value="Below"/>
+          <value ID="2" Type="Real" Value="0.5" SValue=""/>
+          <value2 ID="3" Type="Real" Value="0" SValue=""/>
+          <proctype ID="4" Type="Text" Value="None"/>
+          <keeporigmask ID="5" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="116"/>
+        <Outputs Types="CP" IDs="119;120"/>
+      </fThreshold>
+      <fImageAritmeticsIP Caption="Image Aritmetics In Place" ID="119" PID="61" Description="Image Arithmetic In Place">
+        <Caption>Image Aritmetics In Place</Caption>
+        <Position Top="1146" Left="2164" Height="25" Width="142"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="*"/>
+          <framerange ID="1" Type="Text" Value="All"/>
+        </Parameters>
+        <Inputs Types="PP" IDs="117;118"/>
+        <Outputs Types="P" IDs="124"/>
+      </fImageAritmeticsIP>
+      <fClose Caption="Close" ID="120" PID="22" Description="Close">
+        <Caption>Close</Caption>
+        <Position Top="1106" Left="2152" Height="25" Width="45"/>
+        <Parameters>
+          <target ID="0" Type="Text" Value="Image"/>
+        </Parameters>
+        <Inputs Types="P" IDs="118"/>
+        <Outputs Types="" IDs=""/>
+      </fClose>
+      <fEndIf Caption="EndIf - seg" ID="121" PID="143" Description="EndIf">
+        <Caption>EndIf - seg</Caption>
+        <Position Top="1244" Left="2388" Height="25" Width="70"/>
+        <Parameters>
+          <inputs ID="0" Type="Integer" Value="1" SValue=""/>
+        </Parameters>
+        <Inputs Types="PP" IDs="122;115"/>
+        <Outputs Types="C" IDs="114"/>
+      </fEndIf>
+      <fSelect Caption="Select" ID="122" PID="145" Description="Select">
+        <Caption>Select</Caption>
+        <Position Top="898" Left="2400" Height="25" Width="47"/>
+        <Parameters>
+          <selectorvalues ID="0" Type="Text" Value="Nucleus;Perinuclear ring"/>
+          <selector ID="1" Type="Text" Value="Perinuclear ring"/>
+          <operation ID="2" Type="Text" Value="Execute selected output"/>
+        </Parameters>
+        <Inputs Types="P" IDs="102"/>
+        <Outputs Types="PC" IDs="121;123"/>
+      </fSelect>
+      <fCopy Caption="Copy" ID="123" PID="4" Description="Copy">
+        <Caption>Copy</Caption>
+        <Position Top="934" Left="2192" Height="25" Width="42"/>
+        <Parameters>
+          <linked ID="0" Type="Bool" Value="Yes"/>
+        </Parameters>
+        <Inputs Types="P" IDs="122"/>
+        <Outputs Types="CP" IDs="116;117"/>
+      </fCopy>
+      <fRename Caption="Rename Image" ID="124" PID="18" Description="Rename Image">
+        <Caption>Rename Image</Caption>
+        <Position Top="1186" Left="2206" Height="25" Width="92"/>
+        <Parameters>
+          <channel ID="0" Type="Integer" Value="-1" SValue=""/>
+          <name ID="1" Type="Text" Value="Perinuclear ring for label #3"/>
+        </Parameters>
+        <Inputs Types="P" IDs="119"/>
+        <Outputs Types="P" IDs="115"/>
+      </fRename>
+      <f2DDFTBPTiled Caption="2D DFT Butterworth BP filter tiled" ID="125" PID="103" Description="2D DFT Butterworth BP filter tiled">
+        <Caption>2D DFT Butterworth BP filter tiled</Caption>
+        <Position Top="554" Left="2277" Height="25" Width="183"/>
+        <Parameters>
+          <tilesx ID="0" Type="Integer" Value="5" SValue=""/>
+          <tilesy ID="1" Type="Integer" Value="5" SValue=""/>
+          <cuton ID="2" Type="Real" Value="9.6016" SValue="=0.5*sqrt(imagesizex*imagesizey)/param=9.6016"/>
+          <ordon ID="3" Type="Real" Value="1.3" SValue=""/>
+          <cutoff ID="4" Type="Real" Value="1000" SValue=""/>
+          <ordff ID="5" Type="Real" Value="100" SValue=""/>
+          <units ID="6" Type="Text" Value="pixels"/>
+          <normalization ID="7" Type="Text" Value="Corrected Integral"/>
+          <edges ID="8" Type="Bool" Value="Yes"/>
+          <enlarge ID="9" Type="Bool" Value="No"/>
+          <enlargeto ID="10" Type="Integer" Value="9" SValue=""/>
+          <phase ID="11" Type="Bool" Value="No"/>
+          <absolute ID="12" Type="Bool" Value="No"/>
+          <protect ID="13" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="134"/>
+        <Outputs Types="P" IDs="126"/>
+      </f2DDFTBPTiled>
+      <fThreshold Caption="Threshold" ID="126" PID="14" Description="Threshold">
+        <Caption>Threshold</Caption>
+        <Position Top="598" Left="2335" Height="25" Width="67"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Pixel value"/>
+          <way ID="1" Type="Text" Value="Bottom"/>
+          <value ID="2" Type="Real" Value="0" SValue=""/>
+          <value2 ID="3" Type="Real" Value="0" SValue=""/>
+          <proctype ID="4" Type="Text" Value="None"/>
+          <keeporigmask ID="5" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="125"/>
+        <Outputs Types="P" IDs="131"/>
+      </fThreshold>
+      <fCopy Caption="Copy" ID="127" PID="4" Description="Copy">
+        <Caption>Copy</Caption>
+        <Position Top="522" Left="2161" Height="25" Width="42"/>
+        <Parameters>
+          <linked ID="0" Type="Bool" Value="Yes"/>
+        </Parameters>
+        <Inputs Types="P" IDs="132"/>
+        <Outputs Types="P" IDs="128"/>
+      </fCopy>
+      <f2DMedian Caption="2D Median filter" ID="128" PID="1" Description="2D Median filter">
+        <Caption>2D Median filter</Caption>
+        <Position Top="550" Left="2133" Height="25" Width="95"/>
+        <Parameters>
+          <width ID="0" Type="Integer" Value="49" SValue=""/>
+        </Parameters>
+        <Inputs Types="P" IDs="127"/>
+        <Outputs Types="CP" IDs="129;130"/>
+      </f2DMedian>
+      <fImageAritmeticsIP Caption="Image Aritmetics In Place" ID="129" PID="61" Description="Image Arithmetic In Place">
+        <Caption>Image Aritmetics In Place</Caption>
+        <Position Top="638" Left="2195" Height="25" Width="142"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="-"/>
+          <framerange ID="1" Type="Text" Value="All"/>
+        </Parameters>
+        <Inputs Types="PP" IDs="132;128"/>
+        <Outputs Types="P" IDs="131"/>
+      </fImageAritmeticsIP>
+      <fClose Caption="Close" ID="130" PID="22" Description="Close">
+        <Caption>Close</Caption>
+        <Position Top="577" Left="2157" Height="25" Width="45"/>
+        <Parameters>
+          <target ID="0" Type="Text" Value="Image"/>
+        </Parameters>
+        <Inputs Types="P" IDs="128"/>
+        <Outputs Types="" IDs=""/>
+      </fClose>
+      <fEndIf Caption="EndIf" ID="131" PID="143" Description="EndIf">
+        <Caption>EndIf</Caption>
+        <Position Top="658" Left="2465" Height="25" Width="42"/>
+        <Parameters>
+          <inputs ID="0" Type="Integer" Value="1" SValue=""/>
+        </Parameters>
+        <Inputs Types="PPPP" IDs="126;129;133;166"/>
+        <Outputs Types="P" IDs="235"/>
+      </fEndIf>
+      <fWait Caption="Wait for all inputs" ID="132" PID="106" Description="Wait for all inputs">
+        <Caption>Wait for all inputs</Caption>
+        <Position Top="482" Left="2189" Height="25" Width="103"/>
+        <Parameters/>
+        <Inputs Types="P" IDs="133"/>
+        <Outputs Types="CP" IDs="127;129"/>
+      </fWait>
+      <fSelect Caption="Select" ID="133" PID="145" Description="Select">
+        <Caption>Select</Caption>
+        <Position Top="412" Left="2298" Height="25" Width="47"/>
+        <Parameters>
+          <selectorvalues ID="0" Type="Text" Value="Percentile;Rolling ball;Spatial filtering;None"/>
+          <selector ID="1" Type="Text" Value="Spatial filtering"/>
+          <operation ID="2" Type="Text" Value="Execute selected output"/>
+        </Parameters>
+        <Inputs Types="P" IDs="178"/>
+        <Outputs Types="PPPP" IDs="166;132;134;131"/>
+      </fSelect>
+      <fInpaintMask Caption="Inpaint Mask" ID="134" PID="94" Description="Inpaint Mask">
+        <Caption>Inpaint Mask</Caption>
+        <Position Top="507" Left="2319" Height="25" Width="79"/>
+        <Parameters>
+          <radius ID="0" Type="Real" Value="5" SValue=""/>
+          <method ID="1" Type="Text" Value="Telea"/>
+        </Parameters>
+        <Inputs Types="P" IDs="133"/>
+        <Outputs Types="P" IDs="125"/>
+      </fInpaintMask>
+      <fGetLinked Caption="Get Linked Channel : label3" ID="135" PID="17" Description="Get Linked Channel">
+        <Caption>Get Linked Channel : label3</Caption>
+        <Position Top="20" Left="2282" Height="25" Width="157"/>
+        <Parameters>
+          <channel ID="0" Type="Integer" Value="3" SValue=""/>
+        </Parameters>
+        <Inputs Types="P" IDs="101"/>
+        <Outputs Types="C" IDs="138"/>
+      </fGetLinked>
+      <fCopy Caption="Copy" ID="136" PID="4" Description="Copy">
+        <Caption>Copy</Caption>
+        <Position Top="78" Left="1424" Height="25" Width="42"/>
+        <Parameters>
+          <linked ID="0" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="88"/>
+        <Outputs Types="P" IDs="244"/>
+      </fCopy>
+      <fCopy Caption="Copy" ID="137" PID="4" Description="Copy">
+        <Caption>Copy</Caption>
+        <Position Top="82" Left="1863" Height="25" Width="42"/>
+        <Parameters>
+          <linked ID="0" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="89"/>
+        <Outputs Types="P" IDs="241"/>
+      </fCopy>
+      <fCopy Caption="Copy" ID="138" PID="4" Description="Copy">
+        <Caption>Copy</Caption>
+        <Position Top="60" Left="2340" Height="25" Width="42"/>
+        <Parameters>
+          <linked ID="0" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="135"/>
+        <Outputs Types="P" IDs="242"/>
+      </fCopy>
+      <fRename Caption="Rename Image" ID="139" PID="18" Description="Rename Image">
+        <Caption>Rename Image</Caption>
+        <Position Top="1310" Left="1170" Height="25" Width="92"/>
+        <Parameters>
+          <channel ID="0" Type="Integer" Value="0" SValue=""/>
+          <name ID="1" Type="Text" Value="=Nuclei - %LoadPositionName%"/>
+        </Parameters>
+        <Inputs Types="P" IDs="14"/>
+        <Outputs Types="CP" IDs="20;102"/>
+      </fRename>
+      <fPlotSegmentIntensities Caption="Plot Segment Intensities" ID="140" PID="69" Description="Plot Segment Intensities">
+        <Caption>Plot Segment Intensities</Caption>
+        <Position Top="1282" Left="2848" Height="25" Width="137"/>
+        <Parameters>
+          <dfperf ID="0" Type="Bool" Value="No"/>
+          <resample ID="1" Type="Bool" Value="No"/>
+          <type ID="2" Type="Text" Value="Mean"/>
+          <allMean ID="3" Type="Bool" Value="No"/>
+          <allMedian ID="4" Type="Bool" Value="No"/>
+          <advnorm ID="5" Type="Text" Value="None"/>
+          <histogram ID="6" Type="Text" Value="None"/>
+          <savename ID="7" Type="Text" Value=""/>
+          <save ID="8" Type="Bool" Value="No"/>
+          <saveconfirm ID="9" Type="Bool" Value="No"/>
+          <ranges ID="10" Type="Text" Value=""/>
+          <rates ID="11" Type="Bool" Value="No"/>
+          <ratesnorm ID="12" Type="Bool" Value="No"/>
+          <yonly ID="13" Type="Bool" Value="Yes"/>
+          <mdoutput ID="14" Type="Bool" Value="No"/>
+          <channelrange ID="15" Type="Text" Value="0-4"/>
+          <plateoutput ID="16" Type="Bool" Value="No"/>
+          <stagetocolumn ID="17" Type="Bool" Value="No"/>
+          <singlechannel ID="18" Type="Bool" Value="No"/>
+          <forcenewrow ID="19" Type="Bool" Value="No"/>
+          <histogrambins ID="20" Type="Integer" Value="20" SValue=""/>
+          <histogramrange ID="21" Type="Text" Value="All"/>
+          <continuous ID="22" Type="Bool" Value="No"/>
+          <constrainActiveROI ID="23" Type="Bool" Value="Yes"/>
+        </Parameters>
+        <Inputs Types="PP" IDs="147;238"/>
+        <Outputs Types="" IDs=""/>
+      </fPlotSegmentIntensities>
+      <fReEvSegment Caption="Reevaluate Segments" ID="141" PID="101" Description="Reevaluate Segments">
+        <Caption>Reevaluate Segments</Caption>
+        <Position Top="1222" Left="2636" Height="25" Width="127"/>
+        <Parameters>
+          <reapply ID="0" Type="Bool" Value="Yes"/>
+          <textoutput ID="1" Type="Bool" Value="No"/>
+          <weld ID="2" Type="Bool" Value="No"/>
+          <noedges ID="3" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="150"/>
+        <Outputs Types="P" IDs="147"/>
+      </fReEvSegment>
+      <fCopy Caption="Copy" ID="142" PID="4" Description="Copy">
+        <Caption>Copy</Caption>
+        <Position Top="984" Left="2595" Height="25" Width="42"/>
+        <Parameters>
+          <linked ID="0" Type="Bool" Value="Yes"/>
+        </Parameters>
+        <Inputs Types="P" IDs="149"/>
+        <Outputs Types="P" IDs="144"/>
+      </fCopy>
+      <fMorphological Caption="Morphological operator" ID="143" PID="13" Description="Morphological operator">
+        <Caption>Morphological operator</Caption>
+        <Position Top="1022" Left="2622" Height="25" Width="133"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Dilate"/>
+          <size ID="1" Type="Integer" Value="5" SValue="=param*2+1=11"/>
+          <shape ID="2" Type="Text" Value="Disc"/>
+        </Parameters>
+        <Inputs Types="P" IDs="149"/>
+        <Outputs Types="P" IDs="145"/>
+      </fMorphological>
+      <fThreshold Caption="Threshold" ID="144" PID="14" Description="Threshold">
+        <Caption>Threshold</Caption>
+        <Position Top="1054" Left="2583" Height="25" Width="67"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Pixel value"/>
+          <way ID="1" Type="Text" Value="Below"/>
+          <value ID="2" Type="Real" Value="0.5" SValue=""/>
+          <value2 ID="3" Type="Real" Value="0" SValue=""/>
+          <proctype ID="4" Type="Text" Value="None"/>
+          <keeporigmask ID="5" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="142"/>
+        <Outputs Types="CP" IDs="145;146"/>
+      </fThreshold>
+      <fImageAritmeticsIP Caption="Image Aritmetics In Place" ID="145" PID="61" Description="Image Arithmetic In Place">
+        <Caption>Image Aritmetics In Place</Caption>
+        <Position Top="1146" Left="2591" Height="25" Width="142"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="*"/>
+          <framerange ID="1" Type="Text" Value="All"/>
+        </Parameters>
+        <Inputs Types="PP" IDs="143;144"/>
+        <Outputs Types="P" IDs="150"/>
+      </fImageAritmeticsIP>
+      <fClose Caption="Close" ID="146" PID="22" Description="Close">
+        <Caption>Close</Caption>
+        <Position Top="1106" Left="2578" Height="25" Width="45"/>
+        <Parameters>
+          <target ID="0" Type="Text" Value="Image"/>
+        </Parameters>
+        <Inputs Types="P" IDs="144"/>
+        <Outputs Types="" IDs=""/>
+      </fClose>
+      <fEndIf Caption="EndIf - seg" ID="147" PID="143" Description="EndIf">
+        <Caption>EndIf - seg</Caption>
+        <Position Top="1246" Left="2815" Height="25" Width="70"/>
+        <Parameters>
+          <inputs ID="0" Type="Integer" Value="1" SValue=""/>
+        </Parameters>
+        <Inputs Types="PP" IDs="148;141"/>
+        <Outputs Types="C" IDs="140"/>
+      </fEndIf>
+      <fSelect Caption="Select" ID="148" PID="145" Description="Select">
+        <Caption>Select</Caption>
+        <Position Top="888" Left="2803" Height="25" Width="47"/>
+        <Parameters>
+          <selectorvalues ID="0" Type="Text" Value="Nucleus;Perinuclear ring"/>
+          <selector ID="1" Type="Text" Value="Nucleus"/>
+          <operation ID="2" Type="Text" Value="Execute selected output"/>
+        </Parameters>
+        <Inputs Types="P" IDs="102"/>
+        <Outputs Types="PC" IDs="147;149"/>
+      </fSelect>
+      <fCopy Caption="Copy" ID="149" PID="4" Description="Copy">
+        <Caption>Copy</Caption>
+        <Position Top="934" Left="2619" Height="25" Width="42"/>
+        <Parameters>
+          <linked ID="0" Type="Bool" Value="Yes"/>
+        </Parameters>
+        <Inputs Types="P" IDs="148"/>
+        <Outputs Types="CP" IDs="142;143"/>
+      </fCopy>
+      <fRename Caption="Rename Image" ID="150" PID="18" Description="Rename Image">
+        <Caption>Rename Image</Caption>
+        <Position Top="1188" Left="2632" Height="25" Width="92"/>
+        <Parameters>
+          <channel ID="0" Type="Integer" Value="-1" SValue=""/>
+          <name ID="1" Type="Text" Value="Perinuclear ring for label #3"/>
+        </Parameters>
+        <Inputs Types="P" IDs="145"/>
+        <Outputs Types="P" IDs="141"/>
+      </fRename>
+      <f2DDFTBPTiled Caption="2D DFT Butterworth BP filter tiled" ID="151" PID="103" Description="2D DFT Butterworth BP filter tiled">
+        <Caption>2D DFT Butterworth BP filter tiled</Caption>
+        <Position Top="555" Left="2703" Height="25" Width="183"/>
+        <Parameters>
+          <tilesx ID="0" Type="Integer" Value="5" SValue=""/>
+          <tilesy ID="1" Type="Integer" Value="5" SValue=""/>
+          <cuton ID="2" Type="Real" Value="256" SValue="=0.5*sqrt(imagesizex*imagesizey)/param=6"/>
+          <ordon ID="3" Type="Real" Value="1.3" SValue=""/>
+          <cutoff ID="4" Type="Real" Value="1000" SValue=""/>
+          <ordff ID="5" Type="Real" Value="100" SValue=""/>
+          <units ID="6" Type="Text" Value="pixels"/>
+          <normalization ID="7" Type="Text" Value="Corrected Integral"/>
+          <edges ID="8" Type="Bool" Value="Yes"/>
+          <enlarge ID="9" Type="Bool" Value="No"/>
+          <enlargeto ID="10" Type="Integer" Value="9" SValue=""/>
+          <phase ID="11" Type="Bool" Value="No"/>
+          <absolute ID="12" Type="Bool" Value="No"/>
+          <protect ID="13" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="160"/>
+        <Outputs Types="P" IDs="152"/>
+      </f2DDFTBPTiled>
+      <fThreshold Caption="Threshold" ID="152" PID="14" Description="Threshold">
+        <Caption>Threshold</Caption>
+        <Position Top="599" Left="2761" Height="25" Width="67"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Pixel value"/>
+          <way ID="1" Type="Text" Value="Bottom"/>
+          <value ID="2" Type="Real" Value="0" SValue=""/>
+          <value2 ID="3" Type="Real" Value="0" SValue=""/>
+          <proctype ID="4" Type="Text" Value="None"/>
+          <keeporigmask ID="5" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="151"/>
+        <Outputs Types="P" IDs="157"/>
+      </fThreshold>
+      <fCopy Caption="Copy" ID="153" PID="4" Description="Copy">
+        <Caption>Copy</Caption>
+        <Position Top="523" Left="2587" Height="25" Width="42"/>
+        <Parameters>
+          <linked ID="0" Type="Bool" Value="Yes"/>
+        </Parameters>
+        <Inputs Types="P" IDs="158"/>
+        <Outputs Types="P" IDs="154"/>
+      </fCopy>
+      <f2DMedian Caption="2D Median filter" ID="154" PID="1" Description="2D Median filter">
+        <Caption>2D Median filter</Caption>
+        <Position Top="551" Left="2559" Height="25" Width="95"/>
+        <Parameters>
+          <width ID="0" Type="Integer" Value="49" SValue=""/>
+        </Parameters>
+        <Inputs Types="P" IDs="153"/>
+        <Outputs Types="CP" IDs="155;156"/>
+      </f2DMedian>
+      <fImageAritmeticsIP Caption="Image Aritmetics In Place" ID="155" PID="61" Description="Image Arithmetic In Place">
+        <Caption>Image Aritmetics In Place</Caption>
+        <Position Top="639" Left="2621" Height="25" Width="142"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="-"/>
+          <framerange ID="1" Type="Text" Value="All"/>
+        </Parameters>
+        <Inputs Types="PP" IDs="158;154"/>
+        <Outputs Types="P" IDs="157"/>
+      </fImageAritmeticsIP>
+      <fClose Caption="Close" ID="156" PID="22" Description="Close">
+        <Caption>Close</Caption>
+        <Position Top="578" Left="2583" Height="25" Width="45"/>
+        <Parameters>
+          <target ID="0" Type="Text" Value="Image"/>
+        </Parameters>
+        <Inputs Types="P" IDs="154"/>
+        <Outputs Types="" IDs=""/>
+      </fClose>
+      <fEndIf Caption="EndIf" ID="157" PID="143" Description="EndIf">
+        <Caption>EndIf</Caption>
+        <Position Top="663" Left="2879" Height="25" Width="42"/>
+        <Parameters>
+          <inputs ID="0" Type="Integer" Value="1" SValue=""/>
+        </Parameters>
+        <Inputs Types="PPPP" IDs="152;155;159;167"/>
+        <Outputs Types="P" IDs="237"/>
+      </fEndIf>
+      <fWait Caption="Wait for all inputs" ID="158" PID="106" Description="Wait for all inputs">
+        <Caption>Wait for all inputs</Caption>
+        <Position Top="483" Left="2615" Height="25" Width="103"/>
+        <Parameters/>
+        <Inputs Types="P" IDs="159"/>
+        <Outputs Types="CP" IDs="153;155"/>
+      </fWait>
+      <fSelect Caption="Select" ID="159" PID="145" Description="Select">
+        <Caption>Select</Caption>
+        <Position Top="399" Left="2752" Height="25" Width="47"/>
+        <Parameters>
+          <selectorvalues ID="0" Type="Text" Value="Percentile;Rolling ball;Spatial filtering;None"/>
+          <selector ID="1" Type="Text" Value="Spatial filtering"/>
+          <operation ID="2" Type="Text" Value="Execute selected output"/>
+        </Parameters>
+        <Inputs Types="P" IDs="179"/>
+        <Outputs Types="PPPP" IDs="167;158;160;157"/>
+      </fSelect>
+      <fInpaintMask Caption="Inpaint Mask" ID="160" PID="94" Description="Inpaint Mask">
+        <Caption>Inpaint Mask</Caption>
+        <Position Top="509" Left="2745" Height="25" Width="79"/>
+        <Parameters>
+          <radius ID="0" Type="Real" Value="5" SValue=""/>
+          <method ID="1" Type="Text" Value="Telea"/>
+        </Parameters>
+        <Inputs Types="P" IDs="159"/>
+        <Outputs Types="P" IDs="151"/>
+      </fInpaintMask>
+      <fGetLinked Caption="Get Linked Channel : label4" ID="161" PID="17" Description="Get Linked Channel">
+        <Caption>Get Linked Channel : label4</Caption>
+        <Position Top="18" Left="2666" Height="25" Width="157"/>
+        <Parameters>
+          <channel ID="0" Type="Integer" Value="4" SValue=""/>
+        </Parameters>
+        <Inputs Types="P" IDs="101"/>
+        <Outputs Types="C" IDs="162"/>
+      </fGetLinked>
+      <fCopy Caption="Copy" ID="162" PID="4" Description="Copy">
+        <Caption>Copy</Caption>
+        <Position Top="55" Left="2745" Height="25" Width="42"/>
+        <Parameters>
+          <linked ID="0" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="161"/>
+        <Outputs Types="P" IDs="243"/>
+      </fCopy>
+      <fBgSub Caption="Subtract Background" ID="163" PID="21" Description="Subtract Background">
+        <Caption>Subtract Background</Caption>
+        <Position Top="614" Left="568" Height="25" Width="122"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Percentile by frames"/>
+          <value ID="1" Type="Real" Value="20" SValue=""/>
+          <bgimagefilename ID="2" Type="Text" Value=""/>
+          <bgstage ID="3" Type="Integer" Value="1" SValue=""/>
+          <bgframe ID="4" Type="Integer" Value="1" SValue=""/>
+          <avgbgframes ID="5" Type="Bool" Value="No"/>
+          <shimagefilename ID="6" Type="Text" Value=""/>
+          <shstage ID="7" Type="Integer" Value="1" SValue=""/>
+          <shframe ID="8" Type="Integer" Value="1" SValue=""/>
+          <avgshframes ID="9" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="44"/>
+        <Outputs Types="P" IDs="42"/>
+      </fBgSub>
+      <fBgSub Caption="Subtract Background" ID="164" PID="21" Description="Subtract Background">
+        <Caption>Subtract Background</Caption>
+        <Position Top="465" Left="1599" Height="25" Width="122"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Percentile by frames"/>
+          <value ID="1" Type="Real" Value="20" SValue=""/>
+          <bgimagefilename ID="2" Type="Text" Value=""/>
+          <bgstage ID="3" Type="Integer" Value="1" SValue=""/>
+          <bgframe ID="4" Type="Integer" Value="1" SValue=""/>
+          <avgbgframes ID="5" Type="Bool" Value="No"/>
+          <shimagefilename ID="6" Type="Text" Value=""/>
+          <shstage ID="7" Type="Integer" Value="1" SValue=""/>
+          <shframe ID="8" Type="Integer" Value="1" SValue=""/>
+          <avgshframes ID="9" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="76"/>
+        <Outputs Types="P" IDs="74"/>
+      </fBgSub>
+      <fBgSub Caption="Subtract Background" ID="165" PID="21" Description="Subtract Background">
+        <Caption>Subtract Background</Caption>
+        <Position Top="450" Left="1993" Height="25" Width="122"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Percentile by frames"/>
+          <value ID="1" Type="Real" Value="20" SValue=""/>
+          <bgimagefilename ID="2" Type="Text" Value=""/>
+          <bgstage ID="3" Type="Integer" Value="1" SValue=""/>
+          <bgframe ID="4" Type="Integer" Value="1" SValue=""/>
+          <avgbgframes ID="5" Type="Bool" Value="No"/>
+          <shimagefilename ID="6" Type="Text" Value=""/>
+          <shstage ID="7" Type="Integer" Value="1" SValue=""/>
+          <shframe ID="8" Type="Integer" Value="1" SValue=""/>
+          <avgshframes ID="9" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="86"/>
+        <Outputs Types="P" IDs="84"/>
+      </fBgSub>
+      <fBgSub Caption="Subtract Background" ID="166" PID="21" Description="Subtract Background">
+        <Caption>Subtract Background</Caption>
+        <Position Top="442" Left="2391" Height="25" Width="122"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Percentile by frames"/>
+          <value ID="1" Type="Real" Value="20" SValue=""/>
+          <bgimagefilename ID="2" Type="Text" Value=""/>
+          <bgstage ID="3" Type="Integer" Value="1" SValue=""/>
+          <bgframe ID="4" Type="Integer" Value="1" SValue=""/>
+          <avgbgframes ID="5" Type="Bool" Value="No"/>
+          <shimagefilename ID="6" Type="Text" Value=""/>
+          <shstage ID="7" Type="Integer" Value="1" SValue=""/>
+          <shframe ID="8" Type="Integer" Value="1" SValue=""/>
+          <avgshframes ID="9" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="133"/>
+        <Outputs Types="P" IDs="131"/>
+      </fBgSub>
+      <fBgSub Caption="Subtract Background" ID="167" PID="21" Description="Subtract Background">
+        <Caption>Subtract Background</Caption>
+        <Position Top="455" Left="2815" Height="25" Width="122"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Percentile by frames"/>
+          <value ID="1" Type="Real" Value="20" SValue=""/>
+          <bgimagefilename ID="2" Type="Text" Value=""/>
+          <bgstage ID="3" Type="Integer" Value="1" SValue=""/>
+          <bgframe ID="4" Type="Integer" Value="1" SValue=""/>
+          <avgbgframes ID="5" Type="Bool" Value="No"/>
+          <shimagefilename ID="6" Type="Text" Value=""/>
+          <shstage ID="7" Type="Integer" Value="1" SValue=""/>
+          <shframe ID="8" Type="Integer" Value="1" SValue=""/>
+          <avgshframes ID="9" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="159"/>
+        <Outputs Types="P" IDs="157"/>
+      </fBgSub>
+      <fSelect Caption="Select Fluor/OD" ID="168" PID="145" Description="Select">
+        <Caption>Select Fluor/OD</Caption>
+        <Position Top="185" Left="1475" Height="25" Width="97"/>
+        <Parameters>
+          <selectorvalues ID="0" Type="Text" Value="Fluorescence;Densitometry;Densitometry with thin process suppression"/>
+          <selector ID="1" Type="Text" Value="Fluorescence"/>
+          <operation ID="2" Type="Text" Value="Execute selected output"/>
+        </Parameters>
+        <Inputs Types="P" IDs="245"/>
+        <Outputs Types="PPP" IDs="194;172;211"/>
+      </fSelect>
+      <fSelect Caption="Select Fluor/OD" ID="169" PID="145" Description="Select">
+        <Caption>Select Fluor/OD</Caption>
+        <Position Top="169" Left="1870" Height="25" Width="97"/>
+        <Parameters>
+          <selectorvalues ID="0" Type="Text" Value="Fluorescence;Densitometry;Densitometry with thin process suppression"/>
+          <selector ID="1" Type="Text" Value="Fluorescence"/>
+          <operation ID="2" Type="Text" Value="Execute selected output"/>
+        </Parameters>
+        <Inputs Types="P" IDs="246"/>
+        <Outputs Types="PPP" IDs="197;173;216"/>
+      </fSelect>
+      <fSelect Caption="Select Fluor/OD" ID="170" PID="145" Description="Select">
+        <Caption>Select Fluor/OD</Caption>
+        <Position Top="158" Left="2324" Height="25" Width="97"/>
+        <Parameters>
+          <selectorvalues ID="0" Type="Text" Value="Fluorescence;Densitometry;Densitometry with thin process suppression"/>
+          <selector ID="1" Type="Text" Value="Densitometry with thin process suppression"/>
+          <operation ID="2" Type="Text" Value="Execute selected output"/>
+        </Parameters>
+        <Inputs Types="P" IDs="247"/>
+        <Outputs Types="PPP" IDs="200;174;221"/>
+      </fSelect>
+      <fSelect Caption="Select Fluor/OD" ID="171" PID="145" Description="Select">
+        <Caption>Select Fluor/OD</Caption>
+        <Position Top="157" Left="2720" Height="25" Width="97"/>
+        <Parameters>
+          <selectorvalues ID="0" Type="Text" Value="Fluorescence;Densitometry;Densitometry with thin process suppression"/>
+          <selector ID="1" Type="Text" Value="Fluorescence"/>
+          <operation ID="2" Type="Text" Value="Execute selected output"/>
+        </Parameters>
+        <Inputs Types="P" IDs="248"/>
+        <Outputs Types="PPP" IDs="203;175;226"/>
+      </fSelect>
+      <fBgSub Caption="Optical density" ID="172" PID="21" Description="Subtract Background">
+        <Caption>Optical density</Caption>
+        <Position Top="262" Left="1479" Height="25" Width="90"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Optical Density by Reference Images"/>
+          <value ID="1" Type="Real" Value="450" SValue=""/>
+          <bgimagefilename ID="2" Type="Text" Value=""/>
+          <bgstage ID="3" Type="Integer" Value="1" SValue=""/>
+          <bgframe ID="4" Type="Integer" Value="1" SValue=""/>
+          <avgbgframes ID="5" Type="Bool" Value="No"/>
+          <shimagefilename ID="6" Type="Text" Value=""/>
+          <shstage ID="7" Type="Integer" Value="1" SValue=""/>
+          <shframe ID="8" Type="Integer" Value="1" SValue=""/>
+          <avgshframes ID="9" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="168"/>
+        <Outputs Types="P" IDs="176"/>
+      </fBgSub>
+      <fBgSub Caption="Optical density" ID="173" PID="21" Description="Subtract Background">
+        <Caption>Optical density</Caption>
+        <Position Top="229" Left="1903" Height="25" Width="90"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Optical Density by Reference Images"/>
+          <value ID="1" Type="Real" Value="450" SValue=""/>
+          <bgimagefilename ID="2" Type="Text" Value=""/>
+          <bgstage ID="3" Type="Integer" Value="1" SValue=""/>
+          <bgframe ID="4" Type="Integer" Value="1" SValue=""/>
+          <avgbgframes ID="5" Type="Bool" Value="No"/>
+          <shimagefilename ID="6" Type="Text" Value=""/>
+          <shstage ID="7" Type="Integer" Value="1" SValue=""/>
+          <shframe ID="8" Type="Integer" Value="1" SValue=""/>
+          <avgshframes ID="9" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="169"/>
+        <Outputs Types="P" IDs="177"/>
+      </fBgSub>
+      <fBgSub Caption="Optical density" ID="174" PID="21" Description="Subtract Background">
+        <Caption>Optical density</Caption>
+        <Position Top="218" Left="2339" Height="25" Width="90"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Optical Density by Reference Images"/>
+          <value ID="1" Type="Real" Value="450" SValue=""/>
+          <bgimagefilename ID="2" Type="Text" Value=""/>
+          <bgstage ID="3" Type="Integer" Value="1" SValue=""/>
+          <bgframe ID="4" Type="Integer" Value="1" SValue=""/>
+          <avgbgframes ID="5" Type="Bool" Value="No"/>
+          <shimagefilename ID="6" Type="Text" Value=""/>
+          <shstage ID="7" Type="Integer" Value="1" SValue=""/>
+          <shframe ID="8" Type="Integer" Value="1" SValue=""/>
+          <avgshframes ID="9" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="170"/>
+        <Outputs Types="P" IDs="178"/>
+      </fBgSub>
+      <fBgSub Caption="Optical density" ID="175" PID="21" Description="Subtract Background">
+        <Caption>Optical density</Caption>
+        <Position Top="223" Left="2762" Height="25" Width="90"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Optical Density by Reference Images"/>
+          <value ID="1" Type="Real" Value="450" SValue=""/>
+          <bgimagefilename ID="2" Type="Text" Value=""/>
+          <bgstage ID="3" Type="Integer" Value="1" SValue=""/>
+          <bgframe ID="4" Type="Integer" Value="1" SValue=""/>
+          <avgbgframes ID="5" Type="Bool" Value="No"/>
+          <shimagefilename ID="6" Type="Text" Value=""/>
+          <shstage ID="7" Type="Integer" Value="1" SValue=""/>
+          <shframe ID="8" Type="Integer" Value="1" SValue=""/>
+          <avgshframes ID="9" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="171"/>
+        <Outputs Types="P" IDs="179"/>
+      </fBgSub>
+      <fEndIf Caption="EndIf" ID="176" PID="143" Description="EndIf">
+        <Caption>EndIf</Caption>
+        <Position Top="338" Left="1514" Height="25" Width="42"/>
+        <Parameters>
+          <inputs ID="0" Type="Integer" Value="1" SValue=""/>
+        </Parameters>
+        <Inputs Types="PPP" IDs="172;196;215"/>
+        <Outputs Types="P" IDs="76"/>
+      </fEndIf>
+      <fEndIf Caption="EndIf" ID="177" PID="143" Description="EndIf">
+        <Caption>EndIf</Caption>
+        <Position Top="344" Left="1925" Height="25" Width="42"/>
+        <Parameters>
+          <inputs ID="0" Type="Integer" Value="1" SValue=""/>
+        </Parameters>
+        <Inputs Types="PPP" IDs="173;199;220"/>
+        <Outputs Types="P" IDs="86"/>
+      </fEndIf>
+      <fEndIf Caption="EndIf" ID="178" PID="143" Description="EndIf">
+        <Caption>EndIf</Caption>
+        <Position Top="343" Left="2357" Height="25" Width="42"/>
+        <Parameters>
+          <inputs ID="0" Type="Integer" Value="1" SValue=""/>
+        </Parameters>
+        <Inputs Types="PPP" IDs="174;202;225"/>
+        <Outputs Types="P" IDs="133"/>
+      </fEndIf>
+      <fEndIf Caption="EndIf" ID="179" PID="143" Description="EndIf">
+        <Caption>EndIf</Caption>
+        <Position Top="334" Left="2764" Height="25" Width="42"/>
+        <Parameters>
+          <inputs ID="0" Type="Integer" Value="1" SValue=""/>
+        </Parameters>
+        <Inputs Types="PPP" IDs="175;205;230"/>
+        <Outputs Types="P" IDs="159"/>
+      </fEndIf>
+      <fGetLinked Caption="Get Linked Channel : nuclei" ID="180" PID="17" Description="Get Linked Channel">
+        <Caption>Get Linked Channel : nuclei</Caption>
+        <Position Top="126" Left="548" Height="25" Width="156"/>
+        <Parameters>
+          <channel ID="0" Type="Integer" Value="1" SValue=""/>
+        </Parameters>
+        <Inputs Types="P" IDs="35"/>
+        <Outputs Types="P" IDs="101"/>
+      </fGetLinked>
+      <fSetReferenceImage Caption="Set Reference Image" ID="181" PID="105" Description="Set Reference Image">
+        <Caption>Set Reference Image</Caption>
+        <Position Top="1029" Left="609" Height="25" Width="122"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Histogram"/>
+        </Parameters>
+        <Inputs Types="P" IDs="182"/>
+        <Outputs Types="P" IDs="183"/>
+      </fSetReferenceImage>
+      <fSetReferenceImage Caption="Set Reference Image" ID="182" PID="105" Description="Set Reference Image">
+        <Caption>Set Reference Image</Caption>
+        <Position Top="991" Left="606" Height="25" Width="122"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Close Related Reference Images"/>
+        </Parameters>
+        <Inputs Types="P" IDs="54"/>
+        <Outputs Types="P" IDs="181"/>
+      </fSetReferenceImage>
+      <fRename Caption="Rename Image" ID="183" PID="18" Description="Rename Image">
+        <Caption>Rename Image</Caption>
+        <Position Top="1059" Left="610" Height="25" Width="92"/>
+        <Parameters>
+          <channel ID="0" Type="Integer" Value="-1" SValue=""/>
+          <name ID="1" Type="Text" Value="Nucleus intensity scaling reference image"/>
+        </Parameters>
+        <Inputs Types="P" IDs="181"/>
+        <Outputs Types="" IDs=""/>
+      </fRename>
+      <fWincommand Caption="Window command" ID="184" PID="26" Description="Window command">
+        <Caption>Window command</Caption>
+        <Position Top="1265" Left="52" Height="25" Width="107"/>
+        <Parameters>
+          <command ID="0" Type="Text" Value="Minimize"/>
+        </Parameters>
+        <Inputs Types="P" IDs="186"/>
+        <Outputs Types="" IDs=""/>
+      </fWincommand>
+      <fSetReferenceImage Caption="Set Reference Image" ID="185" PID="105" Description="Set Reference Image">
+        <Caption>Set Reference Image</Caption>
+        <Position Top="1202" Left="40" Height="25" Width="122"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Histogram"/>
+        </Parameters>
+        <Inputs Types="P" IDs="187"/>
+        <Outputs Types="P" IDs="186"/>
+      </fSetReferenceImage>
+      <fRename Caption="Rename Image" ID="186" PID="18" Description="Rename Image">
+        <Caption>Rename Image</Caption>
+        <Position Top="1230" Left="56" Height="25" Width="92"/>
+        <Parameters>
+          <channel ID="0" Type="Integer" Value="-1" SValue=""/>
+          <name ID="1" Type="Text" Value="Seed intensity scaling reference image"/>
+        </Parameters>
+        <Inputs Types="P" IDs="185"/>
+        <Outputs Types="C" IDs="184"/>
+      </fRename>
+      <fSetReferenceImage Caption="Set Reference Image" ID="187" PID="105" Description="Set Reference Image">
+        <Caption>Set Reference Image</Caption>
+        <Position Top="1162" Left="32" Height="25" Width="122"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Close Related Reference Images"/>
+        </Parameters>
+        <Inputs Types="P" IDs="57"/>
+        <Outputs Types="P" IDs="185"/>
+      </fSetReferenceImage>
+      <fGetLinked Caption="Get Linked Channel" ID="188" PID="17" Description="Get Linked Channel">
+        <Caption>Get Linked Channel</Caption>
+        <Position Top="1362" Left="646" Height="25" Width="117"/>
+        <Parameters>
+          <channel ID="0" Type="Integer" Value="101" SValue=""/>
+        </Parameters>
+        <Inputs Types="P" IDs="14"/>
+        <Outputs Types="P" IDs="189"/>
+      </fGetLinked>
+      <fClose Caption="Close" ID="189" PID="22" Description="Close">
+        <Caption>Close</Caption>
+        <Position Top="1394" Left="691" Height="25" Width="45"/>
+        <Parameters>
+          <target ID="0" Type="Text" Value="Image"/>
+        </Parameters>
+        <Inputs Types="P" IDs="188"/>
+        <Outputs Types="" IDs=""/>
+      </fClose>
+      <fCopy Caption="Copy" ID="190" PID="4" Description="Copy">
+        <Caption>Copy</Caption>
+        <Position Top="182" Left="30" Height="25" Width="42"/>
+        <Parameters>
+          <linked ID="0" Type="Bool" Value="Yes"/>
+        </Parameters>
+        <Inputs Types="P" IDs="23"/>
+        <Outputs Types="P" IDs="191"/>
+      </fCopy>
+      <fThreshold Caption="Threshold" ID="191" PID="14" Description="Threshold">
+        <Caption>Threshold</Caption>
+        <Position Top="347" Left="1" Height="25" Width="67"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Pixel value"/>
+          <way ID="1" Type="Text" Value="Above"/>
+          <value ID="2" Type="Real" Value="1" SValue=""/>
+          <value2 ID="3" Type="Real" Value="0" SValue=""/>
+          <proctype ID="4" Type="Text" Value="None"/>
+          <keeporigmask ID="5" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="190"/>
+        <Outputs Types="CP" IDs="193;192"/>
+      </fThreshold>
+      <fClose Caption="Close" ID="192" PID="22" Description="Close">
+        <Caption>Close</Caption>
+        <Position Top="428" Left="0" Height="25" Width="45"/>
+        <Parameters>
+          <target ID="0" Type="Text" Value="Image"/>
+        </Parameters>
+        <Inputs Types="P" IDs="191"/>
+        <Outputs Types="" IDs=""/>
+      </fClose>
+      <fImageAritmeticsIP Caption="Image Arithmetic In Place" ID="193" PID="61" Description="Image Arithmetic In Place">
+        <Caption>Image Arithmetic In Place</Caption>
+        <Position Top="379" Left="59" Height="25" Width="142"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="*"/>
+          <framerange ID="1" Type="Text" Value="All"/>
+        </Parameters>
+        <Inputs Types="PP" IDs="30;191"/>
+        <Outputs Types="P" IDs="21"/>
+      </fImageAritmeticsIP>
+      <fIfBool Caption="If" ID="194" PID="142" Description="If">
+        <Caption>If</Caption>
+        <Position Top="198" Left="1434" Height="25" Width="22"/>
+        <Parameters>
+          <condition ID="0" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="168"/>
+        <Outputs Types="PP" IDs="195;196"/>
+      </fIfBool>
+      <fBgSub Caption="Subtract Background" ID="195" PID="21" Description="Subtract Background">
+        <Caption>Subtract Background</Caption>
+        <Position Top="213" Left="1278" Height="25" Width="122"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Background and shading correction by Background Reference Image"/>
+          <value ID="1" Type="Real" Value="450" SValue=""/>
+          <bgimagefilename ID="2" Type="Text" Value=""/>
+          <bgstage ID="3" Type="Integer" Value="1" SValue=""/>
+          <bgframe ID="4" Type="Integer" Value="1" SValue=""/>
+          <avgbgframes ID="5" Type="Bool" Value="No"/>
+          <shimagefilename ID="6" Type="Text" Value=""/>
+          <shstage ID="7" Type="Integer" Value="1" SValue=""/>
+          <shframe ID="8" Type="Integer" Value="1" SValue=""/>
+          <avgshframes ID="9" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="194"/>
+        <Outputs Types="P" IDs="196"/>
+      </fBgSub>
+      <fEndIf Caption="EndIf" ID="196" PID="143" Description="EndIf">
+        <Caption>EndIf</Caption>
+        <Position Top="248" Left="1428" Height="25" Width="42"/>
+        <Parameters>
+          <inputs ID="0" Type="Integer" Value="1" SValue=""/>
+        </Parameters>
+        <Inputs Types="PP" IDs="195;194"/>
+        <Outputs Types="P" IDs="176"/>
+      </fEndIf>
+      <fIfBool Caption="If" ID="197" PID="142" Description="If">
+        <Caption>If</Caption>
+        <Position Top="197" Left="1833" Height="25" Width="22"/>
+        <Parameters>
+          <condition ID="0" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="169"/>
+        <Outputs Types="PP" IDs="198;199"/>
+      </fIfBool>
+      <fBgSub Caption="Subtract Background" ID="198" PID="21" Description="Subtract Background">
+        <Caption>Subtract Background</Caption>
+        <Position Top="212" Left="1696" Height="25" Width="122"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Background and shading correction by Background Reference Image"/>
+          <value ID="1" Type="Real" Value="450" SValue=""/>
+          <bgimagefilename ID="2" Type="Text" Value=""/>
+          <bgstage ID="3" Type="Integer" Value="1" SValue=""/>
+          <bgframe ID="4" Type="Integer" Value="1" SValue=""/>
+          <avgbgframes ID="5" Type="Bool" Value="No"/>
+          <shimagefilename ID="6" Type="Text" Value=""/>
+          <shstage ID="7" Type="Integer" Value="1" SValue=""/>
+          <shframe ID="8" Type="Integer" Value="1" SValue=""/>
+          <avgshframes ID="9" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="197"/>
+        <Outputs Types="P" IDs="199"/>
+      </fBgSub>
+      <fEndIf Caption="EndIf" ID="199" PID="143" Description="EndIf">
+        <Caption>EndIf</Caption>
+        <Position Top="241" Left="1847" Height="25" Width="42"/>
+        <Parameters>
+          <inputs ID="0" Type="Integer" Value="1" SValue=""/>
+        </Parameters>
+        <Inputs Types="PP" IDs="198;197"/>
+        <Outputs Types="P" IDs="177"/>
+      </fEndIf>
+      <fIfBool Caption="If" ID="200" PID="142" Description="If">
+        <Caption>If</Caption>
+        <Position Top="175" Left="2262" Height="25" Width="22"/>
+        <Parameters>
+          <condition ID="0" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="170"/>
+        <Outputs Types="PP" IDs="201;202"/>
+      </fIfBool>
+      <fBgSub Caption="Subtract Background" ID="201" PID="21" Description="Subtract Background">
+        <Caption>Subtract Background</Caption>
+        <Position Top="200" Left="2118" Height="25" Width="122"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Background and shading correction by Background Reference Image"/>
+          <value ID="1" Type="Real" Value="450" SValue=""/>
+          <bgimagefilename ID="2" Type="Text" Value=""/>
+          <bgstage ID="3" Type="Integer" Value="1" SValue=""/>
+          <bgframe ID="4" Type="Integer" Value="1" SValue=""/>
+          <avgbgframes ID="5" Type="Bool" Value="No"/>
+          <shimagefilename ID="6" Type="Text" Value=""/>
+          <shstage ID="7" Type="Integer" Value="1" SValue=""/>
+          <shframe ID="8" Type="Integer" Value="1" SValue=""/>
+          <avgshframes ID="9" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="200"/>
+        <Outputs Types="P" IDs="202"/>
+      </fBgSub>
+      <fEndIf Caption="EndIf" ID="202" PID="143" Description="EndIf">
+        <Caption>EndIf</Caption>
+        <Position Top="229" Left="2270" Height="25" Width="42"/>
+        <Parameters>
+          <inputs ID="0" Type="Integer" Value="1" SValue=""/>
+        </Parameters>
+        <Inputs Types="PP" IDs="201;200"/>
+        <Outputs Types="P" IDs="178"/>
+      </fEndIf>
+      <fIfBool Caption="If" ID="203" PID="142" Description="If">
+        <Caption>If</Caption>
+        <Position Top="185" Left="2694" Height="25" Width="22"/>
+        <Parameters>
+          <condition ID="0" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="171"/>
+        <Outputs Types="PP" IDs="204;205"/>
+      </fIfBool>
+      <fBgSub Caption="Subtract Background" ID="204" PID="21" Description="Subtract Background">
+        <Caption>Subtract Background</Caption>
+        <Position Top="208" Left="2557" Height="25" Width="122"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Background and shading correction by Background Reference Image"/>
+          <value ID="1" Type="Real" Value="450" SValue=""/>
+          <bgimagefilename ID="2" Type="Text" Value=""/>
+          <bgstage ID="3" Type="Integer" Value="1" SValue=""/>
+          <bgframe ID="4" Type="Integer" Value="1" SValue=""/>
+          <avgbgframes ID="5" Type="Bool" Value="No"/>
+          <shimagefilename ID="6" Type="Text" Value=""/>
+          <shstage ID="7" Type="Integer" Value="1" SValue=""/>
+          <shframe ID="8" Type="Integer" Value="1" SValue=""/>
+          <avgshframes ID="9" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="203"/>
+        <Outputs Types="P" IDs="205"/>
+      </fBgSub>
+      <fEndIf Caption="EndIf" ID="205" PID="143" Description="EndIf">
+        <Caption>EndIf</Caption>
+        <Position Top="237" Left="2708" Height="25" Width="42"/>
+        <Parameters>
+          <inputs ID="0" Type="Integer" Value="1" SValue=""/>
+        </Parameters>
+        <Inputs Types="PP" IDs="204;203"/>
+        <Outputs Types="P" IDs="179"/>
+      </fEndIf>
+      <fIfBool Caption="If" ID="206" PID="142" Description="If">
+        <Caption>If</Caption>
+        <Position Top="465" Left="440" Height="25" Width="22"/>
+        <Parameters>
+          <condition ID="0" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="209"/>
+        <Outputs Types="PP" IDs="207;208"/>
+      </fIfBool>
+      <fBgSub Caption="Subtract Background" ID="207" PID="21" Description="Subtract Background">
+        <Caption>Subtract Background</Caption>
+        <Position Top="471" Left="486" Height="25" Width="122"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Background and shading correction by Background Reference Image"/>
+          <value ID="1" Type="Real" Value="450" SValue=""/>
+          <bgimagefilename ID="2" Type="Text" Value=""/>
+          <bgstage ID="3" Type="Integer" Value="1" SValue=""/>
+          <bgframe ID="4" Type="Integer" Value="1" SValue=""/>
+          <avgbgframes ID="5" Type="Bool" Value="No"/>
+          <shimagefilename ID="6" Type="Text" Value=""/>
+          <shstage ID="7" Type="Integer" Value="1" SValue=""/>
+          <shframe ID="8" Type="Integer" Value="1" SValue=""/>
+          <avgshframes ID="9" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="206"/>
+        <Outputs Types="P" IDs="208"/>
+      </fBgSub>
+      <fEndIf Caption="EndIf" ID="208" PID="143" Description="EndIf">
+        <Caption>EndIf</Caption>
+        <Position Top="509" Left="450" Height="25" Width="42"/>
+        <Parameters>
+          <inputs ID="0" Type="Integer" Value="1" SValue=""/>
+        </Parameters>
+        <Inputs Types="PP" IDs="206;207"/>
+        <Outputs Types="P" IDs="44"/>
+      </fEndIf>
+      <fRename Caption="Rename:nuclei" ID="209" PID="18" Description="Rename Image">
+        <Caption>Rename:nuclei</Caption>
+        <Position Top="430" Left="432" Height="25" Width="91"/>
+        <Parameters>
+          <channel ID="0" Type="Integer" Value="101" SValue=""/>
+          <name ID="1" Type="Text" Value="=Nuclei - %LoadPositionName%"/>
+        </Parameters>
+        <Inputs Types="P" IDs="210"/>
+        <Outputs Types="PC" IDs="206;239"/>
+      </fRename>
+      <fCopy Caption="Copy" ID="210" PID="4" Description="Copy">
+        <Caption>Copy</Caption>
+        <Position Top="390" Left="483" Height="25" Width="42"/>
+        <Parameters>
+          <linked ID="0" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="35"/>
+        <Outputs Types="P" IDs="209"/>
+      </fCopy>
+      <fBgSub Caption="Optical density" ID="211" PID="21" Description="Subtract Background">
+        <Caption>Optical density</Caption>
+        <Position Top="224" Left="1578" Height="25" Width="90"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Optical Density by Reference Images"/>
+          <value ID="1" Type="Real" Value="450" SValue=""/>
+          <bgimagefilename ID="2" Type="Text" Value=""/>
+          <bgstage ID="3" Type="Integer" Value="1" SValue=""/>
+          <bgframe ID="4" Type="Integer" Value="1" SValue=""/>
+          <avgbgframes ID="5" Type="Bool" Value="No"/>
+          <shimagefilename ID="6" Type="Text" Value=""/>
+          <shstage ID="7" Type="Integer" Value="1" SValue=""/>
+          <shframe ID="8" Type="Integer" Value="1" SValue=""/>
+          <avgshframes ID="9" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="168"/>
+        <Outputs Types="P" IDs="212"/>
+      </fBgSub>
+      <fThreshold Caption="Threshold" ID="212" PID="14" Description="Threshold">
+        <Caption>Threshold</Caption>
+        <Position Top="249" Left="1589" Height="25" Width="67"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Pixel value"/>
+          <way ID="1" Type="Text" Value="Bottom"/>
+          <value ID="2" Type="Real" Value="-1" SValue=""/>
+          <value2 ID="3" Type="Real" Value="50" SValue=""/>
+          <proctype ID="4" Type="Text" Value="None"/>
+          <keeporigmask ID="5" Type="Bool" Value="Yes"/>
+        </Parameters>
+        <Inputs Types="P" IDs="211"/>
+        <Outputs Types="P" IDs="213"/>
+      </fThreshold>
+      <fThreshold Caption="Threshold" ID="213" PID="14" Description="Threshold">
+        <Caption>Threshold</Caption>
+        <Position Top="280" Left="1590" Height="25" Width="67"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Pixel value"/>
+          <way ID="1" Type="Text" Value="Ceiling"/>
+          <value ID="2" Type="Real" Value="1" SValue=""/>
+          <value2 ID="3" Type="Real" Value="50" SValue=""/>
+          <proctype ID="4" Type="Text" Value="None"/>
+          <keeporigmask ID="5" Type="Bool" Value="Yes"/>
+        </Parameters>
+        <Inputs Types="P" IDs="212"/>
+        <Outputs Types="P" IDs="214"/>
+      </fThreshold>
+      <f2DDFTBPTiled Caption="2D DFT" ID="214" PID="103" Description="2D DFT Butterworth BP filter tiled">
+        <Caption>2D DFT</Caption>
+        <Position Top="308" Left="1597" Height="25" Width="56"/>
+        <Parameters>
+          <tilesx ID="0" Type="Integer" Value="5" SValue=""/>
+          <tilesy ID="1" Type="Integer" Value="5" SValue=""/>
+          <cuton ID="2" Type="Real" Value="256" SValue="=0.5*sqrt(imagesizex*imagesizey)/param=6"/>
+          <ordon ID="3" Type="Real" Value="1.3" SValue=""/>
+          <cutoff ID="4" Type="Real" Value="20" SValue="=0.5*sqrt(imagesizex*imagesizey)/param=138.25"/>
+          <ordff ID="5" Type="Real" Value="1.3" SValue=""/>
+          <units ID="6" Type="Text" Value="pixels"/>
+          <normalization ID="7" Type="Text" Value="Corrected Integral"/>
+          <edges ID="8" Type="Bool" Value="Yes"/>
+          <enlarge ID="9" Type="Bool" Value="No"/>
+          <enlargeto ID="10" Type="Integer" Value="9" SValue=""/>
+          <phase ID="11" Type="Bool" Value="No"/>
+          <absolute ID="12" Type="Bool" Value="No"/>
+          <protect ID="13" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="213"/>
+        <Outputs Types="P" IDs="215"/>
+      </f2DDFTBPTiled>
+      <fThreshold Caption="Threshold" ID="215" PID="14" Description="Threshold">
+        <Caption>Threshold</Caption>
+        <Position Top="336" Left="1590" Height="25" Width="67"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Pixel value"/>
+          <way ID="1" Type="Text" Value="Bottom"/>
+          <value ID="2" Type="Real" Value="0" SValue=""/>
+          <value2 ID="3" Type="Real" Value="50" SValue=""/>
+          <proctype ID="4" Type="Text" Value="None"/>
+          <keeporigmask ID="5" Type="Bool" Value="Yes"/>
+        </Parameters>
+        <Inputs Types="P" IDs="214"/>
+        <Outputs Types="P" IDs="176"/>
+      </fThreshold>
+      <fBgSub Caption="Optical density" ID="216" PID="21" Description="Subtract Background">
+        <Caption>Optical density</Caption>
+        <Position Top="190" Left="1986" Height="25" Width="90"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Optical Density by Reference Images"/>
+          <value ID="1" Type="Real" Value="450" SValue=""/>
+          <bgimagefilename ID="2" Type="Text" Value=""/>
+          <bgstage ID="3" Type="Integer" Value="1" SValue=""/>
+          <bgframe ID="4" Type="Integer" Value="1" SValue=""/>
+          <avgbgframes ID="5" Type="Bool" Value="No"/>
+          <shimagefilename ID="6" Type="Text" Value=""/>
+          <shstage ID="7" Type="Integer" Value="1" SValue=""/>
+          <shframe ID="8" Type="Integer" Value="1" SValue=""/>
+          <avgshframes ID="9" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="169"/>
+        <Outputs Types="P" IDs="217"/>
+      </fBgSub>
+      <fThreshold Caption="Threshold" ID="217" PID="14" Description="Threshold">
+        <Caption>Threshold</Caption>
+        <Position Top="219" Left="2006" Height="25" Width="67"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Pixel value"/>
+          <way ID="1" Type="Text" Value="Bottom"/>
+          <value ID="2" Type="Real" Value="-1" SValue=""/>
+          <value2 ID="3" Type="Real" Value="50" SValue=""/>
+          <proctype ID="4" Type="Text" Value="None"/>
+          <keeporigmask ID="5" Type="Bool" Value="Yes"/>
+        </Parameters>
+        <Inputs Types="P" IDs="216"/>
+        <Outputs Types="P" IDs="218"/>
+      </fThreshold>
+      <fThreshold Caption="Threshold" ID="218" PID="14" Description="Threshold">
+        <Caption>Threshold</Caption>
+        <Position Top="250" Left="2006" Height="25" Width="67"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Pixel value"/>
+          <way ID="1" Type="Text" Value="Ceiling"/>
+          <value ID="2" Type="Real" Value="1" SValue=""/>
+          <value2 ID="3" Type="Real" Value="50" SValue=""/>
+          <proctype ID="4" Type="Text" Value="None"/>
+          <keeporigmask ID="5" Type="Bool" Value="Yes"/>
+        </Parameters>
+        <Inputs Types="P" IDs="217"/>
+        <Outputs Types="P" IDs="219"/>
+      </fThreshold>
+      <f2DDFTBPTiled Caption="2D DFT" ID="219" PID="103" Description="2D DFT Butterworth BP filter tiled">
+        <Caption>2D DFT</Caption>
+        <Position Top="278" Left="2014" Height="25" Width="56"/>
+        <Parameters>
+          <tilesx ID="0" Type="Integer" Value="5" SValue=""/>
+          <tilesy ID="1" Type="Integer" Value="5" SValue=""/>
+          <cuton ID="2" Type="Real" Value="256" SValue="=0.5*sqrt(imagesizex*imagesizey)/param=6"/>
+          <ordon ID="3" Type="Real" Value="1.3" SValue=""/>
+          <cutoff ID="4" Type="Real" Value="20" SValue="=0.5*sqrt(imagesizex*imagesizey)/param=6"/>
+          <ordff ID="5" Type="Real" Value="1.3" SValue=""/>
+          <units ID="6" Type="Text" Value="pixels"/>
+          <normalization ID="7" Type="Text" Value="Corrected Integral"/>
+          <edges ID="8" Type="Bool" Value="Yes"/>
+          <enlarge ID="9" Type="Bool" Value="No"/>
+          <enlargeto ID="10" Type="Integer" Value="9" SValue=""/>
+          <phase ID="11" Type="Bool" Value="No"/>
+          <absolute ID="12" Type="Bool" Value="No"/>
+          <protect ID="13" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="218"/>
+        <Outputs Types="P" IDs="220"/>
+      </f2DDFTBPTiled>
+      <fThreshold Caption="Threshold" ID="220" PID="14" Description="Threshold">
+        <Caption>Threshold</Caption>
+        <Position Top="306" Left="2007" Height="25" Width="67"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Pixel value"/>
+          <way ID="1" Type="Text" Value="Bottom"/>
+          <value ID="2" Type="Real" Value="0" SValue=""/>
+          <value2 ID="3" Type="Real" Value="50" SValue=""/>
+          <proctype ID="4" Type="Text" Value="None"/>
+          <keeporigmask ID="5" Type="Bool" Value="Yes"/>
+        </Parameters>
+        <Inputs Types="P" IDs="219"/>
+        <Outputs Types="P" IDs="177"/>
+      </fThreshold>
+      <fBgSub Caption="Optical density" ID="221" PID="21" Description="Subtract Background">
+        <Caption>Optical density</Caption>
+        <Position Top="190" Left="2433" Height="25" Width="90"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Optical Density by Reference Images"/>
+          <value ID="1" Type="Real" Value="450" SValue=""/>
+          <bgimagefilename ID="2" Type="Text" Value=""/>
+          <bgstage ID="3" Type="Integer" Value="1" SValue=""/>
+          <bgframe ID="4" Type="Integer" Value="1" SValue=""/>
+          <avgbgframes ID="5" Type="Bool" Value="No"/>
+          <shimagefilename ID="6" Type="Text" Value=""/>
+          <shstage ID="7" Type="Integer" Value="1" SValue=""/>
+          <shframe ID="8" Type="Integer" Value="1" SValue=""/>
+          <avgshframes ID="9" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="170"/>
+        <Outputs Types="P" IDs="222"/>
+      </fBgSub>
+      <fThreshold Caption="Threshold" ID="222" PID="14" Description="Threshold">
+        <Caption>Threshold</Caption>
+        <Position Top="218" Left="2442" Height="25" Width="67"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Pixel value"/>
+          <way ID="1" Type="Text" Value="Bottom"/>
+          <value ID="2" Type="Real" Value="-1" SValue=""/>
+          <value2 ID="3" Type="Real" Value="50" SValue=""/>
+          <proctype ID="4" Type="Text" Value="None"/>
+          <keeporigmask ID="5" Type="Bool" Value="Yes"/>
+        </Parameters>
+        <Inputs Types="P" IDs="221"/>
+        <Outputs Types="P" IDs="223"/>
+      </fThreshold>
+      <fThreshold Caption="Threshold" ID="223" PID="14" Description="Threshold">
+        <Caption>Threshold</Caption>
+        <Position Top="250" Left="2442" Height="25" Width="67"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Pixel value"/>
+          <way ID="1" Type="Text" Value="Ceiling"/>
+          <value ID="2" Type="Real" Value="1" SValue=""/>
+          <value2 ID="3" Type="Real" Value="50" SValue=""/>
+          <proctype ID="4" Type="Text" Value="None"/>
+          <keeporigmask ID="5" Type="Bool" Value="Yes"/>
+        </Parameters>
+        <Inputs Types="P" IDs="222"/>
+        <Outputs Types="P" IDs="224"/>
+      </fThreshold>
+      <f2DDFTBPTiled Caption="2D DFT" ID="224" PID="103" Description="2D DFT Butterworth BP filter tiled">
+        <Caption>2D DFT</Caption>
+        <Position Top="278" Left="2452" Height="25" Width="56"/>
+        <Parameters>
+          <tilesx ID="0" Type="Integer" Value="5" SValue=""/>
+          <tilesy ID="1" Type="Integer" Value="5" SValue=""/>
+          <cuton ID="2" Type="Real" Value="9.6016" SValue="=0.5*sqrt(imagesizex*imagesizey)/param=9.6016"/>
+          <ordon ID="3" Type="Real" Value="1.3" SValue=""/>
+          <cutoff ID="4" Type="Real" Value="122.9" SValue="=0.5*sqrt(imagesizex*imagesizey)/param=122.9"/>
+          <ordff ID="5" Type="Real" Value="1.3" SValue=""/>
+          <units ID="6" Type="Text" Value="pixels"/>
+          <normalization ID="7" Type="Text" Value="Corrected Integral"/>
+          <edges ID="8" Type="Bool" Value="Yes"/>
+          <enlarge ID="9" Type="Bool" Value="No"/>
+          <enlargeto ID="10" Type="Integer" Value="9" SValue=""/>
+          <phase ID="11" Type="Bool" Value="No"/>
+          <absolute ID="12" Type="Bool" Value="No"/>
+          <protect ID="13" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="223"/>
+        <Outputs Types="P" IDs="225"/>
+      </f2DDFTBPTiled>
+      <fThreshold Caption="Threshold" ID="225" PID="14" Description="Threshold">
+        <Caption>Threshold</Caption>
+        <Position Top="306" Left="2442" Height="25" Width="67"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Pixel value"/>
+          <way ID="1" Type="Text" Value="Bottom"/>
+          <value ID="2" Type="Real" Value="0" SValue=""/>
+          <value2 ID="3" Type="Real" Value="50" SValue=""/>
+          <proctype ID="4" Type="Text" Value="None"/>
+          <keeporigmask ID="5" Type="Bool" Value="Yes"/>
+        </Parameters>
+        <Inputs Types="P" IDs="224"/>
+        <Outputs Types="P" IDs="178"/>
+      </fThreshold>
+      <fBgSub Caption="Optical density" ID="226" PID="21" Description="Subtract Background">
+        <Caption>Optical density</Caption>
+        <Position Top="188" Left="2850" Height="25" Width="90"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Optical Density by Reference Images"/>
+          <value ID="1" Type="Real" Value="450" SValue=""/>
+          <bgimagefilename ID="2" Type="Text" Value=""/>
+          <bgstage ID="3" Type="Integer" Value="1" SValue=""/>
+          <bgframe ID="4" Type="Integer" Value="1" SValue=""/>
+          <avgbgframes ID="5" Type="Bool" Value="No"/>
+          <shimagefilename ID="6" Type="Text" Value=""/>
+          <shstage ID="7" Type="Integer" Value="1" SValue=""/>
+          <shframe ID="8" Type="Integer" Value="1" SValue=""/>
+          <avgshframes ID="9" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="171"/>
+        <Outputs Types="P" IDs="227"/>
+      </fBgSub>
+      <fThreshold Caption="Threshold" ID="227" PID="14" Description="Threshold">
+        <Caption>Threshold</Caption>
+        <Position Top="214" Left="2871" Height="25" Width="67"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Pixel value"/>
+          <way ID="1" Type="Text" Value="Bottom"/>
+          <value ID="2" Type="Real" Value="-1" SValue=""/>
+          <value2 ID="3" Type="Real" Value="50" SValue=""/>
+          <proctype ID="4" Type="Text" Value="None"/>
+          <keeporigmask ID="5" Type="Bool" Value="Yes"/>
+        </Parameters>
+        <Inputs Types="P" IDs="226"/>
+        <Outputs Types="P" IDs="228"/>
+      </fThreshold>
+      <fThreshold Caption="Threshold" ID="228" PID="14" Description="Threshold">
+        <Caption>Threshold</Caption>
+        <Position Top="246" Left="2871" Height="25" Width="67"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Pixel value"/>
+          <way ID="1" Type="Text" Value="Ceiling"/>
+          <value ID="2" Type="Real" Value="1" SValue=""/>
+          <value2 ID="3" Type="Real" Value="50" SValue=""/>
+          <proctype ID="4" Type="Text" Value="None"/>
+          <keeporigmask ID="5" Type="Bool" Value="Yes"/>
+        </Parameters>
+        <Inputs Types="P" IDs="227"/>
+        <Outputs Types="P" IDs="229"/>
+      </fThreshold>
+      <f2DDFTBPTiled Caption="2D DFT" ID="229" PID="103" Description="2D DFT Butterworth BP filter tiled">
+        <Caption>2D DFT</Caption>
+        <Position Top="274" Left="2878" Height="25" Width="56"/>
+        <Parameters>
+          <tilesx ID="0" Type="Integer" Value="5" SValue=""/>
+          <tilesy ID="1" Type="Integer" Value="5" SValue=""/>
+          <cuton ID="2" Type="Real" Value="256" SValue="=0.5*sqrt(imagesizex*imagesizey)/param=6"/>
+          <ordon ID="3" Type="Real" Value="1.3" SValue=""/>
+          <cutoff ID="4" Type="Real" Value="20" SValue="=0.5*sqrt(imagesizex*imagesizey)/param=6"/>
+          <ordff ID="5" Type="Real" Value="1.3" SValue=""/>
+          <units ID="6" Type="Text" Value="pixels"/>
+          <normalization ID="7" Type="Text" Value="Corrected Integral"/>
+          <edges ID="8" Type="Bool" Value="Yes"/>
+          <enlarge ID="9" Type="Bool" Value="No"/>
+          <enlargeto ID="10" Type="Integer" Value="9" SValue=""/>
+          <phase ID="11" Type="Bool" Value="No"/>
+          <absolute ID="12" Type="Bool" Value="No"/>
+          <protect ID="13" Type="Bool" Value="No"/>
+        </Parameters>
+        <Inputs Types="P" IDs="228"/>
+        <Outputs Types="P" IDs="230"/>
+      </f2DDFTBPTiled>
+      <fThreshold Caption="Threshold" ID="230" PID="14" Description="Threshold">
+        <Caption>Threshold</Caption>
+        <Position Top="302" Left="2872" Height="25" Width="67"/>
+        <Parameters>
+          <type ID="0" Type="Text" Value="Pixel value"/>
+          <way ID="1" Type="Text" Value="Bottom"/>
+          <value ID="2" Type="Real" Value="0" SValue=""/>
+          <value2 ID="3" Type="Real" Value="50" SValue=""/>
+          <proctype ID="4" Type="Text" Value="None"/>
+          <keeporigmask ID="5" Type="Bool" Value="Yes"/>
+        </Parameters>
+        <Inputs Types="P" IDs="229"/>
+        <Outputs Types="P" IDs="179"/>
+      </fThreshold>
+      <fWait Caption="Add extra processing below" ID="231" PID="106" Description="Wait for all inputs">
+        <Caption>Add extra processing below</Caption>
+        <Position Top="731" Left="1588" Height="25" Width="154"/>
+        <Parameters/>
+        <Inputs Types="P" IDs="74"/>
+        <Outputs Types="P" IDs="232"/>
+      </fWait>
+      <fWait Caption="Add extra processing above" ID="232" PID="106" Description="Wait for all inputs">
+        <Caption>Add extra processing above</Caption>
+        <Position Top="782" Left="1586" Height="25" Width="157"/>
+        <Parameters/>
+        <Inputs Types="P" IDs="231"/>
+        <Outputs Types="C" IDs="90"/>
+      </fWait>
+      <fWait Caption="Add extra processing below" ID="233" PID="106" Description="Wait for all inputs">
+        <Caption>Add extra processing below</Caption>
+        <Position Top="740" Left="2006" Height="25" Width="154"/>
+        <Parameters/>
+        <Inputs Types="P" IDs="84"/>
+        <Outputs Types="P" IDs="234"/>
+      </fWait>
+      <fWait Caption="Add extra processing above" ID="234" PID="106" Description="Wait for all inputs">
+        <Caption>Add extra processing above</Caption>
+        <Position Top="795" Left="1998" Height="25" Width="157"/>
+        <Parameters/>
+        <Inputs Types="P" IDs="233"/>
+        <Outputs Types="C" IDs="103"/>
+      </fWait>
+      <fWait Caption="Add extra processing below" ID="235" PID="106" Description="Wait for all inputs">
+        <Caption>Add extra processing below</Caption>
+        <Position Top="757" Left="2396" Height="25" Width="154"/>
+        <Parameters/>
+        <Inputs Types="P" IDs="131"/>
+        <Outputs Types="P" IDs="236"/>
+      </fWait>
+      <fWait Caption="Add extra processing above" ID="236" PID="106" Description="Wait for all inputs">
+        <Caption>Add extra processing above</Caption>
+        <Position Top="798" Left="2407" Height="25" Width="157"/>
+        <Parameters/>
+        <Inputs Types="P" IDs="235"/>
+        <Outputs Types="C" IDs="114"/>
+      </fWait>
+      <fWait Caption="Add extra processing below" ID="237" PID="106" Description="Wait for all inputs">
+        <Caption>Add extra processing below</Caption>
+        <Position Top="754" Left="2806" Height="25" Width="154"/>
+        <Parameters/>
+        <Inputs Types="P" IDs="157"/>
+        <Outputs Types="P" IDs="238"/>
+      </fWait>
+      <fWait Caption="Add extra processing above" ID="238" PID="106" Description="Wait for all inputs">
+        <Caption>Add extra processing above</Caption>
+        <Position Top="804" Left="2823" Height="25" Width="157"/>
+        <Parameters/>
+        <Inputs Types="P" IDs="237"/>
+        <Outputs Types="C" IDs="140"/>
+      </fWait>
+      <fGetLinked Caption="Get Linked Channel" ID="239" PID="17" Description="Get Linked Channel">
+        <Caption>Get Linked Channel</Caption>
+        <Position Top="369" Left="573" Height="25" Width="117"/>
+        <Parameters>
+          <channel ID="0" Type="Integer" Value="101" SValue=""/>
+        </Parameters>
+        <Inputs Types="P" IDs="209"/>
+        <Outputs Types="P" IDs="240"/>
+      </fGetLinked>
+      <fSelectByNumber Caption="Select by Number" ID="240" PID="147" Description="Select by Number">
+        <Caption>Select by Number</Caption>
+        <Position Top="140" Left="915" Height="25" Width="105"/>
+        <Parameters>
+          <selector ID="0" Type="Integer" Value="3" SValue=""/>
+          <operation ID="1" Type="Text" Value="Execute all outputs up to the selected"/>
+        </Parameters>
+        <Inputs Types="P" IDs="239"/>
+        <Outputs Types="PPPP" IDs="245;246;247;248"/>
+      </fSelectByNumber>
+      <fRename Caption="Rename Image" ID="241" PID="18" Description="Rename Image">
+        <Caption>Rename Image</Caption>
+        <Position Top="106" Left="1838" Height="25" Width="92"/>
+        <Parameters>
+          <channel ID="0" Type="Integer" Value="2" SValue=""/>
+          <name ID="1" Type="Text" Value="=%param% - %LoadPositionName%"/>
+        </Parameters>
+        <Inputs Types="P" IDs="137"/>
+        <Outputs Types="P" IDs="246"/>
+      </fRename>
+      <fRename Caption="Rename Image" ID="242" PID="18" Description="Rename Image">
+        <Caption>Rename Image</Caption>
+        <Position Top="85" Left="2315" Height="25" Width="92"/>
+        <Parameters>
+          <channel ID="0" Type="Integer" Value="3" SValue=""/>
+          <name ID="1" Type="Text" Value="=%param% - %LoadPositionName%"/>
+        </Parameters>
+        <Inputs Types="P" IDs="138"/>
+        <Outputs Types="P" IDs="247"/>
+      </fRename>
+      <fRename Caption="Rename Image" ID="243" PID="18" Description="Rename Image">
+        <Caption>Rename Image</Caption>
+        <Position Top="80" Left="2720" Height="25" Width="92"/>
+        <Parameters>
+          <channel ID="0" Type="Integer" Value="4" SValue=""/>
+          <name ID="1" Type="Text" Value="=%param% - %LoadPositionName%"/>
+        </Parameters>
+        <Inputs Types="P" IDs="162"/>
+        <Outputs Types="P" IDs="248"/>
+      </fRename>
+      <fRename Caption="Rename Image" ID="244" PID="18" Description="Rename Image">
+        <Caption>Rename Image</Caption>
+        <Position Top="103" Left="1399" Height="25" Width="92"/>
+        <Parameters>
+          <channel ID="0" Type="Integer" Value="1" SValue=""/>
+          <name ID="1" Type="Text" Value="=%param% - %LoadPositionName%"/>
+        </Parameters>
+        <Inputs Types="P" IDs="136"/>
+        <Outputs Types="P" IDs="245"/>
+      </fRename>
+      <fLink Caption="Link Windows" ID="245" PID="98" Description="Link Windows">
+        <Caption>Link Windows</Caption>
+        <Position Top="142" Left="1378" Height="25" Width="85"/>
+        <Parameters/>
+        <Inputs Types="PP" IDs="244;240"/>
+        <Outputs Types="P" IDs="168"/>
+      </fLink>
+      <fLink Caption="Link Windows" ID="246" PID="98" Description="Link Windows">
+        <Caption>Link Windows</Caption>
+        <Position Top="139" Left="1764" Height="25" Width="85"/>
+        <Parameters/>
+        <Inputs Types="PP" IDs="241;240"/>
+        <Outputs Types="P" IDs="169"/>
+      </fLink>
+      <fLink Caption="Link Windows" ID="247" PID="98" Description="Link Windows">
+        <Caption>Link Windows</Caption>
+        <Position Top="123" Left="2239" Height="25" Width="85"/>
+        <Parameters/>
+        <Inputs Types="PP" IDs="242;240"/>
+        <Outputs Types="P" IDs="170"/>
+      </fLink>
+      <fLink Caption="Link Windows" ID="248" PID="98" Description="Link Windows">
+        <Caption>Link Windows</Caption>
+        <Position Top="122" Left="2717" Height="25" Width="85"/>
+        <Parameters/>
+        <Inputs Types="PP" IDs="243;240"/>
+        <Outputs Types="P" IDs="171"/>
+      </fLink>
+    </Functions>
+  </Pipeline>
+  <Parameters Version="1195">
+    <Caption>FAST Analysis Pipeline - basic</Caption>
+    <DesignVersion>4</DesignVersion>
+    <Description>Fully Automated Senescence Test
+This is a modified version of the original "Fluorescence and absorbance histometry using nuclear marker (1-4 labels - advanced background options)" V4 pipeline.
+Parameters have been changed to reflect the xGAL + EdU analysis.
+
+Assay protocol (see details on protcols.io link ___):
+7.4 Determine dark current
+8.1 Create fluorescence background reference image (optional) - pipeline: Create background reference image(s) for multiwell plate using median of wells
+8.4 Create blank reference image for xGAL (required) - pipeline: Create BLANK reference image for multiwell plate using median
+9.2 Set pipeline parameters:
+* Subtract reference image background and shading correct first (all fluorescence channels):  see above at #8.1
+
+* Number of x and y tiles
+
+* Nucleus diameter
+
+* Perinuclear ring width (pixels) label #3
+
+* Optical density and shading: optional dark current intensity value: as determined at #7.4 (required, or use dark current reference image)
+
+9.3 Verify that the pipeline parameters have been adjusted properly, it is recommended to run the pipeline on individual wells for each condition to be tested (e.g. a senescent and a control well) to ensure that:
+
+1) The nuclear segmentation was performed correctly
+2) 
+The perinuclear rings to measure SA-B-Gal staining do not have excessive overlap with nearby perinuclear rings.
+
+
+
+Pipeline parameters can be iteratively modified and tested until the user is satisfied for both points above. 
+
+9.4 Run Pipeline (blue fast forward) drop-down menu, click "Run Pipeline on All Stage Positions"
+
+
+
+Generic description of the pipeline:
+
+Measurement of fluorescence intensities or optical densities over nuclei and perinuclear areas using a nuclear marker and 1-4 label channels. Standard morphological segmentation is used. The pipeline can run in single or tiled images and in whole wells with automatic suppression of outside of the well areas and debris (see “Suppress debris and outside of well areas”). Different measurements may be done in the same label channel, and each label can be defined as fluorescence or optical density (“Channel type”). The pipeline can also be executed on image series for faster analysis compared to frame-by-frame operation. Frames of an image series are scaled independently.
+For the SA-bGAL assay use "Densitometry with thin process suppression" as channel type and set the sensitivity of this at "Thin process suppression for optical density (maximal diameter in pixels)". This value is the maximal process diameter, thinner details will be suppressed. Thus a larger value provides greater suppression. This is performed by bandpass spatial filtering between the “Local background: Spatial filtering: Largest object size…” cut on and "Thin process suppression for optical density (maximal diameter in pixels)" cut off. Use additional rolling ball background subtraction. Using additional spatial filtering background subtraction will not have much further effect.
+
+Background subtraction:
+The background subtraction technique can be specified for each channel. Choose percentile-based global or local background subtraction methods. All channels use the same method, and the parameters are at the end of the pipeline parameter list. For median or special filtering, the object size must be bigger than the cell size.
+Tiled images: the background tiling pattern or vignetting is efficiently removed by spatial filtering if the recording was performed without overlap and image registration. Provide the number of tiles in x and y direction in the “Local background: Spatial filtering: Number of tiles in x” and “…y” parameters.
+
+Sample: fixed or live cells stained for nuclei e.g. with Hoechst 33342 or DAPI, and showing other fluorescence of interest. 
+
+Input: 2-4 channels fluorescence image showing a nuclear marker and immuno- or other fluorescence visible over the nuclei or in perinuclear areas. Low or medium magnification 10-40x. May be tiled and whole well image. The area outside of the well must be bright in the fluorescence image for auto detection of the well. Whole slide scans are also workable using the Multi-Dimensional Open/Settings/Crop multi-resolution by ROIs, analyzing multiple regions/scenes loaded as an image series.
+
+Output: 1 morphological parameters of choice of nuclei and 4 intensity or optical density measurements in the same or different label channels. For intensity measurement the “Intensity measurement type of label #” statistics (Mean, Sum, Variance, Punctate over diffuse ratio) is calculated over nuclei or perinuclear area see (“Measure label # fluorescence over” and “Perinuclear ring width”). Output data are single cell values or histogram (see “Histogram or distribution calculation”). Note that the order of labels measured in the output worksheet may vary due to parallel processing. When “Position names and microplate worksheet output” is Yes, labels will show up in renumbered channels as:
+Ch0: Nuclei Morphology
+Ch1: Label #1
+Ch2: Label #2
+Ch3: Label #3
+Ch4: Label #4
+
+Reference image operation: by default, the calculation of nuclei is self-referenced. Thus, it is independently calculated for each image. This is set by the “Positive control reference image operation for nuclei detection” = ”Self-referenced” option. This works well if none of the samples have very few cells compared to others. If cell density varies between samples, or if some samples have very few cells , use positive control reference. The positive control is one of the images from the data set with about maximum number of cells and positive cells. To make reference image set “Positive control reference image operation for nuclei detection” = ”Make reference image”. Process a positive control sample. The reference images will be minimized, and reused at the following operations. Then set “Positive control reference image operation for nuclei detection” = ”Use reference image” and process all data. To process a different data set, close first reference images by “File/Close All Reference Images” and make new reference images.
+
+Debris avoidance: to increase sensitivity, increase “Large debris removal sensitivity (%)” and decrease “Large debris minimum size (length in pixels)”. To decrease sensitivity, do the opposite. Debris avoidance may avoid cells or positive cells, if the cell count or positive cell count is too low. In this case set a small (non-zero) %, e.g. 1 as sensitivity.
+
+Adding more processing, image filtering to labels: Open pipeline window, unlock editing and insert image processing function in between the "Add extra processing below" and "Add extra processing above" placeholders. For this pick the function to be added by pressing the F icon in the toolbar of the Pipeline window. Place this function in an empty space, and then drag it and drop it on the "Add extra processing below" label. Add more processing, or reconnect the "Add extra processing above" label by dropping it on the last added function.
+
+Adjustments:
+Set approximate nucleus diameter. To this end load an image, zoom in using the magnifier glass Main Toolbar button, and then using the linear ROI button draw a line across a nucleus. Double-click the status bar of the Image Window to see the length of the ROI (Size of active ROI).
+The approximate nucleus diameter is used only for seeding the detection, and there are explicit minimum and maximum area gates for finer control.
+Run the pipeline on a single well and observe the results. In the overlay Image Window the gray fluorescence image should be well matched by the colored segments:
+*If single nuclei are detected as multiple segments, increase the approximate cell diameter. In addition, you may turn segment welding on.
+*If multiple nuclei are detected as single segments, decrease the approximate cell diameter. In addition, you may turn segment welding off.
+*If debris is detected a nuclei, increase background cutoff or minimum cell fluorescence.
+*If dimmer cells are missed, decrease background cutoff or minimum cell fluorescence.
+*If bright debris outshines cells, decrease debris cutoff percentile.
+If segmentation goes as it is desired, process the whole microplate using the double blue arrowhead button and ‘Run Pipeline … on All Stage Positions’.
+
+Version history
+V1: based on “Microplate whole well cell count (automatic well positioning, with positive control)” and “Seahorse well cell count with nuclear stain”.
+V3: Added control on how Excel Data is recorded
+      Debris avoidance also removes zero edges resulting from stitching
+      Position names are shown on labels
+      Reference image background subtraction and shading correction
+      Optional clipping of bright foci during segmentation
+      Accidental loopback after background subtraction in label#3 removed
+      Explicit gating for nuclei area
+      New "Densitometry with thin process suppression" option for channel type and "Thin process suppression for optical density (maximal diameter in pixels)" for setting its sensitivity
+      Added "Add extra processing below" and "Add extra processing above" placeholders
+      Added Histogram Range parameters for each label
+V4: ROIs are copied from original images, so ROIs may be drawn on the source images to gate the readout.
+      Echa label can be named now.</Description>
+    <Parameters>
+      <param ID="0" UID="45798039" Caption="Number of labels to measure (1-4)" Type="Integer" Value="3" Constraints="" ErrorMessage="" Hint="Select how many label channels to measure. Each channel can be selected multiple times.">
+        <link Caption="Select by Number::Selected value" ID="101" paramID="0" paramName="selector"/>
+        <link Caption="Select by Number::Selected value (1)" ID="102" paramID="0" paramName="selector"/>
+        <link Caption="Select by Number::Selected value (2)" ID="240" paramID="0" paramName="selector"/>
+      </param>
+      <param ID="1" UID="45776352" Caption="Histogram or distribution calculation" Type="Text" Value="None" Constraints="" ErrorMessage="Invalid histogram analysis type." Hint="Select Histogram to show output as histogram, or None to show individual cell values.">
+        <link Caption="Plot Morphological Parameters::Histogram and distribution" ID="20" paramID="7" paramName="histogram"/>
+        <link Caption="Plot Segment Intensities::Histogram and distribution" ID="90" paramID="6" paramName="histogram"/>
+        <link Caption="Plot Segment Intensities::Histogram and distribution (1)" ID="103" paramID="6" paramName="histogram"/>
+        <link Caption="Plot Segment Intensities::Histogram and distribution (2)" ID="114" paramID="6" paramName="histogram"/>
+        <link Caption="Plot Segment Intensities::Histogram and distribution (2) (1)" ID="140" paramID="6" paramName="histogram"/>
+      </param>
+      <param ID="2" UID="56340879" Caption="Calculate a single mean±SE for all cells" Type="Bool" Value="No" Constraints="" ErrorMessage="" Hint="Calculates a mean value of all traces for each time point.">
+        <link Caption="Plot Morphological Parameters::Mean of all traces" ID="20" paramID="4" paramName="allMean"/>
+        <link Caption="Plot Segment Intensities::Mean of all traces" ID="90" paramID="3" paramName="allMean"/>
+        <link Caption="Plot Segment Intensities::Mean of all traces (1)" ID="103" paramID="3" paramName="allMean"/>
+        <link Caption="Plot Segment Intensities::Mean of all traces (2)" ID="114" paramID="3" paramName="allMean"/>
+        <link Caption="Plot Segment Intensities::Mean of all traces (3)" ID="140" paramID="3" paramName="allMean"/>
+      </param>
+      <param ID="3" UID="56340917" Caption="Position names and microplate worksheet output" Type="Bool" Value="No" Constraints="" ErrorMessage="" Hint="Organizes data in table according to microplate well associations in additional worksheets.">
+        <link Caption="Plot Morphological Parameters::Plate worksheet output" ID="20" paramID="17" paramName="plateoutput"/>
+        <link Caption="Plot Segment Intensities::Plate worksheet output" ID="90" paramID="16" paramName="plateoutput"/>
+        <link Caption="Plot Segment Intensities::Plate worksheet output (1)" ID="103" paramID="16" paramName="plateoutput"/>
+        <link Caption="Plot Segment Intensities::Plate worksheet output (2)" ID="114" paramID="16" paramName="plateoutput"/>
+        <link Caption="Plot Segment Intensities::Plate worksheet output (3)" ID="140" paramID="16" paramName="plateoutput"/>
+        <link Caption="Plot Morphological Parameters::Place channels into columns" ID="20" paramID="15" paramName="mdoutput"/>
+        <link Caption="Plot Segment Intensities::Place channels into columns" ID="90" paramID="14" paramName="mdoutput"/>
+        <link Caption="Plot Segment Intensities::Place channels into columns (1)" ID="140" paramID="14" paramName="mdoutput"/>
+        <link Caption="Plot Segment Intensities::Place channels into columns (2)" ID="103" paramID="14" paramName="mdoutput"/>
+        <link Caption="Plot Segment Intensities::Place channels into columns (3)" ID="114" paramID="14" paramName="mdoutput"/>
+      </param>
+      <param ID="4" UID="56245607" Caption="Subtract reference image background and shading correct first (all fluorescence channels)" Type="Bool" Value="No" Constraints="" ErrorMessage="" Hint="If background reference image is provided, it can be subtracted, or subtracted and also used for shading corrections. Choose between these two at the bottom.">
+        <link Caption="If::Execute output #1 if yes, otherwise #2 (2)" ID="194" paramID="0" paramName="condition"/>
+        <link Caption="If::Execute output #1 if yes, otherwise #2 (2) (1)" ID="197" paramID="0" paramName="condition"/>
+        <link Caption="If::Execute output #1 if yes, otherwise #2 (2) (2)" ID="200" paramID="0" paramName="condition"/>
+        <link Caption="If::Execute output #1 if yes, otherwise #2 (2) (3)" ID="203" paramID="0" paramName="condition"/>
+        <link Caption="If::Execute output #1 if yes, otherwise #2 (1)" ID="206" paramID="0" paramName="condition"/>
+      </param>
+      <param ID="5" UID="6" Caption="Channel Number, nuclear stain" Type="Integer" Value="1" Constraints="0-2147483647" ErrorMessage="Channel number" Hint="Channel number of the nuclear marker used for nucleus segmentation.">
+        <link Caption="Get Linked Channel : post hoc nuclei::Channel (W)" ID="1" paramID="0" paramName="channel"/>
+        <link Caption="Get Linked Channel : post hoc nuclei::Channel (W) (1)" ID="180" paramID="0" paramName="channel"/>
+      </param>
+      <param ID="6" UID="45823971" Caption="Background subtraction method, nuclear stain" Type="Text" Value="Spatial filtering" Constraints="" ErrorMessage="Invalid value. Enter possible values separated by ; at " Hint="Select background subtraction method: Percentile, Rolling ball, Spatial filtering, None. See settings below. Background subtraction is performed in the same way for all channels.">
+        <link Caption="Select::Selected value" ID="44" paramID="1" paramName="selector"/>
+      </param>
+      <param ID="7" UID="45776377" Caption="Morphological parameter measurement for nuclei" Type="Text" Value="area" Constraints="" ErrorMessage="Invalid morphological parameter type." Hint="Plots and saves time course of selected morphological data ">
+        <link Caption="Plot Morphological Parameters::Morphological parameter" ID="20" paramID="0" paramName="morphology"/>
+      </param>
+      <param ID="8" UID="62992808" Caption="Histogram: range for morphological parameter measurement for nuclei" Type="Text" Value="All" Constraints="" ErrorMessage="" Hint="If left empty or set to &quot;All&quot;, a histogram is generated where the lowest bin starts at the smallest data point and the highest bin ends at the largest data point. If a range is given here e.g. 100-500, then the lowest bin starts at the beginning of the range and the highest bin ends at the end of the range.">
+        <link Caption="Plot Morphological Parameters::Histogram: range" ID="20" paramID="22" paramName="histogramrange"/>
+      </param>
+      <param ID="9" UID="45776422" Caption="#1: Channel Number, label #1" Type="Integer" Value="1" Constraints="0-2147483647" ErrorMessage="Channel Number" Hint="Channel number of label #1 to be measured. Each channel can be selected multiple times for different measurements.">
+        <link Caption="Get Linked Channel : label1::Channel Number" ID="88" paramID="0" paramName="channel"/>
+      </param>
+      <param ID="10" UID="65076310" Caption="#1: Name for label #1" Type="Text" Value="Label #1" Constraints="" ErrorMessage="" Hint="Custom name to be shown in image and plot window captions and in output data.">
+        <link Caption="Rename Image::New Name" ID="244" paramID="1" paramName="name"/>
+      </param>
+      <param ID="11" UID="45824477" Caption="#1: Channel type, label #1" Type="Text" Value="Fluorescence" Constraints="" ErrorMessage="Invalid value. Enter possible values separated by ; at " Hint="Switch between fluorescence intensity and optical density measurement. Optical density calculation needs previously set up blank reference image (cell-free image) for the given channel number.">
+        <link Caption="Select Fluor/OD::Selected value" ID="168" paramID="1" paramName="selector"/>
+      </param>
+      <param ID="12" UID="45798137" Caption="#1: Measure label #1 over" Type="Text" Value="Nucleus" Constraints="" ErrorMessage="Invalid value. Enter possible values separated by ; at " Hint="Intensity measurement is performed either over the nucleus or in a perinuclear ring or in the whole cell, marked by secondary segmentation of the cell area marker.">
+        <link Caption="Select::Selected value" ID="98" paramID="1" paramName="selector"/>
+      </param>
+      <param ID="13" UID="45824003" Caption="#1: Background subtraction method, label #1" Type="Text" Value="Spatial filtering" Constraints="" ErrorMessage="Invalid value. Enter possible values separated by ; at " Hint="Select background subtraction method: Percentile, Rolling ball, Spatial filtering, None. See settings below. Background subtraction is performed in the same way for all channels.">
+        <link Caption="Select::Selected value" ID="76" paramID="1" paramName="selector"/>
+      </param>
+      <param ID="14" UID="45776395" Caption="#1: Intensity measurement type of label #1" Type="Text" Value="Sum" Constraints="" ErrorMessage="Invalid plot type." Hint="Available plot types: &quot;Mean&quot;, &quot;Sum&quot;, &quot;Variance&quot;, &quot;PDI variance&quot;, &quot;PDI sd&quot;, &quot;Line Scan&quot;. These statistics describe pixels within each segment. ">
+        <link Caption="Plot Segment Intensities::Plot type (statistics to plot)" ID="90" paramID="2" paramName="type"/>
+        <link Caption="Plot Segment Intensities::Plot type (statistics to plot) (1)" ID="103" paramID="2" paramName="type"/>
+        <link Caption="Plot Segment Intensities::Plot type (statistics to plot) (2)" ID="114" paramID="2" paramName="type"/>
+        <link Caption="Plot Segment Intensities::Plot type (statistics to plot) (2) (1)" ID="140" paramID="2" paramName="type"/>
+      </param>
+      <param ID="15" UID="45798291" Caption="#1: Perinuclear ring width (pixels), label #1" Type="Integer" Value="15" Constraints="&gt;1" ErrorMessage="Mask size is in pixels and must be a positive integer." Hint="Width of the ring around the nucleus to measure perinuclear area, in pixels. This is used only if &quot;Perinuclear ring&quot; is selected above.">
+        <link Caption="Morphological operator::Size" ID="93" paramID="1" paramName="size"/>
+      </param>
+      <param ID="16" UID="62992709" Caption="#1: Histogram: range, label #1" Type="Text" Value="All" Constraints="" ErrorMessage="" Hint="If left empty or set to &quot;All&quot;, a histogram is generated where the lowest bin starts at the smallest data point and the highest bin ends at the largest data point. If a range is given here e.g. 100-500, then the lowest bin starts at the beginning of the range and the highest bin ends at the end of the range.">
+        <link Caption="Plot Segment Intensities::Histogram: range" ID="90" paramID="21" paramName="histogramrange"/>
+      </param>
+      <param ID="17" UID="45776425" Caption="#2: Channel Number, label #2" Type="Integer" Value="2" Constraints="0-2147483647" ErrorMessage="Channel Number" Hint="Channel number of label #2 to be measured. Each channel can be selected multiple times for different measurements.">
+        <link Caption="Get Linked Channel : label2::Channel Number" ID="89" paramID="0" paramName="channel"/>
+        <link Caption="Get Linked Channel : label2::Channel Number (1)" ID="135" paramID="0" paramName="channel"/>
+        <link Caption="Get Linked Channel : label2::Channel Number (1) (1)" ID="161" paramID="0" paramName="channel"/>
+      </param>
+      <param ID="18" UID="65076371" Caption="#2: Name for label #2" Type="Text" Value="Label #2" Constraints="" ErrorMessage="" Hint="Custom name to be shown in image and plot window captions and in output data.">
+        <link Caption="Rename Image::New Name" ID="241" paramID="1" paramName="name"/>
+      </param>
+      <param ID="19" UID="45824480" Caption="#2: Channel type, label #2" Type="Text" Value="Fluorescence" Constraints="" ErrorMessage="Invalid value. Enter possible values separated by ; at " Hint="Switch between fluorescence intensity and optical density measurement. Optical density calculation needs previously set up blank reference image (cell-free image) for the given channel number.">
+        <link Caption="Select Fluor/OD::Selected value" ID="169" paramID="1" paramName="selector"/>
+      </param>
+      <param ID="20" UID="45798152" Caption="#2: Measure label #2 over" Type="Text" Value="Perinuclear ring" Constraints="" ErrorMessage="Invalid value. Enter possible values separated by ; at " Hint="Intensity measurement is performed either over the nucleus or in a perinuclear ring or in the whole cell, marked by secondary segmentation of the cell area marker.">
+        <link Caption="Select::Selected value" ID="111" paramID="1" paramName="selector"/>
+      </param>
+      <param ID="21" UID="45823995" Caption="#2: Background subtraction method, label #2" Type="Text" Value="Spatial filtering" Constraints="" ErrorMessage="Invalid value. Enter possible values separated by ; at " Hint="Select background subtraction method: Percentile, Rolling ball, Spatial filtering, None. See settings below. Background subtraction is performed in the same way for all channels.">
+        <link Caption="Select::Selected value" ID="86" paramID="1" paramName="selector"/>
+      </param>
+      <param ID="22" UID="45798339" Caption="#2: Intensity measurement type of label #2" Type="Text" Value="Sum" Constraints="" ErrorMessage="Invalid plot type." Hint="Available plot types: &quot;Mean&quot;, &quot;Sum&quot;, &quot;Variance&quot;, &quot;PDI variance&quot;, &quot;PDI sd&quot;, &quot;Line Scan&quot;. These statistics describe pixels within each segment.">
+        <link Caption="Plot Segment Intensities::Plot type (statistics to plot)" ID="103" paramID="2" paramName="type"/>
+      </param>
+      <param ID="23" UID="45798294" Caption="#2: Perinuclear ring width (pixels), label #2" Type="Integer" Value="15" Constraints="&gt;1" ErrorMessage="Mask size is in pixels and must be a positive integer." Hint="Width of the ring around the nucleus to measure perinuclear area, in pixels. This is used only if &quot;Perinuclear ring&quot; is selected above.">
+        <link Caption="Morphological operator::Size" ID="106" paramID="1" paramName="size"/>
+      </param>
+      <param ID="24" UID="62992759" Caption="#2: Histogram: range, label #2" Type="Text" Value="All" Constraints="" ErrorMessage="" Hint="If left empty or set to &quot;All&quot;, a histogram is generated where the lowest bin starts at the smallest data point and the highest bin ends at the largest data point. If a range is given here e.g. 100-500, then the lowest bin starts at the beginning of the range and the highest bin ends at the end of the range.">
+        <link Caption="Plot Segment Intensities::Histogram: range" ID="103" paramID="21" paramName="histogramrange"/>
+      </param>
+      <param ID="25" UID="45798185" Caption="#3: Channel Number, label #3" Type="Integer" Value="3" Constraints="0-2147483647" ErrorMessage="Channel Number" Hint="Channel number of label #3 to be measured. Each channel can be selected multiple times for different measurements.">
+        <link Caption="Get Linked Channel : label3::Channel Number" ID="135" paramID="0" paramName="channel"/>
+      </param>
+      <param ID="26" UID="65076392" Caption="#3: Name for label #3" Type="Text" Value="Label #3" Constraints="" ErrorMessage="" Hint="Custom name to be shown in image and plot window captions and in output data.">
+        <link Caption="Rename Image::New Name" ID="242" paramID="1" paramName="name"/>
+      </param>
+      <param ID="27" UID="45824484" Caption="#3: Channel type, label #3" Type="Text" Value="Densitometry with thin process suppression" Constraints="" ErrorMessage="Invalid value. Enter possible values separated by ; at " Hint="Switch between fluorescence intensity and optical density measurement. Optical density calculation needs previously set up blank reference image (cell-free image) for the given channel number.">
+        <link Caption="Select Fluor/OD::Selected value" ID="170" paramID="1" paramName="selector"/>
+      </param>
+      <param ID="28" UID="45798154" Caption="#3: Measure label #3 over" Type="Text" Value="Perinuclear ring" Constraints="" ErrorMessage="Invalid value. Enter possible values separated by ; at " Hint="Intensity measurement is performed either over the nucleus or in a perinuclear ring or in the whole cell, marked by secondary segmentation of the cell area marker.">
+        <link Caption="Select::Selected value" ID="122" paramID="1" paramName="selector"/>
+      </param>
+      <param ID="29" UID="45824008" Caption="#3: Background subtraction method, label #3" Type="Text" Value="Spatial filtering" Constraints="" ErrorMessage="Invalid value. Enter possible values separated by ; at " Hint="Select background subtraction method: Percentile, Rolling ball, Spatial filtering, None. See settings below. Background subtraction is performed in the same way for all channels.">
+        <link Caption="Select::Selected value" ID="133" paramID="1" paramName="selector"/>
+      </param>
+      <param ID="30" UID="45798342" Caption="#3: Intensity measurement type of label #3" Type="Text" Value="Sum" Constraints="" ErrorMessage="Invalid plot type." Hint="Available plot types: &quot;Mean&quot;, &quot;Sum&quot;, &quot;Variance&quot;, &quot;PDI variance&quot;, &quot;PDI sd&quot;, &quot;Line Scan&quot;. These statistics describe pixels within each segment.">
+        <link Caption="Plot Segment Intensities::Plot type (statistics to plot)" ID="114" paramID="2" paramName="type"/>
+      </param>
+      <param ID="31" UID="45798297" Caption="#3: Perinuclear ring width (pixels), label #3" Type="Integer" Value="15" Constraints="&gt;1" ErrorMessage="Mask size is in pixels and must be a positive integer." Hint="Width of the ring around the nucleus to measure perinuclear area, in pixels. This is used only if &quot;Perinuclear ring&quot; is selected above.">
+        <link Caption="Morphological operator::Size" ID="117" paramID="1" paramName="size"/>
+      </param>
+      <param ID="32" UID="62992775" Caption="#3: Histogram: range, label #3" Type="Text" Value="All" Constraints="" ErrorMessage="" Hint="If left empty or set to &quot;All&quot;, a histogram is generated where the lowest bin starts at the smallest data point and the highest bin ends at the largest data point. If a range is given here e.g. 100-500, then the lowest bin starts at the beginning of the range and the highest bin ends at the end of the range.">
+        <link Caption="Plot Segment Intensities::Histogram: range" ID="114" paramID="21" paramName="histogramrange"/>
+      </param>
+      <param ID="33" UID="45820503" Caption="#4: Channel Number, label #4" Type="Integer" Value="4" Constraints="0-2147483647" ErrorMessage="Channel Number" Hint="Channel number of label #4 to be measured. Each channel can be selected multiple times for different measurements.">
+        <link Caption="Get Linked Channel : label4::Channel Number" ID="161" paramID="0" paramName="channel"/>
+      </param>
+      <param ID="34" UID="65076398" Caption="#4: Name for label #4" Type="Text" Value="Label #4" Constraints="" ErrorMessage="" Hint="Custom name to be shown in image and plot window captions and in output data.">
+        <link Caption="Rename Image::New Name" ID="243" paramID="1" paramName="name"/>
+      </param>
+      <param ID="35" UID="45824487" Caption="#4: Channel type, label #4" Type="Text" Value="Fluorescence" Constraints="" ErrorMessage="Invalid value. Enter possible values separated by ; at " Hint="Switch between fluorescence intensity and optical density measurement. Optical density calculation needs previously set up blank reference image (cell-free image) for the given channel number.">
+        <link Caption="Select Fluor/OD::Selected value" ID="171" paramID="1" paramName="selector"/>
+      </param>
+      <param ID="36" UID="45820525" Caption="#4: Measure label #4 over" Type="Text" Value="Nucleus" Constraints="" ErrorMessage="Invalid value. Enter possible values separated by ; at " Hint="Intensity measurement is performed either over the nucleus or in a perinuclear ring or in the whole cell, marked by secondary segmentation of the cell area marker.">
+        <link Caption="Select::Selected value" ID="148" paramID="1" paramName="selector"/>
+      </param>
+      <param ID="37" UID="45824013" Caption="#4: Background subtraction method, label #4" Type="Text" Value="Spatial filtering" Constraints="" ErrorMessage="Invalid value. Enter possible values separated by ; at " Hint="Select background subtraction method: Percentile, Rolling ball, Spatial filtering, None. See settings below. Background subtraction is performed in the same way for all channels.">
+        <link Caption="Select::Selected value" ID="159" paramID="1" paramName="selector"/>
+      </param>
+      <param ID="38" UID="45820508" Caption="#4: Intensity measurement type of label #4" Type="Text" Value="Mean" Constraints="" ErrorMessage="Invalid plot type." Hint="Available plot types: &quot;Mean&quot;, &quot;Sum&quot;, &quot;Variance&quot;, &quot;PDI variance&quot;, &quot;PDI sd&quot;, &quot;Line Scan&quot;. These statistics describe pixels within each segment.">
+        <link Caption="Plot Segment Intensities::Plot type (statistics to plot)" ID="140" paramID="2" paramName="type"/>
+      </param>
+      <param ID="39" UID="45820512" Caption="#4: Perinuclear ring width (pixels), label #4" Type="Integer" Value="5" Constraints="&gt;1" ErrorMessage="Mask size is in pixels and must be a positive integer." Hint="Width of the ring around the nucleus to measure perinuclear area, in pixels. This is used only if &quot;Perinuclear ring&quot; is selected above.">
+        <link Caption="Morphological operator::Size" ID="143" paramID="1" paramName="size"/>
+      </param>
+      <param ID="40" UID="62992787" Caption="#4: Histogram: range, label #4" Type="Text" Value="All" Constraints="" ErrorMessage="" Hint="If left empty or set to &quot;All&quot;, a histogram is generated where the lowest bin starts at the smallest data point and the highest bin ends at the largest data point. If a range is given here e.g. 100-500, then the lowest bin starts at the beginning of the range and the highest bin ends at the end of the range.">
+        <link Caption="Plot Segment Intensities::Histogram: range" ID="140" paramID="21" paramName="histogramrange"/>
+      </param>
+      <param ID="41" UID="45776542" Caption="Histogram: number of bins" Type="Integer" Value="20" Constraints="&gt;-1" ErrorMessage="The number of histogram bins must be greater than zero, or zero for automatic binning." Hint="When the output is histogram, the histogram is calculated using this number of equal sized bins, where the lowest bin starts at the smallest data point and the highest bin ends at the largest data point. If explicit range definition is used below, the bins will bound the given range. Use zero bin size for automatic binning.">
+        <link Caption="Plot Morphological Parameters::Histogram: number of bins" ID="20" paramID="21" paramName="histogrambins"/>
+        <link Caption="Plot Segment Intensities::Histogram: number of bins" ID="90" paramID="20" paramName="histogrambins"/>
+        <link Caption="Plot Segment Intensities::Histogram: number of bins (1)" ID="103" paramID="20" paramName="histogrambins"/>
+        <link Caption="Plot Segment Intensities::Histogram: number of bins (2)" ID="114" paramID="20" paramName="histogrambins"/>
+        <link Caption="Plot Segment Intensities::Histogram: number of bins (2) (1)" ID="140" paramID="20" paramName="histogrambins"/>
+      </param>
+      <param ID="42" UID="27351796" Caption="Positive control reference image operation for nuclei detection" Type="Text" Value="Self-referenced" Constraints="" ErrorMessage="Invalid value. Enter possible values separated by ; at " Hint="The positive control is an image with many visible cells. Using a positive control avoids amplifying background noise in wells with little or no cells.">
+        <link Caption="Select::Selected value (1) (1)" ID="51" paramID="1" paramName="selector"/>
+        <link Caption="Select::Selected value (1) (1) (1)" ID="56" paramID="1" paramName="selector"/>
+        <link Caption="Select::Selected value (1) (1) (1) (1)" ID="64" paramID="1" paramName="selector"/>
+      </param>
+      <param ID="43" UID="18583452" Caption="Suppress debris and outside of well areas" Type="Bool" Value="No" Constraints="" ErrorMessage="" Hint="Brighter areas corresponding to the bottom of microplate outside the well area will be masked.">
+        <link Caption="If::Execute output #1 if yes, otherwise #2" ID="33" paramID="0" paramName="condition"/>
+        <link Caption="If::Execute output #1 if yes, otherwise #2 (3)" ID="46" paramID="0" paramName="condition"/>
+      </param>
+      <param ID="44" UID="18938331" Caption="Debris masking: minimum diameter of continuous bright spot" Type="Real" Value="300" Constraints="&gt;0" ErrorMessage="Maximal Diameter must be &gt;0 or 0 for not checking." Hint="Bright objects larger than this pixel value will be masked, and these areas not used for cell detection and measurements.">
+        <link Caption="Set Segmentation Classifiers::Diameter" ID="27" paramID="5" paramName="maxdiameter"/>
+      </param>
+      <param ID="45" UID="18588882" Caption="Debris and well edge detection sensitivity (%)" Type="Real" Value="75" Constraints="" ErrorMessage="" Hint="Percent of Otsu optimal threshold value. Lower is more sensitive.">
+        <link Caption="Threshold::Value" ID="32" paramID="2" paramName="value"/>
+      </param>
+      <param ID="46" UID="7" Caption="Nuclei: Diameter (pixels, for seeding)" Type="Integer" Value="30" Constraints="&gt;1" ErrorMessage="Inner diameter is in pixels and must be a positive integer." Hint="Diameter of the nucleus in pixels. Nuclei ranging around this size will be selected.">
+        <link Caption="Detect Nuclei Convolution::Inner diameter" ID="6" paramID="1" paramName="id"/>
+        <link Caption="Detect Nuclei Convolution::Outer diameter" ID="6" paramID="2" paramName="od"/>
+        <link Caption="Morphological operator::Size" ID="10" paramID="1" paramName="size"/>
+      </param>
+      <param ID="47" UID="62990553" Caption="Nuclei: Minimum area (pixels, for gating)" Type="Integer" Value="0" Constraints="&gt;0" ErrorMessage="Volume must be &gt;0 or 0 for not checking." Hint="Pixel area gate for detected nuclei, set 0 to disable.">
+        <link Caption="Set Segmentation Classifiers::Volume" ID="11" paramID="1" paramName="volume"/>
+      </param>
+      <param ID="48" UID="62990571" Caption="Nuclei: Maximum area (pixels, for gating)" Type="Integer" Value="10000" Constraints="&gt;0" ErrorMessage="Volume must be &gt;0 or 0 for not checking." Hint="Pixel area gate for detected nuclei, set 0 to disable.">
+        <link Caption="Set Segmentation Classifiers::Volume" ID="12" paramID="1" paramName="volume"/>
+      </param>
+      <param ID="49" UID="10" Caption="Nuclei: Debris cutoff for nuclear stain (percentile)" Type="Real" Value="99.8" Constraints="-1-100" ErrorMessage="Maximal percentile must be between 0 and 100 and must be larger than minimal percentile. Alternatively, -1 overrides percentile with fixed value set below." Hint="This percentile of the image histogram sets the intensity value where the maximum of the Look Up Table (LUT) is scaled.">
+        <link Caption="Set scaling/LUT::Max percentile (1)" ID="2" paramID="3" paramName="pmax"/>
+        <link Caption="Set scaling/LUT::Max percentile (1) (1)" ID="52" paramID="3" paramName="pmax"/>
+        <link Caption="Set scaling/LUT::Max percentile (1) (2)" ID="59" paramID="3" paramName="pmax"/>
+      </param>
+      <param ID="50" UID="56340846" Caption="Nuclei: Clip bright nucleoli" Type="Bool" Value="No" Constraints="" ErrorMessage="" Hint="Set Yes if only part nuclei are detected due to the presence of bright spots within nuclei.">
+        <link Caption="Write back scaled values::Clip range boundaries" ID="16" paramID="1" paramName="clip"/>
+      </param>
+      <param ID="51" UID="12" Caption="Nuclei: Minimum fluorescence (%)" Type="Real" Value="15" Constraints="" ErrorMessage="" Hint="Nuclei must be brighter than this percent of the maximal scaling value, set by the &quot;Debris cutoff&quot; percentile value. Increase this value if debris dimmer than the cells is detected.">
+        <link Caption="Set Segmentation Intensity Classifiers::Mean Intensity" ID="13" paramID="1" paramName="mean"/>
+        <link Caption="Set Segmentation Intensity Classifiers::Mean Intensity (1)" ID="18" paramID="1" paramName="mean"/>
+      </param>
+      <param ID="52" UID="18588776" Caption="Nuclei: Shape factor (minimum; 0-1)" Type="Real" Value="0.1" Constraints="&gt;0" ErrorMessage="Shape factor must be &gt;0 or 0 for not checking." Hint="1 for disc, smaller for irregular shapes. 0 for not checking">
+        <link Caption="Set Segmentation Classifiers::Shape factor" ID="11" paramID="6" paramName="shapefactor"/>
+      </param>
+      <param ID="53" UID="45775214" Caption="Nuclei: Weld segments into round objects" Type="Bool" Value="Yes" Constraints="" ErrorMessage="" Hint="Weld touching segments if they form a rounder object together. Use this to avoid objects fragmenting into multiple segments.">
+        <link Caption="Advanced Segmentation Sep.Seed::Weld segments into round objects" ID="14" paramID="8" paramName="weld"/>
+      </param>
+      <param ID="54" UID="45775218" Caption="Nuclei: Discard segments at edges of the image" Type="Bool" Value="No" Constraints="" ErrorMessage="" Hint="Any segment that has at least 10% of its boundary at the edge of the image will be discarded.">
+        <link Caption="Advanced Segmentation Sep.Seed::Discard segments at edges" ID="14" paramID="12" paramName="noedges"/>
+      </param>
+      <param ID="55" UID="45822355" Caption="Background percentile" Type="Real" Value="20" Constraints="" ErrorMessage="" Hint="If background subtraction method is percentile, this percentile value will be used in all channels.">
+        <link Caption="Subtract Background::Value" ID="163" paramID="1" paramName="value"/>
+        <link Caption="Subtract Background::Value (1)" ID="164" paramID="1" paramName="value"/>
+        <link Caption="Subtract Background::Value (2)" ID="165" paramID="1" paramName="value"/>
+        <link Caption="Subtract Background::Value (3)" ID="166" paramID="1" paramName="value"/>
+        <link Caption="Subtract Background::Value (4)" ID="167" paramID="1" paramName="value"/>
+      </param>
+      <param ID="56" UID="45828485" Caption="Local background: Rolling ball: median filter size" Type="Integer" Value="49" Constraints="&gt;2" ErrorMessage="Window width must be at least %d and smaller than the smallest dimension of the image" Hint="Set this value larger than the object of interest in pixels, if using this type of background subtraction.">
+        <link Caption="2D Median filter::Window width (3)" ID="39" paramID="0" paramName="width"/>
+        <link Caption="2D Median filter::Window width (3) (1)" ID="71" paramID="0" paramName="width"/>
+        <link Caption="2D Median filter::Window width (3) (2)" ID="81" paramID="0" paramName="width"/>
+        <link Caption="2D Median filter::Window width (3) (2) (1)" ID="128" paramID="0" paramName="width"/>
+        <link Caption="2D Median filter::Window width (3) (2) (1) (1)" ID="154" paramID="0" paramName="width"/>
+      </param>
+      <param ID="57" UID="401195" Caption="Local background: Spatial filtering: Number of tiles in x" Type="Integer" Value="5" Constraints="&gt;1" ErrorMessage="Number of tiles has to be at least 1!" Hint="The image consists of this number of equal sized tiles in x dimension. Required if background subtraction is spatial filtering.">
+        <link Caption="2D DFT Butterworth BP filter tiled::Number of tiles in x (3)" ID="36" paramID="0" paramName="tilesx"/>
+        <link Caption="2D DFT Butterworth BP filter tiled::Number of tiles in x (3) (1)" ID="68" paramID="0" paramName="tilesx"/>
+        <link Caption="2D DFT Butterworth BP filter tiled::Number of tiles in x (3) (2)" ID="78" paramID="0" paramName="tilesx"/>
+        <link Caption="2D DFT Butterworth BP filter tiled::Number of tiles in x (3) (2) (1)" ID="125" paramID="0" paramName="tilesx"/>
+        <link Caption="2D DFT Butterworth BP filter tiled::Number of tiles in x (3) (2) (1) (1)" ID="151" paramID="0" paramName="tilesx"/>
+        <link Caption="2D DFT::Number of tiles in x" ID="214" paramID="0" paramName="tilesx"/>
+        <link Caption="2D DFT::Number of tiles in x (1)" ID="219" paramID="0" paramName="tilesx"/>
+        <link Caption="2D DFT::Number of tiles in x (2)" ID="224" paramID="0" paramName="tilesx"/>
+        <link Caption="2D DFT::Number of tiles in x (3)" ID="229" paramID="0" paramName="tilesx"/>
+      </param>
+      <param ID="58" UID="45828486" Caption="Local background: Spatial filtering: Number of tiles in y" Type="Integer" Value="5" Constraints="&gt;1" ErrorMessage="Number of tiles has to be at least 1!" Hint="The image consists of this number of equal sized tiles in y dimension. Required if background subtraction is spatial filtering.">
+        <link Caption="2D DFT Butterworth BP filter tiled::Number of tiles in y (3)" ID="36" paramID="1" paramName="tilesy"/>
+        <link Caption="2D DFT Butterworth BP filter tiled::Number of tiles in y (3) (1)" ID="68" paramID="1" paramName="tilesy"/>
+        <link Caption="2D DFT Butterworth BP filter tiled::Number of tiles in y (3) (2)" ID="78" paramID="1" paramName="tilesy"/>
+        <link Caption="2D DFT Butterworth BP filter tiled::Number of tiles in y (3) (2) (1)" ID="125" paramID="1" paramName="tilesy"/>
+        <link Caption="2D DFT Butterworth BP filter tiled::Number of tiles in y (3) (2) (1) (1)" ID="151" paramID="1" paramName="tilesy"/>
+        <link Caption="2D DFT::Number of tiles in y" ID="214" paramID="1" paramName="tilesy"/>
+        <link Caption="2D DFT::Number of tiles in y (1)" ID="219" paramID="1" paramName="tilesy"/>
+        <link Caption="2D DFT::Number of tiles in y (2)" ID="224" paramID="1" paramName="tilesy"/>
+        <link Caption="2D DFT::Number of tiles in y (3)" ID="229" paramID="1" paramName="tilesy"/>
+      </param>
+      <param ID="59" UID="45822745" Caption="Local background: Spatial filtering: Largest object size (for background removal, pixels times number of tiles)" Type="Real" Value="256" Constraints="&gt;0" ErrorMessage="Cut on is a nonnegative number" Hint="Objects larger than this will be removed as background by spatial filtering. The typical object pixel size must be multiplied by the number if tiles (in x or y). Cut on of the band pass Butterworth filter. .">
+        <link Caption="2D DFT Butterworth BP filter tiled::Cut On ω" ID="36" paramID="2" paramName="cuton"/>
+        <link Caption="2D DFT Butterworth BP filter tiled::Cut On ω (2)" ID="68" paramID="2" paramName="cuton"/>
+        <link Caption="2D DFT Butterworth BP filter tiled::Cut On ω (3)" ID="78" paramID="2" paramName="cuton"/>
+        <link Caption="2D DFT Butterworth BP filter tiled::Cut On ω (4)" ID="125" paramID="2" paramName="cuton"/>
+        <link Caption="2D DFT Butterworth BP filter tiled::Cut On ω (5)" ID="151" paramID="2" paramName="cuton"/>
+        <link Caption="2D DFT::Cut On ω" ID="214" paramID="2" paramName="cuton"/>
+        <link Caption="2D DFT::Cut On ω (1)" ID="219" paramID="2" paramName="cuton"/>
+        <link Caption="2D DFT::Cut On ω (2)" ID="224" paramID="2" paramName="cuton"/>
+        <link Caption="2D DFT::Cut On ω (3)" ID="229" paramID="2" paramName="cuton"/>
+      </param>
+      <param ID="60" UID="44198951" Caption="Thin process suppression for optical density (maximal diameter in pixels)" Type="Real" Value="20" Constraints="&gt;0" ErrorMessage="" Hint="For &quot;Densitometry with thin process suppression&quot; this value is the maximal process diameter, thinner details will be suppressed using spatial filtering.">
+        <link Caption="2D DFT::Cut Off ω" ID="214" paramID="4" paramName="cutoff"/>
+        <link Caption="2D DFT::Cut Off ω (1)" ID="219" paramID="4" paramName="cutoff"/>
+        <link Caption="2D DFT::Cut Off ω (2)" ID="224" paramID="4" paramName="cutoff"/>
+        <link Caption="2D DFT::Cut Off ω (3)" ID="229" paramID="4" paramName="cutoff"/>
+      </param>
+      <param ID="61" UID="45824393" Caption="Optical density and shading: optional dark current intensity value" Type="Real" Value="450" Constraints="" ErrorMessage="" Hint="Enter average pixel intensity measured in an unilluminated, dark image, if not using a dark current reference image when calculating optical density.">
+        <link Caption="Optical density::Value" ID="172" paramID="1" paramName="value"/>
+        <link Caption="Optical density::Value (1)" ID="173" paramID="1" paramName="value"/>
+        <link Caption="Optical density::Value (2)" ID="174" paramID="1" paramName="value"/>
+        <link Caption="Optical density::Value (3)" ID="175" paramID="1" paramName="value"/>
+        <link Caption="Subtract Background::Value" ID="207" paramID="1" paramName="value"/>
+        <link Caption="Subtract Background::Value (1)" ID="195" paramID="1" paramName="value"/>
+        <link Caption="Subtract Background::Value (2)" ID="198" paramID="1" paramName="value"/>
+        <link Caption="Subtract Background::Value (3)" ID="201" paramID="1" paramName="value"/>
+        <link Caption="Subtract Background::Value (4)" ID="204" paramID="1" paramName="value"/>
+        <link Caption="Optical density::Value (4)" ID="211" paramID="1" paramName="value"/>
+        <link Caption="Optical density::Value (4) (1)" ID="216" paramID="1" paramName="value"/>
+        <link Caption="Optical density::Value (4) (2)" ID="221" paramID="1" paramName="value"/>
+        <link Caption="Optical density::Value (4) (3)" ID="226" paramID="1" paramName="value"/>
+      </param>
+      <param ID="62" UID="53344455" Caption="Reference image background: Select &quot;Reference Image&quot; or &quot;Background and shading correction by Background Reference Image&quot;" Type="Text" Value="Background and shading correction by Background Reference Image" Constraints="" ErrorMessage="Invalid background subtraction type." Hint="What kind of background to subtract. Calculated for each frame or for the whole image series.">
+        <link Caption="Subtract Background::Background type" ID="195" paramID="0" paramName="type"/>
+        <link Caption="Subtract Background::Background type (1)" ID="198" paramID="0" paramName="type"/>
+        <link Caption="Subtract Background::Background type (2)" ID="201" paramID="0" paramName="type"/>
+        <link Caption="Subtract Background::Background type (3)" ID="204" paramID="0" paramName="type"/>
+        <link Caption="Subtract Background::Background type (4)" ID="207" paramID="0" paramName="type"/>
+      </param>
+    </Parameters>
+  </Parameters>
+  <Options Version="1195">
+    <usesexcel Value="true"/>
+    <warnrefimage Value="false"/>
+    <warnrefimagemsg Value=""/>
+    <matrixsavedef Value="false"/>
+  </Options>
+</IAPipeline>
