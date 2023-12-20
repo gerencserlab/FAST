@@ -5,14 +5,16 @@ Cellular senescence is a major driver of aging and age-related diseases. Quantif
 [This repository](https://github.com/gerencserlab/FAST/) contains components of the complete FAST workflow for Image Analyst MKII and R.   
 
 ## List of pipelines
-* [Create BLANK reference image for multiwell plate using median](FAST_-_Create_BLANK_reference_image_for_multiwell_plate_using_median.md)
-* [Create background reference image(s) for multiwell plate using median of wells](FAST_-_Create_reference_image_for_multiwell_plate_using_median.md)
 * [FAST Analysis Pipeline - Basic](FAST_Analysis_Pipeline_-_basic.md)
 * [FAST Analysis Pipeline - Cellpose Segmentation](FAST_Analysis_Pipeline_-_Cellpose.md)
+* [FAST Analysis Pipeline - Basic - Modified for Live plus Fixed Merging](/Other_pipelines_used_in_the_FAST_paper/Fluorescence_and_absorbance_histometry_using_nuclear_marker_(1-4_labels)_live_plus_fixed.md)
 * [Install FAST.R Shiny App](Install_FAST.R.md)
-* [FAST Analysis Pipeline - Basic - Modified for Live plus Fixed Merging](Pipelines used in the FAST paper/Fluorescence_and_absorbance_histometry_using_nuclear_marker_(1-4_labels)_live_plus_fixed.md)
 * [Run FAST.R Shiny App](Run_FAST.R.md)
+* [Create BLANK reference image for multiwell plate using median](FAST_-_Create_BLANK_reference_image_for_multiwell_plate_using_median.md)
+* [Create background reference image(s) for multiwell plate using median of wells](FAST_-_Create_reference_image_for_multiwell_plate_using_median.md)
 
+## Step-by-step protocol
+* [Generic FAST protocol at protocol.io](https://www.protocols.io/view/fully-automated-senescence-test-fast-cy9qxz5w)
 
 ## Installation
 1. Download and install [Image Analyst MKII for Windows](https://www.imageanalyst.net/downloads/?item=recent/imageanalystMKII64.msi).
@@ -24,6 +26,7 @@ Cellular senescence is a major driver of aging and age-related diseases. Quantif
 7. The pipelines deposited here will appear in the middle section of the Pipelines main menu.
 8. In Image Analyst MKII main menu select Pipelines/FAST/"Install FAST.R Shiny App" to install app and its R dependencies 
 9. Follow the protocol on protocols.io for the analysis.
+Note: For standalone installation of FAST.R using R-Studio go to the [FAST.R Repository](https://github.com/f-neri/FAST.R).
 
 [Gerencser Lab on Github](https://github.com/gerencserlab)
 
