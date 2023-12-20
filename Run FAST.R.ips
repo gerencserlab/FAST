@@ -16,7 +16,7 @@
           <customtemp ID="8" Type="Text" Value="=%ExecutingPipelineFolder%"/>
           <deletetemp ID="9" Type="Bool" Value="No"/>
           <forceclose ID="10" Type="Bool" Value="No"/>
-          <nowait ID="11" Type="Bool" Value="No"/>
+          <nowait ID="11" Type="Bool" Value="Yes"/>
           <loopframes ID="12" Type="Bool" Value="No"/>
           <parallel ID="13" Type="Integer" Value="1" SValue=""/>
           <runas ID="14" Type="Bool" Value="No"/>
@@ -36,7 +36,7 @@
       </fRunEXE>
       <fIfBool Caption="If" ID="1" PID="142" Description="If">
         <Caption>If</Caption>
-        <Position Top="0" Left="66" Height="25" Width="22"/>
+        <Position Top="0" Left="66" Height="25" Width="23"/>
         <Parameters>
           <condition ID="0" Type="Bool" Value="Yes"/>
         </Parameters>
@@ -58,7 +58,7 @@
           <customtemp ID="8" Type="Text" Value="=%ExecutingPipelineFolder%"/>
           <deletetemp ID="9" Type="Bool" Value="No"/>
           <forceclose ID="10" Type="Bool" Value="No"/>
-          <nowait ID="11" Type="Bool" Value="No"/>
+          <nowait ID="11" Type="Bool" Value="Yes"/>
           <loopframes ID="12" Type="Bool" Value="No"/>
           <parallel ID="13" Type="Integer" Value="1" SValue=""/>
           <runas ID="14" Type="Bool" Value="No"/>
