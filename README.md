@@ -20,18 +20,22 @@ Cellular senescence is a major driver of aging and age-related diseases. Quantif
 1. Download and install [Image Analyst MKII for Windows](https://www.imageanalyst.net/downloads/?item=recent/imageanalystMKII64.msi).
 2. You will also need Microsoft Excel to perform the analysis.
 3. Download and install [R for Windows](https://cran.r-project.org/bin/windows/base/). Note that no R-Studio is required for this implementation and all interaction with R is menu-based from Image Analyst MKII.
-4. Clone this git in Image Analyst MKII by Edit/Download and Manage Pipelines from GitHub. For this: 
-5. Press the "< > Code" button [above in this page](https://github.com/gerencserlab/FAST/) and copy the URL of this git.
-6. Paste the URL in the URL field in the Connect to Git window in Image Analyst MKII.
-5. Press Download.
-6. The pipelines deposited here will appear in the middle section of the Pipelines main menu in the FAST submenu.
-7. In Image Analyst MKII main menu select Pipelines/FAST/"Install FAST.R Shiny App" to install app and its R dependencies. 
-8.  Follow the protocol on protocols.io for the analysis.
+4. Clone this git:
+5. Press the "Code" button [above in this page](https://github.com/gerencserlab/FAST/) and copy the URL of this git.
+6. In Image Analyst MKII main menu select Edit/Download and Manage Pipelines from GitHub.
+7. Paste the URL in the URL field in the Connect to Git window in Image Analyst MKII.
+8. Press Download.
+9. The pipelines deposited here will appear in the middle section of the Pipelines main menu in the FAST submenu.
+10. In Image Analyst MKII main menu select Pipelines/FAST/"Install FAST.R Shiny App" to install app and its R dependencies.
+11. Run the pipeline by pressing the blue play button ![Run Pipeline](/img/Play_pipeline.png). 
+12. Follow the protocol on protocols.io for the analysis.
 
 ## Standalone app installation
 For standalone installation for data analysis only by FAST.R using R-Studio go to the [FAST.R Repository](https://f-neri.github.io/FAST.R/).
 
-[Gerencser Lab on Github](https://github.com/gerencserlab)
+[Gerencser Lab on Github](https://github.com/gerencserlab)  
+[Gerencser Lab on protocols.io](https://www.protocols.io/workspaces/gerencser-lab)  
+[Gerencser Lab at the Buck Institute for Research on Aging](https://www.buckinstitute.org/lab/gerencser-lab/)
 
 
 
