@@ -5,26 +5,26 @@ This is a modified version of the original "Fluorescence and absorbance histomet
 Registering and Merging live and fixed cell recording has been added.
 Parameters have been changed to reflect the xGAL + EdU analysis.
 
-Assay protocol (see details on protcols.io link ___):
-7.4 Determine dark current
-8.1 Create fluorescence background reference image (optional) - pipeline: Create background reference image(s) for multiwell plate using median of wells
-8.4 Create blank reference image for xGAL (required) - pipeline: Create BLANK reference image for multiwell plate using median
-9.2 Set pipeline parameters:
-* Channel numbers for nuclei segmentation, labels and live-fixed merging
+Assay protocol (see details on protcols.io https://dx.doi.org/10.17504/protocols.io.kxygx3ypwg8j/v1):
+7.2 Determine dark current
+9.1 Create fluorescence background reference image (optional) - pipeline: Create background reference image(s) for multiwell plate using median of wells
+9.4 Create blank reference image for xGAL (required) - pipeline: Create BLANK reference image for multiwell plate using median
+10.2 Set pipeline parameters:
+* Channel numbers for nuclei segmentation, labels 
 * Subtract reference image background and shading correct first (all fluorescence channels):  see above at #8.1
 * Number of x and y tiles
 * Nucleus diameter
 * Perinuclear ring width (pixels) label #3
-* Optical density and shading: optional dark current intensity value: as determined at #7.4 (required, or use dark current reference image)
+* Optical density and shading: optional dark current intensity value: as determined at #7.2 (required, or use dark current reference image)
 
-9.3 Verify that the pipeline parameters have been adjusted properly, it is recommended to run the pipeline on individual wells for each condition to be tested (e.g. a senescent and a control well) to ensure that:
+10.3 Verify that the pipeline parameters have been adjusted properly, it is recommended to run the pipeline on individual wells for each condition to be tested (e.g. a senescent and a control well) to ensure that:
 
 1) The nuclear segmentation was performed correctly
 2) The perinuclear rings to measure SA-B-Gal staining do not have excessive overlap with nearby perinuclear rings.
 
 Pipeline parameters can be iteratively modified and tested until the user is satisfied for both points above. 
 
-9.4 Run Pipeline (blue fast forward) drop-down menu, click "Run Pipeline on All Stage Positions"
+10.4 Run Pipeline (blue fast forward) drop-down menu, click "Run Pipeline on All Stage Positions"
 
 
 
@@ -83,73 +83,74 @@ V4: ROIs are copied from original images, so ROIs may be drawn on the source ima
 |---|------|------|-------------|
 | 0 | Channel Number for Nuclei in Live Cell recording (MD dialog #1) for registration | Integer | The first linked image window with matching channel number will be invoked. |
 | 1 | Channel Number for Nuclei in Fixed Cell recording (MD dialog #2) for registration | Integer | The first linked image window with matching channel number will be invoked. |
-| 2 | Number of labels to measure (1-4) | Integer | Select how many label channels to measure. Each channel can be selected multiple times. |
-| 3 | Histogram or distribution calculation | Text | Select Histogram to show output as histogram, or None to show individual cell values. |
-| 4 | Calculate a single mean±SE for all cells | Bool | Calculates a mean value of all traces for each time point. |
-| 5 | Position names and microplate worksheet output | Bool | Organizes data in table according to microplate well associations in additional worksheets. |
-| 6 | Subtract reference image background and shading correct first (all fluorescence channels) | Bool | If background reference image is provided, it can be subtracted, or subtracted and also used for shading corrections. Choose between these two at the bottom. |
-| 7 | Channel Number, nuclear stain | Integer | Channel number of the nuclear marker used for nucleus segmentation. |
-| 8 | Background subtraction method, nuclear stain | Text | Select background subtraction method: Percentile, Rolling ball, Spatial filtering, None. See settings below. Background subtraction is performed in the same way for all channels. |
-| 9 | Morphological parameter measurement for nuclei | Text | Plots and saves time course of selected morphological data  |
-| 10 | Histogram: range for morphological parameter measurement for nuclei | Text | If left empty or set to "All", a histogram is generated where the lowest bin starts at the smallest data point and the highest bin ends at the largest data point. If a range is given here e.g. 100-500, then the lowest bin starts at the beginning of the range and the highest bin ends at the end of the range. |
-| 11 | #1: Channel Number, label #1 | Integer | Channel number of label #1 to be measured. Each channel can be selected multiple times for different measurements. |
-| 12 | #1: Name for label #1 | Text | Custom name to be shown in image and plot window captions and in output data. |
-| 13 | #1: Channel type, label #1 | Text | Switch between fluorescence intensity and optical density measurement. Optical density calculation needs previously set up blank reference image (cell-free image) for the given channel number. |
-| 14 | #1: Measure label #1 over | Text | Intensity measurement is performed either over the nucleus or in a perinuclear ring or in the whole cell, marked by secondary segmentation of the cell area marker. |
-| 15 | #1: Background subtraction method, label #1 | Text | Select background subtraction method: Percentile, Rolling ball, Spatial filtering, None. See settings below. Background subtraction is performed in the same way for all channels. |
-| 16 | #1: Intensity measurement type of label #1 | Text | Available plot types: "Mean", "Sum", "Variance", "PDI variance", "PDI sd", "Line Scan". These statistics describe pixels within each segment.  |
-| 17 | #1: Perinuclear ring width (pixels), label #1 | Integer | Width of the ring around the nucleus to measure perinuclear area, in pixels. This is used only if "Perinuclear ring" is selected above. |
-| 18 | #1: Histogram: range, label #1 | Text | If left empty or set to "All", a histogram is generated where the lowest bin starts at the smallest data point and the highest bin ends at the largest data point. If a range is given here e.g. 100-500, then the lowest bin starts at the beginning of the range and the highest bin ends at the end of the range. |
-| 19 | #2: Channel Number, label #2 | Integer | Channel number of label #2 to be measured. Each channel can be selected multiple times for different measurements. |
-| 20 | #2: Name for label #2 | Text | Custom name to be shown in image and plot window captions and in output data. |
-| 21 | #2: Channel type, label #2 | Text | Switch between fluorescence intensity and optical density measurement. Optical density calculation needs previously set up blank reference image (cell-free image) for the given channel number. |
-| 22 | #2: Measure label #2 over | Text | Intensity measurement is performed either over the nucleus or in a perinuclear ring or in the whole cell, marked by secondary segmentation of the cell area marker. |
-| 23 | #2: Background subtraction method, label #2 | Text | Select background subtraction method: Percentile, Rolling ball, Spatial filtering, None. See settings below. Background subtraction is performed in the same way for all channels. |
-| 24 | #2: Intensity measurement type of label #2 | Text | Available plot types: "Mean", "Sum", "Variance", "PDI variance", "PDI sd", "Line Scan". These statistics describe pixels within each segment. |
-| 25 | #2: Perinuclear ring width (pixels), label #2 | Integer | Width of the ring around the nucleus to measure perinuclear area, in pixels. This is used only if "Perinuclear ring" is selected above. |
-| 26 | #2: Histogram: range, label #2 | Text | If left empty or set to "All", a histogram is generated where the lowest bin starts at the smallest data point and the highest bin ends at the largest data point. If a range is given here e.g. 100-500, then the lowest bin starts at the beginning of the range and the highest bin ends at the end of the range. |
-| 27 | #3: Channel Number, label #3 | Integer | Channel number of label #3 to be measured. Each channel can be selected multiple times for different measurements. |
-| 28 | #3: Name for label #3 | Text | Custom name to be shown in image and plot window captions and in output data. |
-| 29 | #3: Channel type, label #3 | Text | Switch between fluorescence intensity and optical density measurement. Optical density calculation needs previously set up blank reference image (cell-free image) for the given channel number. |
-| 30 | #3: Measure label #3 over | Text | Intensity measurement is performed either over the nucleus or in a perinuclear ring or in the whole cell, marked by secondary segmentation of the cell area marker. |
-| 31 | #3: Background subtraction method, label #3 | Text | Select background subtraction method: Percentile, Rolling ball, Spatial filtering, None. See settings below. Background subtraction is performed in the same way for all channels. |
-| 32 | #3: Intensity measurement type of label #3 | Text | Available plot types: "Mean", "Sum", "Variance", "PDI variance", "PDI sd", "Line Scan". These statistics describe pixels within each segment. |
-| 33 | #3: Perinuclear ring width (pixels), label #3 | Integer | Width of the ring around the nucleus to measure perinuclear area, in pixels. This is used only if "Perinuclear ring" is selected above. |
-| 34 | #3: Histogram: range, label #3 | Text | If left empty or set to "All", a histogram is generated where the lowest bin starts at the smallest data point and the highest bin ends at the largest data point. If a range is given here e.g. 100-500, then the lowest bin starts at the beginning of the range and the highest bin ends at the end of the range. |
-| 35 | #4: Channel Number, label #4 | Integer | Channel number of label #4 to be measured. Each channel can be selected multiple times for different measurements. |
-| 36 | #4: Name for label #4 | Text | Custom name to be shown in image and plot window captions and in output data. |
-| 37 | #4: Channel type, label #4 | Text | Switch between fluorescence intensity and optical density measurement. Optical density calculation needs previously set up blank reference image (cell-free image) for the given channel number. |
-| 38 | #4: Measure label #4 over | Text | Intensity measurement is performed either over the nucleus or in a perinuclear ring or in the whole cell, marked by secondary segmentation of the cell area marker. |
-| 39 | #4: Background subtraction method, label #4 | Text | Select background subtraction method: Percentile, Rolling ball, Spatial filtering, None. See settings below. Background subtraction is performed in the same way for all channels. |
-| 40 | #4: Intensity measurement type of label #4 | Text | Available plot types: "Mean", "Sum", "Variance", "PDI variance", "PDI sd", "Line Scan". These statistics describe pixels within each segment. |
-| 41 | #4: Perinuclear ring width (pixels), label #4 | Integer | Width of the ring around the nucleus to measure perinuclear area, in pixels. This is used only if "Perinuclear ring" is selected above. |
-| 42 | #4: Histogram: range, label #4 | Text | If left empty or set to "All", a histogram is generated where the lowest bin starts at the smallest data point and the highest bin ends at the largest data point. If a range is given here e.g. 100-500, then the lowest bin starts at the beginning of the range and the highest bin ends at the end of the range. |
-| 43 | Histogram: number of bins | Integer | When the output is histogram, the histogram is calculated using this number of equal sized bins, where the lowest bin starts at the smallest data point and the highest bin ends at the largest data point. If explicit range definition is used below, the bins will bound the given range. Use zero bin size for automatic binning. |
-| 44 | Positive control reference image operation for nuclei detection | Text | The positive control is an image with many visible cells. Using a positive control avoids amplifying background noise in wells with little or no cells. |
-| 45 | Suppress debris and outside of well areas | Bool | Brighter areas corresponding to the bottom of microplate outside the well area will be masked. |
-| 46 | Debris masking: minimum diameter of continuous bright spot | Real | Bright objects larger than this pixel value will be masked, and these areas not used for cell detection and measurements. |
-| 47 | Debris and well edge detection sensitivity (%) | Real | Percent of Otsu optimal threshold value. Lower is more sensitive. |
-| 48 | Nuclei: Diameter (pixels, for seeding) | Integer | Diameter of the nucleus in pixels. Nuclei ranging around this size will be selected. |
-| 49 | Nuclei: Minimum area (pixels, for gating) | Integer | Pixel area gate for detected nuclei, set 0 to disable. |
-| 50 | Nuclei: Maximum area (pixels, for gating) | Integer | Pixel area gate for detected nuclei, set 0 to disable. |
-| 51 | Nuclei: Debris cutoff for nuclear stain (percentile) | Real | This percentile of the image histogram sets the intensity value where the maximum of the Look Up Table (LUT) is scaled. |
-| 52 | Nuclei: Clip bright nucleoli | Bool | Set Yes if only part nuclei are detected due to the presence of bright spots within nuclei. |
-| 53 | Nuclei: Minimum fluorescence (%) | Real | Nuclei must be brighter than this percent of the maximal scaling value, set by the "Debris cutoff" percentile value. Increase this value if debris dimmer than the cells is detected. |
-| 54 | Nuclei: Shape factor (minimum; 0-1) | Real | 1 for disc, smaller for irregular shapes. 0 for not checking |
-| 55 | Nuclei: Weld segments into round objects | Bool | Weld touching segments if they form a rounder object together. Use this to avoid objects fragmenting into multiple segments. |
-| 56 | Nuclei: Discard segments at edges of the image | Bool | Any segment that has at least 10% of its boundary at the edge of the image will be discarded. |
-| 57 | Background percentile | Real | If background subtraction method is percentile, this percentile value will be used in all channels. |
-| 58 | Local background: Rolling ball: median filter size | Integer | Set this value larger than the object of interest in pixels, if using this type of background subtraction. |
-| 59 | Local background: Spatial filtering: Number of tiles in x | Integer | The image consists of this number of equal sized tiles in x dimension. Required if background subtraction is spatial filtering. |
-| 60 | Local background: Spatial filtering: Number of tiles in y | Integer | The image consists of this number of equal sized tiles in y dimension. Required if background subtraction is spatial filtering. |
-| 61 | Local background: Spatial filtering: Largest object size (for background removal, pixels times number of tiles) | Real | Objects larger than this will be removed as background by spatial filtering. The typical object pixel size must be multiplied by the number if tiles (in x or y). Cut on of the band pass Butterworth filter. . |
-| 62 | Thin process suppression for optical density (maximal diameter in pixels) | Real | For "Densitometry with thin process suppression" this value is the maximal process diameter, thinner details will be suppressed using spatial filtering. |
-| 63 | Optical density and shading: optional dark current intensity value | Real | Enter average pixel intensity measured in an unilluminated, dark image, if not using a dark current reference image when calculating optical density. |
-| 64 | Reference image background: Select "Reference Image" or "Background and shading correction by Background Reference Image" | Text | What kind of background to subtract. Calculated for each frame or for the whole image series. |
+| 2 | Channel Number for Label in Live Cell recording (MD dialog #1) to be used as ch#4 during analysis | Integer | The first linked image window with matching channel number will be invoked. |
+| 3 | Number of labels to measure (1-4) | Integer | Select how many label channels to measure. Each channel can be selected multiple times. |
+| 4 | Histogram or distribution calculation | Text | Select Histogram to show output as histogram, or None to show individual cell values. |
+| 5 | Calculate a single mean±SE for all cells | Bool | Calculates a mean value of all traces for each time point. |
+| 6 | Position names and microplate worksheet output | Bool | Organizes data in table according to microplate well associations in additional worksheets. |
+| 7 | Subtract reference image background and shading correct first (all fluorescence channels) | Bool | If background reference image is provided, it can be subtracted, or subtracted and also used for shading corrections. Choose between these two at the bottom. |
+| 8 | Channel Number, nuclear stain | Integer | Channel number of the nuclear marker used for nucleus segmentation. |
+| 9 | Background subtraction method, nuclear stain | Text | Select background subtraction method: Percentile, Rolling ball, Spatial filtering, None. See settings below. Background subtraction is performed in the same way for all channels. |
+| 10 | Morphological parameter measurement for nuclei | Text | Plots and saves time course of selected morphological data  |
+| 11 | Histogram: range for morphological parameter measurement for nuclei | Text | If left empty or set to "All", a histogram is generated where the lowest bin starts at the smallest data point and the highest bin ends at the largest data point. If a range is given here e.g. 100-500, then the lowest bin starts at the beginning of the range and the highest bin ends at the end of the range. |
+| 12 | #1: Channel Number, label #1 | Integer | Channel number of label #1 to be measured. Each channel can be selected multiple times for different measurements. |
+| 13 | #1: Name for label #1 | Text | Custom name to be shown in image and plot window captions and in output data. |
+| 14 | #1: Channel type, label #1 | Text | Switch between fluorescence intensity and optical density measurement. Optical density calculation needs previously set up blank reference image (cell-free image) for the given channel number. |
+| 15 | #1: Measure label #1 over | Text | Intensity measurement is performed either over the nucleus or in a perinuclear ring or in the whole cell, marked by secondary segmentation of the cell area marker. |
+| 16 | #1: Background subtraction method, label #1 | Text | Select background subtraction method: Percentile, Rolling ball, Spatial filtering, None. See settings below. Background subtraction is performed in the same way for all channels. |
+| 17 | #1: Intensity measurement type of label #1 | Text | Available plot types: "Mean", "Sum", "Variance", "PDI variance", "PDI sd", "Line Scan". These statistics describe pixels within each segment.  |
+| 18 | #1: Perinuclear ring width (pixels), label #1 | Integer | Width of the ring around the nucleus to measure perinuclear area, in pixels. This is used only if "Perinuclear ring" is selected above. |
+| 19 | #1: Histogram: range, label #1 | Text | If left empty or set to "All", a histogram is generated where the lowest bin starts at the smallest data point and the highest bin ends at the largest data point. If a range is given here e.g. 100-500, then the lowest bin starts at the beginning of the range and the highest bin ends at the end of the range. |
+| 20 | #2: Channel Number, label #2 | Integer | Channel number of label #2 to be measured. Each channel can be selected multiple times for different measurements. |
+| 21 | #2: Name for label #2 | Text | Custom name to be shown in image and plot window captions and in output data. |
+| 22 | #2: Channel type, label #2 | Text | Switch between fluorescence intensity and optical density measurement. Optical density calculation needs previously set up blank reference image (cell-free image) for the given channel number. |
+| 23 | #2: Measure label #2 over | Text | Intensity measurement is performed either over the nucleus or in a perinuclear ring or in the whole cell, marked by secondary segmentation of the cell area marker. |
+| 24 | #2: Background subtraction method, label #2 | Text | Select background subtraction method: Percentile, Rolling ball, Spatial filtering, None. See settings below. Background subtraction is performed in the same way for all channels. |
+| 25 | #2: Intensity measurement type of label #2 | Text | Available plot types: "Mean", "Sum", "Variance", "PDI variance", "PDI sd", "Line Scan". These statistics describe pixels within each segment. |
+| 26 | #2: Perinuclear ring width (pixels), label #2 | Integer | Width of the ring around the nucleus to measure perinuclear area, in pixels. This is used only if "Perinuclear ring" is selected above. |
+| 27 | #2: Histogram: range, label #2 | Text | If left empty or set to "All", a histogram is generated where the lowest bin starts at the smallest data point and the highest bin ends at the largest data point. If a range is given here e.g. 100-500, then the lowest bin starts at the beginning of the range and the highest bin ends at the end of the range. |
+| 28 | #3: Channel Number, label #3 | Integer | Channel number of label #3 to be measured. Each channel can be selected multiple times for different measurements. |
+| 29 | #3: Name for label #3 | Text | Custom name to be shown in image and plot window captions and in output data. |
+| 30 | #3: Channel type, label #3 | Text | Switch between fluorescence intensity and optical density measurement. Optical density calculation needs previously set up blank reference image (cell-free image) for the given channel number. |
+| 31 | #3: Measure label #3 over | Text | Intensity measurement is performed either over the nucleus or in a perinuclear ring or in the whole cell, marked by secondary segmentation of the cell area marker. |
+| 32 | #3: Background subtraction method, label #3 | Text | Select background subtraction method: Percentile, Rolling ball, Spatial filtering, None. See settings below. Background subtraction is performed in the same way for all channels. |
+| 33 | #3: Intensity measurement type of label #3 | Text | Available plot types: "Mean", "Sum", "Variance", "PDI variance", "PDI sd", "Line Scan". These statistics describe pixels within each segment. |
+| 34 | #3: Perinuclear ring width (pixels), label #3 | Integer | Width of the ring around the nucleus to measure perinuclear area, in pixels. This is used only if "Perinuclear ring" is selected above. |
+| 35 | #3: Histogram: range, label #3 | Text | If left empty or set to "All", a histogram is generated where the lowest bin starts at the smallest data point and the highest bin ends at the largest data point. If a range is given here e.g. 100-500, then the lowest bin starts at the beginning of the range and the highest bin ends at the end of the range. |
+| 36 | #4: Channel Number, label #4 | Integer | Channel number of label #4 to be measured. Each channel can be selected multiple times for different measurements. |
+| 37 | #4: Name for label #4 | Text | Custom name to be shown in image and plot window captions and in output data. |
+| 38 | #4: Channel type, label #4 | Text | Switch between fluorescence intensity and optical density measurement. Optical density calculation needs previously set up blank reference image (cell-free image) for the given channel number. |
+| 39 | #4: Measure label #4 over | Text | Intensity measurement is performed either over the nucleus or in a perinuclear ring or in the whole cell, marked by secondary segmentation of the cell area marker. |
+| 40 | #4: Background subtraction method, label #4 | Text | Select background subtraction method: Percentile, Rolling ball, Spatial filtering, None. See settings below. Background subtraction is performed in the same way for all channels. |
+| 41 | #4: Intensity measurement type of label #4 | Text | Available plot types: "Mean", "Sum", "Variance", "PDI variance", "PDI sd", "Line Scan". These statistics describe pixels within each segment. |
+| 42 | #4: Perinuclear ring width (pixels), label #4 | Integer | Width of the ring around the nucleus to measure perinuclear area, in pixels. This is used only if "Perinuclear ring" is selected above. |
+| 43 | #4: Histogram: range, label #4 | Text | If left empty or set to "All", a histogram is generated where the lowest bin starts at the smallest data point and the highest bin ends at the largest data point. If a range is given here e.g. 100-500, then the lowest bin starts at the beginning of the range and the highest bin ends at the end of the range. |
+| 44 | Histogram: number of bins | Integer | When the output is histogram, the histogram is calculated using this number of equal sized bins, where the lowest bin starts at the smallest data point and the highest bin ends at the largest data point. If explicit range definition is used below, the bins will bound the given range. Use zero bin size for automatic binning. |
+| 45 | Positive control reference image operation for nuclei detection | Text | The positive control is an image with many visible cells. Using a positive control avoids amplifying background noise in wells with little or no cells. |
+| 46 | Suppress debris and outside of well areas | Bool | Brighter areas corresponding to the bottom of microplate outside the well area will be masked. |
+| 47 | Debris masking: minimum diameter of continuous bright spot | Real | Bright objects larger than this pixel value will be masked, and these areas not used for cell detection and measurements. |
+| 48 | Debris and well edge detection sensitivity (%) | Real | Percent of Otsu optimal threshold value. Lower is more sensitive. |
+| 49 | Nuclei: Diameter (pixels, for seeding) | Integer | Diameter of the nucleus in pixels. Nuclei ranging around this size will be selected. |
+| 50 | Nuclei: Minimum area (pixels, for gating) | Integer | Pixel area gate for detected nuclei, set 0 to disable. |
+| 51 | Nuclei: Maximum area (pixels, for gating) | Integer | Pixel area gate for detected nuclei, set 0 to disable. |
+| 52 | Nuclei: Debris cutoff for nuclear stain (percentile) | Real | This percentile of the image histogram sets the intensity value where the maximum of the Look Up Table (LUT) is scaled. |
+| 53 | Nuclei: Clip bright nucleoli | Bool | Set Yes if only part nuclei are detected due to the presence of bright spots within nuclei. |
+| 54 | Nuclei: Minimum fluorescence (%) | Real | Nuclei must be brighter than this percent of the maximal scaling value, set by the "Debris cutoff" percentile value. Increase this value if debris dimmer than the cells is detected. |
+| 55 | Nuclei: Shape factor (minimum; 0-1) | Real | 1 for disc, smaller for irregular shapes. 0 for not checking |
+| 56 | Nuclei: Weld segments into round objects | Bool | Weld touching segments if they form a rounder object together. Use this to avoid objects fragmenting into multiple segments. |
+| 57 | Nuclei: Discard segments at edges of the image | Bool | Any segment that has at least 10% of its boundary at the edge of the image will be discarded. |
+| 58 | Background percentile | Real | If background subtraction method is percentile, this percentile value will be used in all channels. |
+| 59 | Local background: Rolling ball: median filter size | Integer | Set this value larger than the object of interest in pixels, if using this type of background subtraction. |
+| 60 | Local background: Spatial filtering: Number of tiles in x | Integer | The image consists of this number of equal sized tiles in x dimension. Required if background subtraction is spatial filtering. |
+| 61 | Local background: Spatial filtering: Number of tiles in y | Integer | The image consists of this number of equal sized tiles in y dimension. Required if background subtraction is spatial filtering. |
+| 62 | Local background: Spatial filtering: Largest object size (for background removal, pixels times number of tiles) | Real | Objects larger than this will be removed as background by spatial filtering. The typical object pixel size must be multiplied by the number if tiles (in x or y). Cut on of the band pass Butterworth filter. . |
+| 63 | Thin process suppression for optical density (maximal diameter in pixels) | Real | For "Densitometry with thin process suppression" this value is the maximal process diameter, thinner details will be suppressed using spatial filtering. |
+| 64 | Optical density and shading: optional dark current intensity value | Real | Enter average pixel intensity measured in an unilluminated, dark image, if not using a dark current reference image when calculating optical density. |
+| 65 | Reference image background: Select "Reference Image" or "Background and shading correction by Background Reference Image" | Text | What kind of background to subtract. Calculated for each frame or for the whole image series. |
 
 
 ## Structure
 ![structure](/img/Fluorescence_and_absorbance_histometry_using_nuclear_marker_(1-4_labels)_live_plus_fixed.jpg)
 
-[Image Analyst MKII](https://www.imageanalyst.net) pipeline - saved by V4.2.6 (build 923)
+[Image Analyst MKII](https://www.imageanalyst.net) pipeline - saved by V4.2.7 (build 923)
 

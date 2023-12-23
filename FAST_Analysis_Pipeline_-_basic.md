@@ -4,26 +4,26 @@ Fully Automated Senescence Test
 This is a modified version of the original "Fluorescence and absorbance histometry using nuclear marker (1-4 labels - advanced background options)" V4 pipeline.
 Parameters have been changed to reflect the xGAL + EdU analysis.
 
-Assay protocol (see details on protcols.io link ___):
-7.4 Determine dark current
-8.1 Create fluorescence background reference image (optional) - pipeline: Create background reference image(s) for multiwell plate using median of wells
-8.4 Create blank reference image for xGAL (required) - pipeline: Create BLANK reference image for multiwell plate using median
-9.2 Set pipeline parameters:
+Assay protocol (see details on protcols.io https://dx.doi.org/10.17504/protocols.io.kxygx3ypwg8j/v1):
+7.2 Determine dark current
+9.1 Create fluorescence background reference image (optional) - pipeline: Create background reference image(s) for multiwell plate using median of wells
+9.4 Create blank reference image for xGAL (required) - pipeline: Create BLANK reference image for multiwell plate using median
+10.2 Set pipeline parameters:
 * Channel numbers for nuclei segmentation, labels 
 * Subtract reference image background and shading correct first (all fluorescence channels):  see above at #8.1
 * Number of x and y tiles
 * Nucleus diameter
 * Perinuclear ring width (pixels) label #3
-* Optical density and shading: optional dark current intensity value: as determined at #7.4 (required, or use dark current reference image)
+* Optical density and shading: optional dark current intensity value: as determined at #7.2 (required, or use dark current reference image)
 
-9.3 Verify that the pipeline parameters have been adjusted properly, it is recommended to run the pipeline on individual wells for each condition to be tested (e.g. a senescent and a control well) to ensure that:
+10.3 Verify that the pipeline parameters have been adjusted properly, it is recommended to run the pipeline on individual wells for each condition to be tested (e.g. a senescent and a control well) to ensure that:
 
 1) The nuclear segmentation was performed correctly
 2) The perinuclear rings to measure SA-B-Gal staining do not have excessive overlap with nearby perinuclear rings.
 
 Pipeline parameters can be iteratively modified and tested until the user is satisfied for both points above. 
 
-9.4 Run Pipeline (blue fast forward) drop-down menu, click "Run Pipeline on All Stage Positions"
+10.4 Run Pipeline (blue fast forward) drop-down menu, click "Run Pipeline on All Stage Positions"
 
 
 
@@ -150,5 +150,5 @@ V4: ROIs are copied from original images, so ROIs may be drawn on the source ima
 ## Structure
 ![structure](/img/FAST_Analysis_Pipeline_-_basic.jpg)
 
-[Image Analyst MKII](https://www.imageanalyst.net) pipeline - saved by V4.2.6 (build 923)
+[Image Analyst MKII](https://www.imageanalyst.net) pipeline - saved by V4.2.7 (build 923)
 

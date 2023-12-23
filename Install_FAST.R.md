@@ -22,5 +22,5 @@ This pipeline requires Image Analyst MKII V4.2.7.
 ## Structure
 ![structure](/img/Install_FAST.R.jpg)
 
-[Image Analyst MKII](https://www.imageanalyst.net) pipeline - saved by V4.2.6 (build 923)
+[Image Analyst MKII](https://www.imageanalyst.net) pipeline - saved by V4.2.7 (build 923)
 
