@@ -3129,26 +3129,26 @@ This is a modified version of the original "Fluorescence and absorbance histomet
 Registering and Merging live and fixed cell recording has been added.
 Parameters have been changed to reflect the xGAL + EdU analysis.
 
-Assay protocol (see details on protcols.io link ___):
-7.4 Determine dark current
-8.1 Create fluorescence background reference image (optional) - pipeline: Create background reference image(s) for multiwell plate using median of wells
-8.4 Create blank reference image for xGAL (required) - pipeline: Create BLANK reference image for multiwell plate using median
-9.2 Set pipeline parameters:
-* Channel numbers for nuclei segmentation, labels and live-fixed merging
+Assay protocol (see details on protcols.io https://dx.doi.org/10.17504/protocols.io.kxygx3ypwg8j/v1):
+7.2 Determine dark current
+9.1 Create fluorescence background reference image (optional) - pipeline: Create background reference image(s) for multiwell plate using median of wells
+9.4 Create blank reference image for xGAL (required) - pipeline: Create BLANK reference image for multiwell plate using median
+10.2 Set pipeline parameters:
+* Channel numbers for nuclei segmentation, labels 
 * Subtract reference image background and shading correct first (all fluorescence channels):  see above at #8.1
 * Number of x and y tiles
 * Nucleus diameter
 * Perinuclear ring width (pixels) label #3
-* Optical density and shading: optional dark current intensity value: as determined at #7.4 (required, or use dark current reference image)
+* Optical density and shading: optional dark current intensity value: as determined at #7.2 (required, or use dark current reference image)
 
-9.3 Verify that the pipeline parameters have been adjusted properly, it is recommended to run the pipeline on individual wells for each condition to be tested (e.g. a senescent and a control well) to ensure that:
+10.3 Verify that the pipeline parameters have been adjusted properly, it is recommended to run the pipeline on individual wells for each condition to be tested (e.g. a senescent and a control well) to ensure that:
 
 1) The nuclear segmentation was performed correctly
 2) The perinuclear rings to measure SA-B-Gal staining do not have excessive overlap with nearby perinuclear rings.
 
 Pipeline parameters can be iteratively modified and tested until the user is satisfied for both points above. 
 
-9.4 Run Pipeline (blue fast forward) drop-down menu, click "Run Pipeline on All Stage Positions"
+10.4 Run Pipeline (blue fast forward) drop-down menu, click "Run Pipeline on All Stage Positions"
 
 
 
@@ -3209,6 +3209,9 @@ V4: ROIs are copied from original images, so ROIs may be drawn on the source ima
       <param ID="1" UID="71707101" Caption="Channel Number for Nuclei in Fixed Cell recording (MD dialog #2) for registration" Type="Integer" Value="1" Constraints="0-2147483647" ErrorMessage="Channel Number" Hint="The first linked image window with matching channel number will be invoked.">
         <link Caption="Get Linked Channel::Channel Number" ID="252" paramID="0" paramName="channel"/>
         <link Caption="Get Linked Channel::Channel Number (1)" ID="260" paramID="0" paramName="channel"/>
+      </param>
+      <param ID="2" UID="74813380" Caption="Channel Number for Label in Live Cell recording (MD dialog #1) to be used as ch#4 during analysis" Type="Integer" Value="2" Constraints="0-2147483647" ErrorMessage="Channel Number" Hint="The first linked image window with matching channel number will be invoked.">
+        <link Caption="Get Linked Channel::Channel Number" ID="255" paramID="0" paramName="channel"/>
       </param>
       <param ID="3" UID="45798039" Caption="Number of labels to measure (1-4)" Type="Integer" Value="4" Constraints="" ErrorMessage="" Hint="Select how many label channels to measure. Each channel can be selected multiple times.">
         <link Caption="Select by Number::Selected value" ID="101" paramID="0" paramName="selector"/>
