@@ -37,3 +37,11 @@ For standalone installation for data analysis only by FAST.R using R-Studio go t
 [Gerencser Lab on protocols.io](https://www.protocols.io/workspaces/gerencser-lab)  
 [Gerencser Lab at the Buck Institute for Research on Aging](https://www.buckinstitute.org/lab/gerencser-lab/)
 
+## List of pipelines
+* [Create BLANK reference image for multiwell plate using median](FAST_-_Create_BLANK_reference_image_for_multiwell_plate_using_median.md)
+* [Create background reference image(s) for multiwell plate using median of wells](FAST_-_Create_reference_image_for_multiwell_plate_using_median.md)
+* [FAST Analysis Pipeline - Basic](FAST_Analysis_Pipeline_-_basic.md)
+* [FAST Analysis Pipeline - Cellpose Segmentation](FAST_Analysis_Pipeline_-_Cellpose.md)
+* [Install FAST.R Shiny App](Install_FAST.R.md)
+* [FAST Analysis Pipeline - Basic - Modified for Live plus Fixed Merging](Other_pipelines_used_in_the_FAST_paper/Fluorescence_and_absorbance_histometry_using_nuclear_marker_(1-4_labels)_live_plus_fixed.md)
+* [Run FAST.R Shiny App](Run_FAST.R.md)

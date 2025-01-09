@@ -1,5 +1,5 @@
-<IAPipeline Description="Image Analyst MKII XML 1.0" Version="1195">
-  <Pipeline Version="1195">
+<IAPipeline Description="Image Analyst MKII XML 1.0" Version="1207">
+  <Pipeline Version="1207">
     <Functions>
       <fInput Caption="Input image" ID="0" PID="0" Description="Input image">
         <Caption>Input image</Caption>
@@ -37,11 +37,11 @@
       </fSetScaling>
       <fCopy Caption="Copy" ID="3" PID="4" Description="Copy">
         <Caption>Copy</Caption>
-        <Position Top="857" Left="259" Height="25" Width="42"/>
+        <Position Top="852" Left="248" Height="25" Width="42"/>
         <Parameters>
           <linked ID="0" Type="Bool" Value="Yes"/>
         </Parameters>
-        <Inputs Types="P" IDs="4"/>
+        <Inputs Types="P" IDs="48"/>
         <Outputs Types="P" IDs="64"/>
       </fCopy>
       <fWienerFilterSmooth Caption="Wiener Filter Smooth" ID="4" PID="84" Description="Wiener Filter Smooth">
@@ -52,13 +52,13 @@
           <noise ID="1" Type="Real" Value="0.01" SValue=""/>
         </Parameters>
         <Inputs Types="P" IDs="55"/>
-        <Outputs Types="PC" IDs="16;3"/>
+        <Outputs Types="P" IDs="16"/>
       </fWienerFilterSmooth>
       <fRename Caption="Rename Image" ID="5" PID="18" Description="Rename Image">
         <Caption>Rename Image</Caption>
         <Position Top="965" Left="214" Height="25" Width="92"/>
         <Parameters>
-          <channel ID="0" Type="Integer" Value="101" SValue=""/>
+          <channel ID="0" Type="Integer" Value="102" SValue=""/>
           <name ID="1" Type="Text" Value="seeds"/>
         </Parameters>
         <Inputs Types="P" IDs="63"/>
@@ -69,8 +69,8 @@
         <Position Top="996" Left="196" Height="25" Width="146"/>
         <Parameters>
           <way ID="0" Type="Text" Value="Bright inside"/>
-          <id ID="1" Type="Integer" Value="30" SValue="=param=30"/>
-          <od ID="2" Type="Integer" Value="32" SValue="=param+2=32"/>
+          <id ID="1" Type="Integer" Value="15" SValue="=param=15"/>
+          <od ID="2" Type="Integer" Value="17" SValue="=param+2=17"/>
         </Parameters>
         <Inputs Types="P" IDs="5"/>
         <Outputs Types="P" IDs="56"/>
@@ -127,7 +127,7 @@
         <Position Top="1332" Left="170" Height="25" Width="133"/>
         <Parameters>
           <type ID="0" Type="Text" Value="Dilate"/>
-          <size ID="1" Type="Integer" Value="15" SValue="=param/2=15"/>
+          <size ID="1" Type="Integer" Value="8" SValue="=param/2=8"/>
           <shape ID="2" Type="Text" Value="Disc"/>
         </Parameters>
         <Inputs Types="P" IDs="9"/>
@@ -135,10 +135,10 @@
       </fMorphological>
       <fSetSegmentationClassifiers Caption="Set Segmentation Classifiers" ID="11" PID="48" Description="Set Segmentation Classifiers">
         <Caption>Set Segmentation Classifiers</Caption>
-        <Position Top="1147" Left="550" Height="25" Width="161"/>
+        <Position Top="1169" Left="551" Height="25" Width="161"/>
         <Parameters>
           <type ID="0" Type="Text" Value="Min"/>
-          <volume ID="1" Type="Integer" Value="0" SValue=""/>
+          <volume ID="1" Type="Integer" Value="200" SValue=""/>
           <surface ID="2" Type="Integer" Value="0" SValue=""/>
           <maxarea ID="3" Type="Integer" Value="0" SValue=""/>
           <maxperimeter ID="4" Type="Integer" Value="0" SValue=""/>
@@ -153,7 +153,7 @@
           <numberofneighbors ID="13" Type="Integer" Value="0" SValue=""/>
           <distancetoedge ID="14" Type="Real" Value="0" SValue=""/>
         </Parameters>
-        <Inputs Types="P" IDs="15"/>
+        <Inputs Types="P" IDs="250"/>
         <Outputs Types="P" IDs="12"/>
       </fSetSegmentationClassifiers>
       <fSetSegmentationClassifiers Caption="Set Segmentation Classifiers" ID="12" PID="48" Description="Set Segmentation Classifiers">
@@ -161,7 +161,7 @@
         <Position Top="1205" Left="556" Height="25" Width="161"/>
         <Parameters>
           <type ID="0" Type="Text" Value="Max"/>
-          <volume ID="1" Type="Integer" Value="10000" SValue=""/>
+          <volume ID="1" Type="Integer" Value="3000" SValue=""/>
           <surface ID="2" Type="Integer" Value="0" SValue=""/>
           <maxarea ID="3" Type="Integer" Value="0" SValue=""/>
           <maxperimeter ID="4" Type="Integer" Value="0" SValue=""/>
@@ -213,7 +213,7 @@
           <noedges ID="12" Type="Bool" Value="No"/>
         </Parameters>
         <Inputs Types="PP" IDs="13;10"/>
-        <Outputs Types="PC" IDs="139;188"/>
+        <Outputs Types="PCC" IDs="139;188;251"/>
       </fAdvSegmentSepSeed>
       <fCopy Caption="Copy" ID="15" PID="4" Description="Copy">
         <Caption>Copy</Caption>
@@ -222,7 +222,7 @@
           <linked ID="0" Type="Bool" Value="Yes"/>
         </Parameters>
         <Inputs Types="P" IDs="16"/>
-        <Outputs Types="P" IDs="11"/>
+        <Outputs Types="P" IDs="250"/>
       </fCopy>
       <fWriteBack Caption="Write back scaled values" ID="16" PID="46" Description="Write back scaled values">
         <Caption>Write back scaled values</Caption>
@@ -238,7 +238,7 @@
         <Caption>Rename Image</Caption>
         <Position Top="1120" Left="397" Height="25" Width="92"/>
         <Parameters>
-          <channel ID="0" Type="Integer" Value="102" SValue=""/>
+          <channel ID="0" Type="Integer" Value="101" SValue=""/>
           <name ID="1" Type="Text" Value="intensity classifier"/>
         </Parameters>
         <Inputs Types="P" IDs="16"/>
@@ -263,7 +263,7 @@
         <Caption>Get Linked Channel</Caption>
         <Position Top="1243" Left="388" Height="25" Width="117"/>
         <Parameters>
-          <channel ID="0" Type="Integer" Value="102" SValue=""/>
+          <channel ID="0" Type="Integer" Value="101" SValue=""/>
         </Parameters>
         <Inputs Types="P" IDs="9"/>
         <Outputs Types="P" IDs="13"/>
@@ -497,7 +497,7 @@
         <Parameters>
           <tilesx ID="0" Type="Integer" Value="5" SValue=""/>
           <tilesy ID="1" Type="Integer" Value="5" SValue=""/>
-          <cuton ID="2" Type="Real" Value="9.6016" SValue="=0.5*sqrt(imagesizex*imagesizey)/param=9.6016"/>
+          <cuton ID="2" Type="Real" Value="256" SValue="=0.5*sqrt(imagesizex*imagesizey)/param=10"/>
           <ordon ID="3" Type="Real" Value="1.3" SValue=""/>
           <cutoff ID="4" Type="Real" Value="1000" SValue=""/>
           <ordff ID="5" Type="Real" Value="100" SValue=""/>
@@ -585,7 +585,7 @@
         <Position Top="552" Left="458" Height="25" Width="47"/>
         <Parameters>
           <selectorvalues ID="0" Type="Text" Value="Percentile;Rolling ball;Spatial filtering;None"/>
-          <selector ID="1" Type="Text" Value="Spatial filtering"/>
+          <selector ID="1" Type="Text" Value="Percentile"/>
           <operation ID="2" Type="Text" Value="Execute selected output"/>
         </Parameters>
         <Inputs Types="P" IDs="208"/>
@@ -627,7 +627,7 @@
           <inputs ID="0" Type="Integer" Value="1" SValue=""/>
         </Parameters>
         <Inputs Types="PP" IDs="46;47"/>
-        <Outputs Types="P" IDs="51"/>
+        <Outputs Types="PC" IDs="51;3"/>
       </fEndIf>
       <fCropInPlace Caption="Crop in place" ID="49" PID="159" Description="Crop in place">
         <Caption>Crop in place</Caption>
@@ -858,7 +858,7 @@
         <Parameters>
           <tilesx ID="0" Type="Integer" Value="5" SValue=""/>
           <tilesy ID="1" Type="Integer" Value="5" SValue=""/>
-          <cuton ID="2" Type="Real" Value="9.6016" SValue="=0.5*sqrt(imagesizex*imagesizey)/param=9.6016"/>
+          <cuton ID="2" Type="Real" Value="256" SValue="=0.5*sqrt(imagesizex*imagesizey)/param=10"/>
           <ordon ID="3" Type="Real" Value="1.3" SValue=""/>
           <cutoff ID="4" Type="Real" Value="1000" SValue=""/>
           <ordff ID="5" Type="Real" Value="100" SValue=""/>
@@ -946,7 +946,7 @@
         <Position Top="411" Left="1502" Height="25" Width="47"/>
         <Parameters>
           <selectorvalues ID="0" Type="Text" Value="Percentile;Rolling ball;Spatial filtering;None"/>
-          <selector ID="1" Type="Text" Value="Spatial filtering"/>
+          <selector ID="1" Type="Text" Value="Percentile"/>
           <operation ID="2" Type="Text" Value="Execute selected output"/>
         </Parameters>
         <Inputs Types="P" IDs="176"/>
@@ -968,7 +968,7 @@
         <Parameters>
           <tilesx ID="0" Type="Integer" Value="5" SValue=""/>
           <tilesy ID="1" Type="Integer" Value="5" SValue=""/>
-          <cuton ID="2" Type="Real" Value="9.6016" SValue="=0.5*sqrt(imagesizex*imagesizey)/param=9.6016"/>
+          <cuton ID="2" Type="Real" Value="256" SValue="=0.5*sqrt(imagesizex*imagesizey)/param=10"/>
           <ordon ID="3" Type="Real" Value="1.3" SValue=""/>
           <cutoff ID="4" Type="Real" Value="1000" SValue=""/>
           <ordff ID="5" Type="Real" Value="100" SValue=""/>
@@ -1056,7 +1056,7 @@
         <Position Top="413" Left="1898" Height="25" Width="47"/>
         <Parameters>
           <selectorvalues ID="0" Type="Text" Value="Percentile;Rolling ball;Spatial filtering;None"/>
-          <selector ID="1" Type="Text" Value="Spatial filtering"/>
+          <selector ID="1" Type="Text" Value="Percentile"/>
           <operation ID="2" Type="Text" Value="Execute selected output"/>
         </Parameters>
         <Inputs Types="P" IDs="177"/>
@@ -1304,7 +1304,7 @@
         <Position Top="1022" Left="1826" Height="25" Width="133"/>
         <Parameters>
           <type ID="0" Type="Text" Value="Dilate"/>
-          <size ID="1" Type="Integer" Value="31" SValue="=param*2+1=31"/>
+          <size ID="1" Type="Integer" Value="15" SValue="=param*2+1=31"/>
           <shape ID="2" Type="Text" Value="Disc"/>
         </Parameters>
         <Inputs Types="P" IDs="112"/>
@@ -1357,7 +1357,7 @@
         <Position Top="900" Left="1970" Height="25" Width="47"/>
         <Parameters>
           <selectorvalues ID="0" Type="Text" Value="Nucleus;Perinuclear ring"/>
-          <selector ID="1" Type="Text" Value="Perinuclear ring"/>
+          <selector ID="1" Type="Text" Value="Nucleus"/>
           <operation ID="2" Type="Text" Value="Execute selected output"/>
         </Parameters>
         <Inputs Types="P" IDs="102"/>
@@ -1524,7 +1524,7 @@
         <Parameters>
           <tilesx ID="0" Type="Integer" Value="5" SValue=""/>
           <tilesy ID="1" Type="Integer" Value="5" SValue=""/>
-          <cuton ID="2" Type="Real" Value="9.6016" SValue="=0.5*sqrt(imagesizex*imagesizey)/param=9.6016"/>
+          <cuton ID="2" Type="Real" Value="256" SValue="=0.5*sqrt(imagesizex*imagesizey)/param=9.6016"/>
           <ordon ID="3" Type="Real" Value="1.3" SValue=""/>
           <cutoff ID="4" Type="Real" Value="1000" SValue=""/>
           <ordff ID="5" Type="Real" Value="100" SValue=""/>
@@ -1612,7 +1612,7 @@
         <Position Top="412" Left="2298" Height="25" Width="47"/>
         <Parameters>
           <selectorvalues ID="0" Type="Text" Value="Percentile;Rolling ball;Spatial filtering;None"/>
-          <selector ID="1" Type="Text" Value="Spatial filtering"/>
+          <selector ID="1" Type="Text" Value="None"/>
           <operation ID="2" Type="Text" Value="Execute selected output"/>
         </Parameters>
         <Inputs Types="P" IDs="178"/>
@@ -1904,7 +1904,7 @@
         <Position Top="399" Left="2752" Height="25" Width="47"/>
         <Parameters>
           <selectorvalues ID="0" Type="Text" Value="Percentile;Rolling ball;Spatial filtering;None"/>
-          <selector ID="1" Type="Text" Value="Spatial filtering"/>
+          <selector ID="1" Type="Text" Value="Percentile"/>
           <operation ID="2" Type="Text" Value="Execute selected output"/>
         </Parameters>
         <Inputs Types="P" IDs="179"/>
@@ -1943,7 +1943,7 @@
         <Position Top="614" Left="568" Height="25" Width="122"/>
         <Parameters>
           <type ID="0" Type="Text" Value="Percentile by frames"/>
-          <value ID="1" Type="Real" Value="20" SValue=""/>
+          <value ID="1" Type="Real" Value="5" SValue=""/>
           <bgimagefilename ID="2" Type="Text" Value=""/>
           <bgstage ID="3" Type="Integer" Value="1" SValue=""/>
           <bgframe ID="4" Type="Integer" Value="1" SValue=""/>
@@ -1961,7 +1961,7 @@
         <Position Top="465" Left="1599" Height="25" Width="122"/>
         <Parameters>
           <type ID="0" Type="Text" Value="Percentile by frames"/>
-          <value ID="1" Type="Real" Value="20" SValue=""/>
+          <value ID="1" Type="Real" Value="5" SValue=""/>
           <bgimagefilename ID="2" Type="Text" Value=""/>
           <bgstage ID="3" Type="Integer" Value="1" SValue=""/>
           <bgframe ID="4" Type="Integer" Value="1" SValue=""/>
@@ -1979,7 +1979,7 @@
         <Position Top="450" Left="1993" Height="25" Width="122"/>
         <Parameters>
           <type ID="0" Type="Text" Value="Percentile by frames"/>
-          <value ID="1" Type="Real" Value="20" SValue=""/>
+          <value ID="1" Type="Real" Value="5" SValue=""/>
           <bgimagefilename ID="2" Type="Text" Value=""/>
           <bgstage ID="3" Type="Integer" Value="1" SValue=""/>
           <bgframe ID="4" Type="Integer" Value="1" SValue=""/>
@@ -1997,7 +1997,7 @@
         <Position Top="442" Left="2391" Height="25" Width="122"/>
         <Parameters>
           <type ID="0" Type="Text" Value="Percentile by frames"/>
-          <value ID="1" Type="Real" Value="20" SValue=""/>
+          <value ID="1" Type="Real" Value="5" SValue=""/>
           <bgimagefilename ID="2" Type="Text" Value=""/>
           <bgstage ID="3" Type="Integer" Value="1" SValue=""/>
           <bgframe ID="4" Type="Integer" Value="1" SValue=""/>
@@ -2015,7 +2015,7 @@
         <Position Top="455" Left="2815" Height="25" Width="122"/>
         <Parameters>
           <type ID="0" Type="Text" Value="Percentile by frames"/>
-          <value ID="1" Type="Real" Value="20" SValue=""/>
+          <value ID="1" Type="Real" Value="5" SValue=""/>
           <bgimagefilename ID="2" Type="Text" Value=""/>
           <bgstage ID="3" Type="Integer" Value="1" SValue=""/>
           <bgframe ID="4" Type="Integer" Value="1" SValue=""/>
@@ -2215,7 +2215,7 @@
           <name ID="1" Type="Text" Value="Nucleus intensity scaling reference image"/>
         </Parameters>
         <Inputs Types="P" IDs="181"/>
-        <Outputs Types="" IDs=""/>
+        <Outputs Types="C" IDs="249"/>
       </fRename>
       <fWincommand Caption="Window command" ID="184" PID="26" Description="Window command">
         <Caption>Window command</Caption>
@@ -2729,9 +2729,9 @@
         <Parameters>
           <tilesx ID="0" Type="Integer" Value="5" SValue=""/>
           <tilesy ID="1" Type="Integer" Value="5" SValue=""/>
-          <cuton ID="2" Type="Real" Value="9.6016" SValue="=0.5*sqrt(imagesizex*imagesizey)/param=9.6016"/>
+          <cuton ID="2" Type="Real" Value="256" SValue="=0.5*sqrt(imagesizex*imagesizey)/param=10"/>
           <ordon ID="3" Type="Real" Value="1.3" SValue=""/>
-          <cutoff ID="4" Type="Real" Value="122.9" SValue="=0.5*sqrt(imagesizex*imagesizey)/param=122.9"/>
+          <cutoff ID="4" Type="Real" Value="20" SValue="=0.5*sqrt(imagesizex*imagesizey)/param=128"/>
           <ordff ID="5" Type="Real" Value="1.3" SValue=""/>
           <units ID="6" Type="Text" Value="pixels"/>
           <normalization ID="7" Type="Text" Value="Corrected Integral"/>
@@ -2984,11 +2984,48 @@
         <Inputs Types="PP" IDs="243;240"/>
         <Outputs Types="P" IDs="171"/>
       </fLink>
+      <fWincommand Caption="Window command" ID="249" PID="26" Description="Window command">
+        <Caption>Window command</Caption>
+        <Position Top="1094" Left="658" Height="25" Width="107"/>
+        <Parameters>
+          <command ID="0" Type="Text" Value="Minimize"/>
+        </Parameters>
+        <Inputs Types="P" IDs="183"/>
+        <Outputs Types="" IDs=""/>
+      </fWincommand>
+      <fRename Caption="Rename Image" ID="250" PID="18" Description="Rename Image">
+        <Caption>Rename Image</Caption>
+        <Position Top="1144" Left="586" Height="25" Width="92"/>
+        <Parameters>
+          <channel ID="0" Type="Integer" Value="0" SValue=""/>
+          <name ID="1" Type="Text" Value="=Nuclei - %LoadPositionName%"/>
+        </Parameters>
+        <Inputs Types="P" IDs="15"/>
+        <Outputs Types="P" IDs="11"/>
+      </fRename>
+      <fGetLinked Caption="Get Linked Channel" ID="251" PID="17" Description="Get Linked Channel">
+        <Caption>Get Linked Channel</Caption>
+        <Position Top="1363" Left="781" Height="25" Width="117"/>
+        <Parameters>
+          <channel ID="0" Type="Integer" Value="102" SValue=""/>
+        </Parameters>
+        <Inputs Types="P" IDs="14"/>
+        <Outputs Types="P" IDs="252"/>
+      </fGetLinked>
+      <fClose Caption="Close" ID="252" PID="22" Description="Close">
+        <Caption>Close</Caption>
+        <Position Top="1395" Left="816" Height="25" Width="45"/>
+        <Parameters>
+          <target ID="0" Type="Text" Value="Image"/>
+        </Parameters>
+        <Inputs Types="P" IDs="251"/>
+        <Outputs Types="" IDs=""/>
+      </fClose>
     </Functions>
   </Pipeline>
-  <Parameters Version="1195">
+  <Parameters Version="1207">
     <Caption>FAST Analysis Pipeline - Basic</Caption>
-    <DesignVersion>4</DesignVersion>
+    <DesignVersion>5</DesignVersion>
     <Description>Fully Automated Senescence Test
 This is a modified version of the original "Fluorescence and absorbance histometry using nuclear marker (1-4 labels - advanced background options)" V4 pipeline.
 Parameters have been changed to reflect the xGAL + EdU analysis.
@@ -3066,7 +3103,8 @@ V3: Added control on how Excel Data is recorded
       Added "Add extra processing below" and "Add extra processing above" placeholders
       Added Histogram Range parameters for each label
 V4: ROIs are copied from original images, so ROIs may be drawn on the source images to gate the readout.
-      Echa label can be named now.</Description>
+      Echa label can be named now.
+V5: Fixed error in "Use reference image" operation for nucleus segmentation</Description>
     <Parameters>
       <param ID="0" UID="45798039" Caption="Number of labels to measure (1-4)" Type="Integer" Value="3" Constraints="" ErrorMessage="" Hint="Select how many label channels to measure. Each channel can be selected multiple times.">
         <link Caption="Select by Number::Selected value" ID="101" paramID="0" paramName="selector"/>
@@ -3230,7 +3268,7 @@ V4: ROIs are copied from original images, so ROIs may be drawn on the source ima
       <param ID="42" UID="27351796" Caption="Positive control reference image operation for nuclei detection" Type="Text" Value="Self-referenced" Constraints="" ErrorMessage="Invalid value. Enter possible values separated by ; at " Hint="The positive control is an image with many visible cells. Using a positive control avoids amplifying background noise in wells with little or no cells.">
         <link Caption="Select::Selected value (1) (1)" ID="51" paramID="1" paramName="selector"/>
         <link Caption="Select::Selected value (1) (1) (1)" ID="56" paramID="1" paramName="selector"/>
-        <link Caption="Select::Selected value (1) (1) (1) (1)" ID="64" paramID="1" paramName="selector"/>
+        <link Caption="Select::Selected value" ID="64" paramID="1" paramName="selector"/>
       </param>
       <param ID="43" UID="18583452" Caption="Suppress debris and outside of well areas" Type="Bool" Value="No" Constraints="" ErrorMessage="" Hint="Brighter areas corresponding to the bottom of microplate outside the well area will be masked.">
         <link Caption="If::Execute output #1 if yes, otherwise #2" ID="33" paramID="0" paramName="condition"/>
@@ -3242,15 +3280,15 @@ V4: ROIs are copied from original images, so ROIs may be drawn on the source ima
       <param ID="45" UID="18588882" Caption="Debris and well edge detection sensitivity (%)" Type="Real" Value="75" Constraints="" ErrorMessage="" Hint="Percent of Otsu optimal threshold value. Lower is more sensitive.">
         <link Caption="Threshold::Value" ID="32" paramID="2" paramName="value"/>
       </param>
-      <param ID="46" UID="7" Caption="Nuclei: Diameter (pixels, for seeding)" Type="Integer" Value="30" Constraints="&gt;1" ErrorMessage="Inner diameter is in pixels and must be a positive integer." Hint="Diameter of the nucleus in pixels. Nuclei ranging around this size will be selected.">
+      <param ID="46" UID="7" Caption="Nuclei: Diameter (pixels, for seeding)" Type="Integer" Value="15" Constraints="&gt;1" ErrorMessage="Inner diameter is in pixels and must be a positive integer." Hint="Diameter of the nucleus in pixels. Nuclei ranging around this size will be selected.">
         <link Caption="Detect Nuclei Convolution::Inner diameter" ID="6" paramID="1" paramName="id"/>
         <link Caption="Detect Nuclei Convolution::Outer diameter" ID="6" paramID="2" paramName="od"/>
         <link Caption="Morphological operator::Size" ID="10" paramID="1" paramName="size"/>
       </param>
-      <param ID="47" UID="62990553" Caption="Nuclei: Minimum area (pixels, for gating)" Type="Integer" Value="0" Constraints="&gt;0" ErrorMessage="Volume must be &gt;0 or 0 for not checking." Hint="Pixel area gate for detected nuclei, set 0 to disable.">
+      <param ID="47" UID="62990553" Caption="Nuclei: Minimum area (pixels, for gating)" Type="Integer" Value="200" Constraints="&gt;0" ErrorMessage="Volume must be &gt;0 or 0 for not checking." Hint="Pixel area gate for detected nuclei, set 0 to disable.">
         <link Caption="Set Segmentation Classifiers::Volume" ID="11" paramID="1" paramName="volume"/>
       </param>
-      <param ID="48" UID="62990571" Caption="Nuclei: Maximum area (pixels, for gating)" Type="Integer" Value="10000" Constraints="&gt;0" ErrorMessage="Volume must be &gt;0 or 0 for not checking." Hint="Pixel area gate for detected nuclei, set 0 to disable.">
+      <param ID="48" UID="62990571" Caption="Nuclei: Maximum area (pixels, for gating)" Type="Integer" Value="3000" Constraints="&gt;0" ErrorMessage="Volume must be &gt;0 or 0 for not checking." Hint="Pixel area gate for detected nuclei, set 0 to disable.">
         <link Caption="Set Segmentation Classifiers::Volume" ID="12" paramID="1" paramName="volume"/>
       </param>
       <param ID="49" UID="10" Caption="Nuclei: Debris cutoff for nuclear stain (percentile)" Type="Real" Value="99.8" Constraints="-1-100" ErrorMessage="Maximal percentile must be between 0 and 100 and must be larger than minimal percentile. Alternatively, -1 overrides percentile with fixed value set below." Hint="This percentile of the image histogram sets the intensity value where the maximum of the Look Up Table (LUT) is scaled.">
@@ -3351,7 +3389,7 @@ V4: ROIs are copied from original images, so ROIs may be drawn on the source ima
       </param>
     </Parameters>
   </Parameters>
-  <Options Version="1195">
+  <Options Version="1207">
     <usesexcel Value="true"/>
     <warnrefimage Value="false"/>
     <warnrefimagemsg Value=""/>

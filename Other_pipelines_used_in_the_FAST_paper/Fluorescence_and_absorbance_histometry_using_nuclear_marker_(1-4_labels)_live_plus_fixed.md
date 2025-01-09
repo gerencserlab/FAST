@@ -77,6 +77,7 @@ V3: Added control on how Excel Data is recorded
       Added Histogram Range parameters for each label
 V4: ROIs are copied from original images, so ROIs may be drawn on the source images to gate the readout.
       Echa label can be named now.
+V5: Fixed error in "Use reference image" operation for nucleus segmentation.
 
 ## Parameters
 | # | Name | Type | Description |
@@ -152,5 +153,5 @@ V4: ROIs are copied from original images, so ROIs may be drawn on the source ima
 ## Structure
 ![structure](/img/Fluorescence_and_absorbance_histometry_using_nuclear_marker_(1-4_labels)_live_plus_fixed.jpg)
 
-[Image Analyst MKII](https://www.imageanalyst.net) pipeline - saved by V4.2.7 (build 923)
+[Image Analyst MKII](https://www.imageanalyst.net) pipeline - saved by V4.2.14 (build 976)
 

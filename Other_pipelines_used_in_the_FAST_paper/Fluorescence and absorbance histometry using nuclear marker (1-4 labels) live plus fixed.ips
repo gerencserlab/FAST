@@ -1,5 +1,5 @@
-<IAPipeline Description="Image Analyst MKII XML 1.0" Version="1195">
-  <Pipeline Version="1195">
+<IAPipeline Description="Image Analyst MKII XML 1.0" Version="1207">
+  <Pipeline Version="1207">
     <Functions>
       <fInput Caption="Input image" ID="0" PID="0" Description="Input image">
         <Caption>Input image</Caption>
@@ -37,11 +37,11 @@
       </fSetScaling>
       <fCopy Caption="Copy" ID="3" PID="4" Description="Copy">
         <Caption>Copy</Caption>
-        <Position Top="1066" Left="259" Height="25" Width="42"/>
+        <Position Top="1046" Left="282" Height="25" Width="42"/>
         <Parameters>
           <linked ID="0" Type="Bool" Value="Yes"/>
         </Parameters>
-        <Inputs Types="P" IDs="4"/>
+        <Inputs Types="P" IDs="48"/>
         <Outputs Types="P" IDs="64"/>
       </fCopy>
       <fWienerFilterSmooth Caption="Wiener Filter Smooth" ID="4" PID="84" Description="Wiener Filter Smooth">
@@ -52,13 +52,13 @@
           <noise ID="1" Type="Real" Value="0.01" SValue=""/>
         </Parameters>
         <Inputs Types="P" IDs="55"/>
-        <Outputs Types="PC" IDs="16;3"/>
+        <Outputs Types="P" IDs="16"/>
       </fWienerFilterSmooth>
       <fRename Caption="Rename Image" ID="5" PID="18" Description="Rename Image">
         <Caption>Rename Image</Caption>
         <Position Top="1174" Left="214" Height="25" Width="92"/>
         <Parameters>
-          <channel ID="0" Type="Integer" Value="101" SValue=""/>
+          <channel ID="0" Type="Integer" Value="102" SValue=""/>
           <name ID="1" Type="Text" Value="seeds"/>
         </Parameters>
         <Inputs Types="P" IDs="63"/>
@@ -213,7 +213,7 @@
           <noedges ID="12" Type="Bool" Value="No"/>
         </Parameters>
         <Inputs Types="PP" IDs="13;10"/>
-        <Outputs Types="PC" IDs="139;188"/>
+        <Outputs Types="PCC" IDs="139;188;263"/>
       </fAdvSegmentSepSeed>
       <fCopy Caption="Copy" ID="15" PID="4" Description="Copy">
         <Caption>Copy</Caption>
@@ -238,7 +238,7 @@
         <Caption>Rename Image</Caption>
         <Position Top="1328" Left="397" Height="25" Width="92"/>
         <Parameters>
-          <channel ID="0" Type="Integer" Value="102" SValue=""/>
+          <channel ID="0" Type="Integer" Value="101" SValue=""/>
           <name ID="1" Type="Text" Value="intensity classifier"/>
         </Parameters>
         <Inputs Types="P" IDs="16"/>
@@ -263,7 +263,7 @@
         <Caption>Get Linked Channel</Caption>
         <Position Top="1452" Left="388" Height="25" Width="117"/>
         <Parameters>
-          <channel ID="0" Type="Integer" Value="102" SValue=""/>
+          <channel ID="0" Type="Integer" Value="101" SValue=""/>
         </Parameters>
         <Inputs Types="P" IDs="9"/>
         <Outputs Types="P" IDs="13"/>
@@ -627,7 +627,7 @@
           <inputs ID="0" Type="Integer" Value="1" SValue=""/>
         </Parameters>
         <Inputs Types="PP" IDs="46;47"/>
-        <Outputs Types="P" IDs="51"/>
+        <Outputs Types="PC" IDs="51;3"/>
       </fEndIf>
       <fCropInPlace Caption="Crop in place" ID="49" PID="159" Description="Crop in place">
         <Caption>Crop in place</Caption>
@@ -693,7 +693,7 @@
           <linked ID="0" Type="Bool" Value="No"/>
         </Parameters>
         <Inputs Types="P" IDs="53"/>
-        <Outputs Types="P" IDs="182"/>
+        <Outputs Types="P" IDs="265"/>
       </fCopy>
       <fEndIf Caption="EndIf" ID="55" PID="143" Description="EndIf">
         <Caption>EndIf</Caption>
@@ -2200,11 +2200,11 @@
       </fSetReferenceImage>
       <fSetReferenceImage Caption="Set Reference Image" ID="182" PID="105" Description="Set Reference Image">
         <Caption>Set Reference Image</Caption>
-        <Position Top="1200" Left="606" Height="25" Width="122"/>
+        <Position Top="1208" Left="609" Height="25" Width="122"/>
         <Parameters>
           <type ID="0" Type="Text" Value="Close Related Reference Images"/>
         </Parameters>
-        <Inputs Types="P" IDs="54"/>
+        <Inputs Types="P" IDs="265"/>
         <Outputs Types="P" IDs="181"/>
       </fSetReferenceImage>
       <fRename Caption="Rename Image" ID="183" PID="18" Description="Rename Image">
@@ -2215,7 +2215,7 @@
           <name ID="1" Type="Text" Value="Nucleus intensity scaling reference image"/>
         </Parameters>
         <Inputs Types="P" IDs="181"/>
-        <Outputs Types="" IDs=""/>
+        <Outputs Types="C" IDs="266"/>
       </fRename>
       <fWincommand Caption="Window command" ID="184" PID="26" Description="Window command">
         <Caption>Window command</Caption>
@@ -3119,11 +3119,48 @@
         <Inputs Types="P" IDs="256"/>
         <Outputs Types="C" IDs="259"/>
       </fGetLinked>
+      <fGetLinked Caption="Get Linked Channel" ID="263" PID="17" Description="Get Linked Channel">
+        <Caption>Get Linked Channel</Caption>
+        <Position Top="1570" Left="769" Height="25" Width="117"/>
+        <Parameters>
+          <channel ID="0" Type="Integer" Value="102" SValue=""/>
+        </Parameters>
+        <Inputs Types="P" IDs="14"/>
+        <Outputs Types="P" IDs="264"/>
+      </fGetLinked>
+      <fClose Caption="Close" ID="264" PID="22" Description="Close">
+        <Caption>Close</Caption>
+        <Position Top="1603" Left="812" Height="25" Width="45"/>
+        <Parameters>
+          <target ID="0" Type="Text" Value="Image"/>
+        </Parameters>
+        <Inputs Types="P" IDs="263"/>
+        <Outputs Types="" IDs=""/>
+      </fClose>
+      <fRename Caption="Rename Image" ID="265" PID="18" Description="Rename Image">
+        <Caption>Rename Image</Caption>
+        <Position Top="1183" Left="624" Height="25" Width="92"/>
+        <Parameters>
+          <channel ID="0" Type="Integer" Value="0" SValue=""/>
+          <name ID="1" Type="Text" Value="=Nuclei - %LoadPositionName%"/>
+        </Parameters>
+        <Inputs Types="P" IDs="54"/>
+        <Outputs Types="P" IDs="182"/>
+      </fRename>
+      <fWincommand Caption="Window command" ID="266" PID="26" Description="Window command">
+        <Caption>Window command</Caption>
+        <Position Top="1302" Left="654" Height="25" Width="107"/>
+        <Parameters>
+          <command ID="0" Type="Text" Value="Minimize"/>
+        </Parameters>
+        <Inputs Types="P" IDs="183"/>
+        <Outputs Types="" IDs=""/>
+      </fWincommand>
     </Functions>
   </Pipeline>
-  <Parameters Version="1195">
+  <Parameters Version="1207">
     <Caption>FAST Analysis Pipeline - Basic - Modified for Live plus Fixed Merging</Caption>
-    <DesignVersion>4</DesignVersion>
+    <DesignVersion>5</DesignVersion>
     <Description>Fully Automated Senescence Test
 This is a modified version of the original "Fluorescence and absorbance histometry using nuclear marker (1-4 labels - advanced background options)" V4 pipeline.
 Registering and Merging live and fixed cell recording has been added.
@@ -3200,7 +3237,8 @@ V3: Added control on how Excel Data is recorded
       Added "Add extra processing below" and "Add extra processing above" placeholders
       Added Histogram Range parameters for each label
 V4: ROIs are copied from original images, so ROIs may be drawn on the source images to gate the readout.
-      Echa label can be named now.</Description>
+      Echa label can be named now.
+V5: Fixed error in "Use reference image" operation for nucleus segmentation.</Description>
     <Parameters>
       <param ID="0" UID="71707081" Caption="Channel Number for Nuclei in Live Cell recording (MD dialog #1) for registration" Type="Integer" Value="1" Constraints="0-2147483647" ErrorMessage="Channel Number" Hint="The first linked image window with matching channel number will be invoked.">
         <link Caption="Get Linked Channel::Channel Number" ID="251" paramID="0" paramName="channel"/>
@@ -3496,7 +3534,7 @@ V4: ROIs are copied from original images, so ROIs may be drawn on the source ima
       </param>
     </Parameters>
   </Parameters>
-  <Options Version="1195">
+  <Options Version="1207">
     <usesexcel Value="true"/>
     <warnrefimage Value="false"/>
     <warnrefimagemsg Value=""/>
